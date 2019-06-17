@@ -5,6 +5,10 @@ import previmedical.it.leetcode.models.ListNode;
 public class Kth_toLast {
 
 
+    /*
+        Implement an algorithm to find the kth to last element of a singly linked list.
+     */
+
     public ListNode kthToLast(ListNode head, int kToLast)  {
 
         ListNode slowRunner = head;

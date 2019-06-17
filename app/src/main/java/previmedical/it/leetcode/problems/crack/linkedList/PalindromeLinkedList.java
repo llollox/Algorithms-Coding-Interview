@@ -8,6 +8,8 @@ public class PalindromeLinkedList {
 
 
     /*
+         Implement a function to check if a linked list is a palindrome.
+
         Solution.
         Fast runner / Slow runner per sapere l'elemento medio. O(n)
 

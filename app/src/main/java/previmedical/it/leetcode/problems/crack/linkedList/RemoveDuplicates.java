@@ -8,6 +8,12 @@ import java.util.List;
 public class RemoveDuplicates {
 
 
+    /*
+        Write code to remove duplicates from an unsorted linked list.
+        FOLLOW UP
+        How would you solve this problem if a temporary buffer is not allowed?
+     */
+
     public ListNode removeDuplicatesWithBuffer(ListNode head) {
         if (head == null || head.next == null) {
             return head;

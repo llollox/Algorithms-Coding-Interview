@@ -4,6 +4,7 @@ import junit.framework.Assert
 import org.junit.Test
 import previmedical.it.leetcode.problems.crack.strings.IsPermutation
 import previmedical.it.leetcode.problems.crack.strings.IsUnique
+import previmedical.it.leetcode.problems.crack.strings.URLify
 
 class StringTests {
 
@@ -35,6 +36,13 @@ class StringTests {
         Assert.assertEquals(true, isPermutation.isPermutation("ciaoaaa", "iaaocaa"))
         Assert.assertEquals(false, isPermutation.isPermutation("provaaa", "prov"))
         Assert.assertEquals(false, isPermutation.isPermutation("", "iaoc"))
+    }
+
+    @Test
+    fun urlifyTests() {
+        val urlify = URLify()
+        Assert.assertEquals("Mr%20John%20Smith", urlify.urlify("Mr John Smith    "))
+
     }
 
 }

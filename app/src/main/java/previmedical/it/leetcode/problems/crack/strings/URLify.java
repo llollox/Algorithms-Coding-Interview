@@ -43,7 +43,7 @@ public class URLify {
             prev = peek;
         }
 
-        return charArray.toString();
+        return new String(charArray);
     }
 
     public void test() {
