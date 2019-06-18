@@ -4,6 +4,10 @@ import java.util.Stack;
 
 public class MyQueue {
 
+    /*
+        Implement a MyQueue class which implements a queue using two stacks.
+     */
+
     private Stack<Integer> s1 = new Stack<>();
     private Stack<Integer> s2 = new Stack<>();
 
