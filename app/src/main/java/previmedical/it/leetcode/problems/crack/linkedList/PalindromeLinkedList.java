@@ -38,20 +38,22 @@ public class PalindromeLinkedList {
 
         while (current != null) {
 
-            if (middleFound) {  // verifica
+            if (middleFound) {
 
+                // verifica
                 ListNode peek = stack.pop();
                 if (current.val != peek.val) {
                     return false;
                 }
             }
 
-            else { // Aggiunta valori
+            else {
 
+                // Aggiunta valori
                 if (current == middle) {
                     middleFound = true;
 
-                    if (stack.size() % 2 == 1) {
+                    if (stack.size() % 2 == 0) {
                         stack.push(current);
                     }
                 }
@@ -87,6 +89,50 @@ public class PalindromeLinkedList {
         }
 
         return slowRunner;
+    }
+
+
+    class PalindromeResult {
+        public ListNode node;
+        public boolean result;
+
+        PalindromeResult(ListNode node, boolean result) {
+            this.node = node;
+            this.result = result;
+        }
+    }
+
+    public boolean isPalindromeRecurse(ListNode head) {
+
+        int length = LinkedListUtil.length(head);
+        PalindromeResult p = this.isPalindromeRecurse(head, length);
+        return p.result;
+    }
+
+    public PalindromeResult isPalindromeRecurse(ListNode head, int length) {
+
+        if (head == null || length <= 0) {
+            return new PalindromeResult(head, true);
+        }
+        else if (length == 1) {
+            return new PalindromeResult(head.next, true);
+        }
+
+        PalindromeResult res = this.isPalindromeRecurse(head.next, length - 2);
+
+        // If child calls are not a palindrome, pass back up a failure
+        if (!res.result || res.node == null) {
+            return res;
+        }
+
+        // Check if this node is same of node from the other side
+        res.result = head.val == res.node.val;
+
+
+        // Return corresponding node
+        res.node = res.node.next;
+
+        return res;
     }
 
 //    private ListNode recurse(ListNode head) {
