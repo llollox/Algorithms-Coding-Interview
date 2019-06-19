@@ -21,11 +21,6 @@ public class MinimalTree {
 
 
     public TreeNode minimalTree(int[] array) {
-
-        if (array.length == 0) {
-            return null;
-        }
-
         return minimalTree(array, 0, array.length - 1);
     }
 
@@ -34,9 +29,6 @@ public class MinimalTree {
 
         if (end < start) {
             return null;
-        }
-        else if (start == end) {
-            return new TreeNode(array[start]);
         }
 
         int mid = (start + end) / 2;
