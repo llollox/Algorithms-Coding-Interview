@@ -3,6 +3,8 @@ package previmedical.it.leetcode.crack
 import junit.framework.Assert
 import org.junit.Test
 import previmedical.it.leetcode.models.GraphNode
+import previmedical.it.leetcode.models.TreeNode
+import previmedical.it.leetcode.problems.crack.treegraph.ListOfDepths
 import previmedical.it.leetcode.problems.crack.treegraph.MinimalTree
 import previmedical.it.leetcode.problems.crack.treegraph.RouteBetweenNodes
 
@@ -64,5 +66,33 @@ class TreeGraphTests {
 
         // 8
         Assert.assertEquals(9, right.right.right.`val`)
+    }
+
+
+    @Test
+    fun listOfDepthsTest() {
+
+        val root = TreeNode(1)
+        root.left = TreeNode(2)
+        root.right = TreeNode(3)
+        root.left.left = TreeNode(4)
+        root.left.right = TreeNode(5)
+        root.right.left = TreeNode(6)
+        root.right.right = TreeNode(7)
+
+        val output = ListOfDepths().listOfDepths(root)
+
+        Assert.assertEquals(1, output[0].size)
+        Assert.assertEquals(1, output[0][0].`val`)
+
+        Assert.assertEquals(2, output[1].size)
+        Assert.assertEquals(2, output[1][0].`val`)
+        Assert.assertEquals(3, output[1][1].`val`)
+
+        Assert.assertEquals(4, output[2].size)
+        Assert.assertEquals(4, output[2][0].`val`)
+        Assert.assertEquals(5, output[2][1].`val`)
+        Assert.assertEquals(6, output[2][2].`val`)
+        Assert.assertEquals(7, output[2][3].`val`)
     }
 }
