@@ -9,6 +9,9 @@ import java.util.Set;
 
 public class RouteBetweenNodes {
 
+    /*
+        Given a directed graph, design an algorithm to find out whether there is a route between two nodes.
+     */
 
     public boolean searchPath(GraphNode start, GraphNode end) {
 

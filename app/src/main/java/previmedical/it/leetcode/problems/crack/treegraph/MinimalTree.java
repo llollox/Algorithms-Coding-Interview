@@ -1,6 +1,5 @@
 package previmedical.it.leetcode.problems.crack.treegraph;
 
-import previmedical.it.leetcode.models.GraphNode;
 import previmedical.it.leetcode.models.TreeNode;
 
 public class MinimalTree {

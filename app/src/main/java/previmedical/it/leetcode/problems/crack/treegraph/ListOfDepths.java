@@ -4,7 +4,7 @@ import previmedical.it.leetcode.models.TreeNode;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.Queue;
+
 
 public class ListOfDepths {
 
@@ -15,11 +15,12 @@ public class ListOfDepths {
 
         Solution.
 
-        Faccio una bfs
-        Salvo il puntatore all'ultimo nodo di ogni livello.
-        Quando poppo un elemento dalla coda ed è l'ultimo del livello,
-        prima di pushare dentro i suoi figli creo una lista col contenuto corrente della coda.
-
+        Se ricevo null ritorno lista vuota
+        Faccio una bfs modificata
+        Ad ogni iterazione copio l'intero contenuto della coda in una linked list perchè sono tutti i nodi di quel livello.
+        Cancello la coda
+        Per ogni elemento dell'ultima lista (quella che ho appena aggiunto) vado ad aggiungere tutti i nodi dei figli
+        Ripeto fintanto che ci sono nodi nella coda.
      */
 
 
