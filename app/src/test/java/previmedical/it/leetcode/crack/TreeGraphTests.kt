@@ -4,6 +4,7 @@ import junit.framework.Assert
 import org.junit.Test
 import previmedical.it.leetcode.models.GraphNode
 import previmedical.it.leetcode.models.TreeNode
+import previmedical.it.leetcode.problems.crack.treegraph.CheckBalanced
 import previmedical.it.leetcode.problems.crack.treegraph.ListOfDepths
 import previmedical.it.leetcode.problems.crack.treegraph.MinimalTree
 import previmedical.it.leetcode.problems.crack.treegraph.RouteBetweenNodes
@@ -94,5 +95,34 @@ class TreeGraphTests {
         Assert.assertEquals(5, output[2][1].`val`)
         Assert.assertEquals(6, output[2][2].`val`)
         Assert.assertEquals(7, output[2][3].`val`)
+    }
+
+
+    @Test
+    fun checkBalancedTest() {
+
+        val balanced = TreeNode(1)
+        balanced.left = TreeNode(2)
+        balanced.right = TreeNode(3)
+        balanced.left.left = TreeNode(4)
+        balanced.left.right = TreeNode(5)
+        balanced.right.left = TreeNode(6)
+        balanced.right.right = TreeNode(7)
+
+
+        val unbalanced = TreeNode(1)
+        unbalanced.left = TreeNode(2)
+        unbalanced.right = TreeNode(3)
+        unbalanced.right.right = TreeNode(4)
+        unbalanced.right.right.right = TreeNode(5)
+        unbalanced.right.right.right.right = TreeNode(6)
+
+        val checkBalanced = CheckBalanced()
+
+        Assert.assertEquals(true, checkBalanced.checkBalanced(balanced))
+        Assert.assertEquals(true, checkBalanced.checkBalancedImproved(balanced))
+
+        Assert.assertEquals(false, checkBalanced.checkBalanced(unbalanced))
+        Assert.assertEquals(false, checkBalanced.checkBalancedImproved(unbalanced))
     }
 }
