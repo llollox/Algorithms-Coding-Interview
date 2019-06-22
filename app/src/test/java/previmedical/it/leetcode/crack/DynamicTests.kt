@@ -3,6 +3,7 @@ package previmedical.it.leetcode.crack
 import org.junit.Assert
 import org.junit.Test
 import previmedical.it.leetcode.problems.crack.dynamic.MagicIndex
+import previmedical.it.leetcode.problems.crack.dynamic.PowerSet
 import previmedical.it.leetcode.problems.crack.dynamic.RobotIntoGrid
 import previmedical.it.leetcode.problems.crack.dynamic.TripleSteps
 
@@ -98,5 +99,21 @@ class DynamicTests {
         Assert.assertEquals(-1, magicIndex.magicIndexDuplicates(input1))
         Assert.assertEquals(2, magicIndex.magicIndexDuplicates(input2))
         Assert.assertEquals(7, magicIndex.magicIndexDuplicates(input3))
+    }
+
+    @Test
+    fun powerSetTest() {
+
+        val input1 = listOf(1, 2, 3)
+
+        val powerSet = PowerSet()
+
+        val ouptut1 = powerSet.powerSetIterative(input1)
+        Assert.assertEquals(8, ouptut1.size)
+        Assert.assertEquals(0, ouptut1[0].size)
+
+        val ouptut11 = powerSet.powerSetRecursive(input1)
+        Assert.assertEquals(8, ouptut11.size)
+        Assert.assertEquals(0, ouptut11[0].size)
     }
 }
