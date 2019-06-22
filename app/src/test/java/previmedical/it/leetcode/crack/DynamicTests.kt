@@ -2,6 +2,7 @@ package previmedical.it.leetcode.crack
 
 import org.junit.Assert
 import org.junit.Test
+import previmedical.it.leetcode.problems.crack.dynamic.MagicIndex
 import previmedical.it.leetcode.problems.crack.dynamic.RobotIntoGrid
 import previmedical.it.leetcode.problems.crack.dynamic.TripleSteps
 
@@ -59,5 +60,43 @@ class DynamicTests {
 
         Assert.assertEquals(3, pointsMemoization[5].x)
         Assert.assertEquals(2, pointsMemoization[5].y)
+    }
+
+    @Test
+    fun magicIndexTest() {
+
+        val input1 = intArrayOf(-1, 0, 5, 6, 7, 8)
+        val input2 = intArrayOf(-2, 0, 2)
+        val input3 = intArrayOf(-12, -8, -2, 0, 1, 3, 5, 7, 11, 19)
+
+        val magicIndex = MagicIndex()
+
+        Assert.assertEquals(-1, magicIndex.magicIndexBruteForce(input1))
+        Assert.assertEquals(2, magicIndex.magicIndexBruteForce(input2))
+        Assert.assertEquals(7, magicIndex.magicIndexBruteForce(input3))
+
+        Assert.assertEquals(-1, magicIndex.magicIndexBinarySearch(input1))
+        Assert.assertEquals(2, magicIndex.magicIndexBinarySearch(input2))
+        Assert.assertEquals(7, magicIndex.magicIndexBinarySearch(input3))
+
+        Assert.assertEquals(-1, magicIndex.magicIndexBinarySearchIterative(input1))
+        Assert.assertEquals(2, magicIndex.magicIndexBinarySearchIterative(input2))
+        Assert.assertEquals(7, magicIndex.magicIndexBinarySearchIterative(input3))
+
+
+    }
+
+    @Test
+    fun magicIndexDuplicatesTest() {
+
+        val input1 = intArrayOf(-1, 0, 0, 4, 7, 8)
+        val input2 = intArrayOf(-2, 0, 2)
+        val input3 = intArrayOf(-12, -8, -8, -8, -7, 3, 5, 7, 11, 19)
+
+        val magicIndex = MagicIndex()
+
+        Assert.assertEquals(-1, magicIndex.magicIndexDuplicates(input1))
+        Assert.assertEquals(2, magicIndex.magicIndexDuplicates(input2))
+        Assert.assertEquals(7, magicIndex.magicIndexDuplicates(input3))
     }
 }
