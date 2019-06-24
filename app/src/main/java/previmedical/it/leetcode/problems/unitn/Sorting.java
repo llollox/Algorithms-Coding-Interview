@@ -106,47 +106,44 @@ public class Sorting {
     // Repeat recursively within the two halves.
     // Best case O(n * log2n): Prendo sempre il medio
     // Worst case O(n2): Prendo sempre il minimo o il massimo
-    public int[] quickSort(int[] array) {
-
-        if (array.length < 2) {
-            return array;
+    public int[] quickSort(int[] a) {
+        if (a == null || a.length == 1) {
+            return a;
         }
 
-        int pivotIndex = this.randomInt(0, array.length - 1);
-        int pivot = array[pivotIndex];
+        return this.quickSort(a, 0, a.length - 1);
+    }
 
-        ArrayList<Integer> lessThanPivot = new ArrayList<Integer>();
-        ArrayList<Integer> greaterOrEqualThanPivot = new ArrayList<Integer>();
+    private int[] quickSort(int[] a, int start, int end) {
 
-        for (int i=0; i<array.length; i++) {
-            if (i != pivotIndex) {
-                if (array[i] < pivot) {
-                    lessThanPivot.add(array[i]);
-                }
-                else {
-                    greaterOrEqualThanPivot.add(array[i]);
-                }
+        // Base Case
+        if (start > end) {
+            return a;
+        }
+
+
+        // Partitioning
+        int pivot = a[end];
+
+        int i = start - 1;
+        for (int j=start; j <= end - 1; j++) {
+
+            // If current element is smaller than or equal to pivot
+            if (a[j] <= pivot) {
+                i++;
+                ArrayUtil.swap(a, i, j);
             }
         }
 
-        // Set elements less than pivot
-        int[] lessThanPivotSorted = this.quickSort(this.toArray(lessThanPivot));
-        for (int i=0; i<lessThanPivotSorted.length; i++) {
-            array[i] = lessThanPivotSorted[i];
-        }
+        int pivotIndex = i + 1;
 
-        // Set pivot
-        int newPivotIndex = lessThanPivot.size();
-        array[newPivotIndex] = pivot;
+        ArrayUtil.swap(a, pivotIndex, end);
 
+        // Recursive pass
+        a = this.quickSort(a, start, pivotIndex - 1);
+        a = this.quickSort(a, pivotIndex + 1, end);
 
-        // Set elements greater than pivot
-        int[] greaterOrEqualThanPivotSorted = this.quickSort(this.toArray(greaterOrEqualThanPivot));
-        for (int i=0;i<greaterOrEqualThanPivotSorted.length; i++) {
-            array[i + newPivotIndex + 1] = greaterOrEqualThanPivotSorted[i];
-        }
-
-        return array;
+        return a;
     }
 
 
