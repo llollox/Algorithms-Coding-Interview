@@ -24,9 +24,11 @@ class SortingTest {
 
         val sorting = Sorting()
 
-//        val input = intArrayOf(12, 4, 9, 18, 2, 0, -5, 29, 1)
-//        val output = sorting.countingSort(input)
-//        val expected = intArrayOf(-5, 0, 1, 2, 4, 9, 12, 18, 29)
+        val input1 = intArrayOf(12, 4, 9, 18, 2, 0, -5, 29, 1)
+        val output1 = sorting.countingSort(input1)
+        val expected1 = intArrayOf(-5, 0, 1, 2, 4, 9, 12, 18, 29)
+
+        Assert.assertEquals(true, output1!!.contentEquals(expected1))
 
         val input = intArrayOf(3, 2, 1, 1, 4, 2, 0)
         val output = sorting.countingSort(input)
@@ -77,6 +79,18 @@ class SortingTest {
         val output = sorting.quickSort(input)
         val expected = intArrayOf(-5, 0, 1, 2, 4, 9, 12, 18, 29)
         Assert.assertEquals(true, output!!.contentEquals(expected))
+    }
+
+    @Test
+    fun radixSortTest() {
+
+        val sorting = Sorting()
+
+        val input1 = intArrayOf(12, 4, 9, 18, 2, 0, 0, 29, 1)
+        val output1 = sorting.radixSort(input1)
+        val expected1 = intArrayOf(0, 0, 1, 2, 4, 9, 12, 18, 29)
+
+        Assert.assertEquals(true, output1!!.contentEquals(expected1))
     }
 
     @Test

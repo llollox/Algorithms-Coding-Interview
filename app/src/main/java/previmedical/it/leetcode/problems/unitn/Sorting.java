@@ -5,6 +5,7 @@ import previmedical.it.leetcode.problems.unitn.util.ArrayUtil;
 import previmedical.it.leetcode.problems.unitn.util.HeapUtil;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 
 
@@ -239,6 +240,58 @@ public class Sorting {
         a = this.quickSort(a, pivotIndex + 1, end);
 
         return a;
+    }
+
+
+    // RADIX SORT ******************************************************************************************************
+    // It doesn't work for negative numbers.
+    // Very efficient when all the numbers are in a short range since k is small.
+    // At every iteration i, it sorts the numbers based on the i-th digit of each number.
+    // It applies counting sort for each time.
+    // Every case: Time O(nk), where n = length of array, k = log2(max value of array)
+    // Every case: Space O(n + k)
+    public int[] radixSort(int[] array) {
+
+        // Find the maximum number to know number of digits
+        int max = ArrayUtil.max(array);
+
+        // Do counting sort for every digit.
+        // Note that instead of passing digit number,
+        // exp is passed.
+        // exp is 10^i where i is current digit number
+        for (int exp = 1; max/exp > 0; exp *= 10) {
+            this.countingSortForRadix(array, exp);
+        }
+
+        return array;
+    }
+
+    private int[] countingSortForRadix(int[] array, int exp) {
+        int n = array.length;
+        int[] output = new int[n];
+        int[] count = new int[10];
+        Arrays.fill(count, 0);
+
+        for (int i = 0; i<n; i++) {
+            count[ (array[i] / exp) % 10 ]++;
+        }
+
+        for (int k = 1; k<10; k++) {
+            count[k] += count[k - 1];
+        }
+
+        for (int i=n-1; i>=0; i--) {
+            int countIdx = (array[i] / exp) % 10;
+            int outputIdx = count[countIdx] - 1;
+            output[outputIdx] = array[i];
+            count[countIdx]--;
+        }
+
+        for (int i=0; i<n; i++) {
+            array[i] = output[i];
+        }
+
+        return array;
     }
 
 
