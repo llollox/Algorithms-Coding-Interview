@@ -37,6 +37,50 @@ public class Sorting {
     }
 
 
+    // COUNTING SORT ***************************************************************************************************
+    public int[] countingSort(int[] array) {
+
+        int n = array.length;
+        int min = ArrayUtil.min(array);
+        int max = ArrayUtil.max(array);
+
+        int range = (max - min) + 1;
+
+        // Output array that will contain the sorted array
+        int[] output = new int[n];
+
+        // Count array
+        int[] count = new int[range];
+
+
+        // Take a count array to store the count of each unique object.
+        for (int i=0; i<n; i++) {
+            int idx = array[i] - min;
+            count[idx]++;
+        }
+
+        // Modify the count array such that each element at each index
+        // stores the sum of previous counts.
+        for (int i=1; i<range; i++) {
+            count[i] += count[i - 1];
+        }
+
+        // Now each the value v, at position i on the modified count array indicates
+        // the position of the i-th element into the sorted array.
+        // Output each object from the input sequence followed by
+        // decreasing its count by 1.
+        for (int i=n-1; i>=0; i--) {
+            int countIdx = array[i] - min;
+
+            // -1 because array starts from 0.
+            output[count[countIdx] - 1] = array[i];
+            --count[countIdx];
+        }
+
+        return output;
+    }
+
+
     // MAX HEAP SORT ***************************************************************************************************
     // Since heapSort jumps from bottom to top of the heap many times,
     // it invalid any kind of caching on pages of memory.
@@ -67,6 +111,10 @@ public class Sorting {
 
 
     // INSERTION SORT **************************************************************************************************
+    // Considero il primo come già ordinato.
+    // Parto dal secondo e verifico se è minore del primo, se si li swappo. A questo punto ho i primi 2 ordinati.
+    // Prendo il terzo e swappo all'indietro fintanto che trovo la posizione corretta dell'elemento.
+    // Avanti cosí per tutti gli elementi dell'array.
     // Best case O(n): Already sorted array
     // Best case O(n2): Reverse sorted array
     // Very fast for small arrays (roughly 10)

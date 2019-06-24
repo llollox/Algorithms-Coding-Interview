@@ -20,6 +20,22 @@ class SortingTest {
     }
 
     @Test
+    fun countingSortTest() {
+
+        val sorting = Sorting()
+
+//        val input = intArrayOf(12, 4, 9, 18, 2, 0, -5, 29, 1)
+//        val output = sorting.countingSort(input)
+//        val expected = intArrayOf(-5, 0, 1, 2, 4, 9, 12, 18, 29)
+
+        val input = intArrayOf(3, 2, 1, 1, 4, 2, 0)
+        val output = sorting.countingSort(input)
+        val expected = intArrayOf(0, 1, 1, 2, 2, 3, 4)
+
+        Assert.assertEquals(true, output!!.contentEquals(expected))
+    }
+
+    @Test
     fun heapSortTest() {
 
         val sorting = Sorting()
