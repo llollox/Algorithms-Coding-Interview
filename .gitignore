@@ -12,3 +12,5 @@
 app/libs/
 gradle/
 /gradle.properties
+app/app.iml
+local.properties
