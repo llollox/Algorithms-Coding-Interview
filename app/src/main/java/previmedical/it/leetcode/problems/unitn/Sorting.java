@@ -4,9 +4,7 @@ package previmedical.it.leetcode.problems.unitn;
 import previmedical.it.leetcode.problems.unitn.util.ArrayUtil;
 import previmedical.it.leetcode.problems.unitn.util.HeapUtil;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Random;
+import java.util.*;
 
 
 public class Sorting {
@@ -37,6 +35,55 @@ public class Sorting {
         return array;
     }
 
+
+    // BUCKET SORT *****************************************************************************************************
+    // Crea n empty buckets (lists)
+    // Per ogni elemento dell'array, inserisco array[i] nel bucket[n * array[i]]
+    // Ordino ogni bucket utilizzando insertion sort.
+    // Concateno tutti i bucket sortati.
+    //
+    // L'idea è quella di creare dei bucket (non troppo grandi) di valori simili in cui poi eseguire insertion Sort
+    // che è efficiente quando non abbiamo troppi valori da ordinare.
+    // Poichè il range di ogni bucket è minore dell'altro, quando prendo gli elementi del primo bucket saranno tutti
+    // minori degli elementi del secondo bucket.
+    // Per questo motivo, una volta ordinati tutti i bucket, mi basta concatenarli per ottenere l'array ordinato.
+    // Time O(n + k) Space O(n)
+    public int[] bucketSort(int[] array) {
+
+        int max = ArrayUtil.max(array);
+        int k = power(max) + 1; // # buckets
+
+        ArrayList<List<Integer>> buckets = new ArrayList<>();
+
+        // Initialization
+        for (int i=0; i<k; i++) {
+            buckets.add(new ArrayList<Integer>());
+        }
+
+        // Divide the input into 10 buckets
+        for (int i=0; i<array.length; i++) {
+            int bucketIdx = power(array[i]);
+            buckets.get(bucketIdx).add(array[i]);
+        }
+
+        // Sort each bucket
+        for (int i=0; i<k; i++) {
+            Collections.sort(buckets.get(i));
+        }
+
+
+        // Combine results
+        int arrayIdx = 0;
+        for (int i=0; i<k; i++) {
+            List<Integer> bucket = buckets.get(i);
+            for (int j=0; j<bucket.size(); j++) {
+                array[arrayIdx] = bucket.get(j);
+                arrayIdx++;
+            }
+        }
+
+        return array;
+    }
 
     // COUNTING SORT ***************************************************************************************************
     public int[] countingSort(int[] array) {
@@ -338,6 +385,19 @@ public class Sorting {
             array[i] = list.get(i);
         }
         return array;
+    }
+
+    private int power(int n) {
+        if (n == 0) {
+            return 0;
+        }
+
+        int count = 0;
+        while (n > 0) {
+            n = n / 10;
+            count++;
+        }
+        return count - 1;
     }
 
 }

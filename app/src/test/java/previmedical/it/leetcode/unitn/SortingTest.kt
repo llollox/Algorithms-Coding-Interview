@@ -20,6 +20,17 @@ class SortingTest {
     }
 
     @Test
+    fun bucketSortTest() {
+
+        val sorting = Sorting()
+
+        val input = intArrayOf(12, 4, 9, 18, 2, 0, 19, 29, 1)
+        val output = sorting.bucketSort(input)
+        val expected = intArrayOf(0, 1, 2, 4, 9, 12, 18, 19, 29)
+        Assert.assertEquals(true, output!!.contentEquals(expected))
+    }
+
+    @Test
     fun countingSortTest() {
 
         val sorting = Sorting()
