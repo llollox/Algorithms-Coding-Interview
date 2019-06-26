@@ -2,10 +2,7 @@ package previmedical.it.leetcode.crack
 
 import org.junit.Assert
 import org.junit.Test
-import previmedical.it.leetcode.problems.crack.dynamic.MagicIndex
-import previmedical.it.leetcode.problems.crack.dynamic.PowerSet
-import previmedical.it.leetcode.problems.crack.dynamic.RobotIntoGrid
-import previmedical.it.leetcode.problems.crack.dynamic.TripleSteps
+import previmedical.it.leetcode.problems.crack.dynamic.*
 
 class DynamicTests {
 
@@ -115,5 +112,23 @@ class DynamicTests {
         val ouptut11 = powerSet.powerSetRecursive(input1)
         Assert.assertEquals(8, ouptut11.size)
         Assert.assertEquals(0, ouptut11[0].size)
+    }
+
+    @Test
+    fun recursiveMultiplyTest() {
+
+        val recursiveMultiply = RecursiveMultiply()
+
+//        Assert.assertEquals(0, recursiveMultiply.recursiveMultiply(12, 0))
+//        Assert.assertEquals(56, recursiveMultiply.recursiveMultiply(8, 7))
+//        Assert.assertEquals(144, recursiveMultiply.recursiveMultiply(12, 12))
+//        Assert.assertEquals(169, recursiveMultiply.recursiveMultiply(13, 13))
+//        Assert.assertEquals(124, recursiveMultiply.recursiveMultiply(31, 4))
+
+//        Assert.assertEquals(0, recursiveMultiply.recursiveMultiply2(12, 0))
+        Assert.assertEquals(56, recursiveMultiply.recursiveMultiply2(8, 7))
+        Assert.assertEquals(144, recursiveMultiply.recursiveMultiply2(12, 12))
+        Assert.assertEquals(169, recursiveMultiply.recursiveMultiply2(13, 13))
+        Assert.assertEquals(124, recursiveMultiply.recursiveMultiply2(31, 4))
     }
 }
