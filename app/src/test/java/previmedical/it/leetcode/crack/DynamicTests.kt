@@ -131,4 +131,13 @@ class DynamicTests {
         Assert.assertEquals(169, recursiveMultiply.recursiveMultiply2(13, 13))
         Assert.assertEquals(124, recursiveMultiply.recursiveMultiply2(31, 4))
     }
+
+
+    @Test
+    fun permutationsTest() {
+        val permutations = PermutationsWithoutDups()
+        val output = permutations.permutations("cip")
+        Assert.assertEquals(8, output.size)
+
+    }
 }
