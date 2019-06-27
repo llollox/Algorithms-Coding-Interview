@@ -140,4 +140,38 @@ class DynamicTests {
         Assert.assertEquals(8, output.size)
 
     }
+
+
+    @Test
+    fun parensTest() {
+
+        val parens = Parens()
+
+//        Assert.assertEquals(1, parens.generateParensRecursive(0).size)
+//        Assert.assertEquals(1, parens.generateParensRecursive(1).size)
+//        Assert.assertEquals(2, parens.generateParensRecursive(2).size)
+//        Assert.assertEquals(5, parens.generateParensRecursive(3).size)
+//        Assert.assertEquals(14, parens.generateParensRecursive(4).size)
+//        Assert.assertEquals(42, parens.generateParensRecursive(5).size)
+//        Assert.assertEquals(132, parens.generateParensRecursive(6).size)
+//        Assert.assertEquals(429, parens.generateParensRecursive(7).size)
+//        Assert.assertEquals(1430, parens.generateParensRecursive(8).size)
+//        Assert.assertEquals(4862, parens.generateParensRecursive(9).size)
+//        Assert.assertEquals(16796, parens.generateParensRecursive(10).size)
+
+
+        Assert.assertEquals(0, parens.generateParensWithoutDupsRecursive(0).size)
+        Assert.assertEquals(1, parens.generateParensWithoutDupsRecursive(1).size)
+        Assert.assertEquals(2, parens.generateParensWithoutDupsRecursive(2).size)
+        Assert.assertEquals(5, parens.generateParensWithoutDupsRecursive(3).size)
+        Assert.assertEquals(14, parens.generateParensWithoutDupsRecursive(4).size)
+        Assert.assertEquals(42, parens.generateParensWithoutDupsRecursive(5).size)
+        Assert.assertEquals(132, parens.generateParensWithoutDupsRecursive(6).size)
+        Assert.assertEquals(429, parens.generateParensWithoutDupsRecursive(7).size)
+        Assert.assertEquals(1430, parens.generateParensWithoutDupsRecursive(8).size)
+        Assert.assertEquals(4862, parens.generateParensWithoutDupsRecursive(9).size)
+        Assert.assertEquals(16796, parens.generateParensWithoutDupsRecursive(10).size)
+        Assert.assertEquals(742900, parens.generateParensWithoutDupsRecursive(13).size)
+
+    }
 }
