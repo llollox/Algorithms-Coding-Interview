@@ -37,8 +37,12 @@ public class RecursiveMultiply {
     /*
         Solution 2.
         Since 7 * 8 = 2 * (7 * 4).
-        È possibile dividere il numero piu piccolo per due e moltiplicare il risultato delle chiamate ricorsive per 2.
-        In questo modo otteniamo una soluzione O(log(s)), dove s è il minore dei due numeri.
+
+        It is possible to double the result of the recursive call and divide by two the smaller number.
+        In this way we obtain a log(n) complexity algorithm.
+        Whenever the smaller number is odd, we simply add the bigger number once.
+
+        Time O(log(n)) Space O(log(n))
      */
     public int recursiveMultiply2(int n, int m) {
         if (m == 0 || n == 0) {
@@ -53,9 +57,7 @@ public class RecursiveMultiply {
         }
     }
 
-    // 31 * 15 = 481 == 30 * 15 + 15 == (31 * (7 * 2)) + 31 = (31 * ((3 * 2) * 2)) + 31 + 31
     private int recursiveMultiplyHelper2(int bigger, int smaller) {
-        System.out.println("BIGGER " + bigger + ", smaller: " + smaller);
         if (smaller == 0) {
             return 0;
         }
@@ -63,6 +65,11 @@ public class RecursiveMultiply {
             return bigger;
         }
 
-        return 2 * recursiveMultiplyHelper2(bigger, smaller >> 1);
+        if (smaller % 2 == 1) {
+            return bigger + 2 * recursiveMultiplyHelper2(bigger, smaller >> 1);
+        }
+        else {
+            return 2 * recursiveMultiplyHelper2(bigger, smaller >> 1);
+        }
     }
 }
