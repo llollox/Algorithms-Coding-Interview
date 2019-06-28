@@ -3,6 +3,7 @@ package previmedical.it.leetcode.unitn
 import junit.framework.Assert
 import org.junit.Test
 import previmedical.it.leetcode.problems.unitn.KnightDialer
+import previmedical.it.leetcode.problems.unitn.dynamic.LongestCommonSubsequence
 
 
 class UnitnTest  {
@@ -43,6 +44,18 @@ class UnitnTest  {
         System.out.println(System.currentTimeMillis())
         Assert.assertEquals(1912111104, knightDialer.knightDialerDp(1, 30))
         System.out.println(System.currentTimeMillis())
+    }
+
+    @Test
+    fun lcsTest() {
+
+        val inputA = "AAAATTGA"
+        val inputB = "TAACGATA"
+
+        val lcs = LongestCommonSubsequence()
+        val output = lcs.lcs(inputA, inputB)
+
+        Assert.assertEquals("AAATA", output)
     }
 
 }
