@@ -185,5 +185,19 @@ class DynamicTests {
         Assert.assertEquals(4, coins.coins(10))
         Assert.assertEquals(9, coins.coins(20))
         Assert.assertEquals(13, coins.coins(25))
+        Assert.assertEquals(242, coins.coins(100))
+        Assert.assertEquals(142511, coins.coins(1000))
+        Assert.assertEquals(134235101, coins.coins(10000))
+
+        Assert.assertEquals(0, coins.coinsVector(0))
+        Assert.assertEquals(1, coins.coinsVector(1))
+        Assert.assertEquals(2, coins.coinsVector(5))
+        Assert.assertEquals(4, coins.coinsVector(10))
+        Assert.assertEquals(9, coins.coinsVector(20))
+        Assert.assertEquals(13, coins.coinsVector(25))
+        Assert.assertEquals(242, coins.coinsVector(100))
+        Assert.assertEquals(142511, coins.coinsVector(1000))
+        Assert.assertEquals(134235101, coins.coinsVector(10000))
+
     }
 }
