@@ -5,7 +5,10 @@ public class Coins {
 
     /*
 
-        Solution 1.   T = O(log25(r) * log10(r) + log10(r)) = O(log^2(r))
+        Solution 1.
+
+        T O(r/25 * r/10 * r/5)
+        2 * 4 * 7 = 56
 
         - Se ricevo un r == 0 significa che sono arrivato in fondo quindi ritorno 1
         - Se tutti i centesimi rimanenti sono a zero significa che posso solo aggiungere monetine da 1
@@ -80,6 +83,7 @@ public class Coins {
 
     /*
 
+        Solution2.
         T  O(log25(r) * log10(r) * log5(r)) = O(log^3(r))
 
         Resto 100
@@ -100,10 +104,19 @@ public class Coins {
         }
 
         int[] dimens = {25, 10, 5, 1};
-        return this.coinsHelperVector(r, dimens, 0);
+        Counter c = new Counter();
+        return this.coinsHelperVector(r, dimens, 0, c);
     }
 
-    public int coinsHelperVector(int r, int[] dimens, int index) {
+    class Counter {
+        public int k = 0;
+    }
+
+    public int coinsHelperVector(int r, int[] dimens, int index, Counter k) {
+
+        k.k += 1;
+        System.out.println(k.k + ": c("+ r + ", " + index + ")");
+
         if (r == 0 || index == dimens.length - 1) {
             return 1;
         }
@@ -114,9 +127,83 @@ public class Coins {
 
         for (int i=0; i * dimen <= r; i++) {
             int rem = r - i * dimen;
-            count += this.coinsHelperVector(rem, dimens, index + 1);
+            count += this.coinsHelperVector(rem, dimens, index + 1, k);
         }
 
         return count;
     }
+
+
+    /*
+
+        Solution. 3 Memoization
+        T O(r/25 + r/10 + r/5)
+     */
+
+    public int coinsMemo(int r) {
+        if (r <= 0) {
+            return 0;
+        }
+        else if (r < 5) {
+            return 1;
+        }
+
+        int[] dimens = {25, 10, 5, 1};
+        int[][] memo = new int[r + 1][dimens.length - 1];
+        return this.coinsMemo(r, dimens, 0, memo);
+    }
+
+    // Better because fill memo for each iteration
+    private int coinsMemo(int r, int[] dimens, int index, int[][] memo) {
+
+//        System.out.println("c("+ r + ", " + index + ")");
+
+        if (r == 0 || index == dimens.length - 1) {
+            return 1;
+        }
+
+        int dimen = dimens[index];
+
+        int count = 0;
+
+        for (int i=0; i * dimen <= r; i++) {
+            int rem = r - i * dimen;
+
+            int v = memo[rem][index];
+            if (v <= 0) {
+                v = this.coinsMemo(rem, dimens, index + 1, memo);
+                memo[rem][index] = v;
+            }
+
+            count += v;
+        }
+
+        return count;
+    }
+
+//    private int coinsMemo(int r, int[] dimens, int index, int[][] memo) {
+//
+//        System.out.println("c("+ r + ", " + index + ")");
+//
+//        if (r == 0 || index == dimens.length - 1) {
+//            return 1;
+//        }
+//
+//        if (memo[r][index] > 0) {
+//            return memo[r][index];
+//        }
+//
+//        int dimen = dimens[index];
+//
+//        int count = 0;
+//
+//        for (int i=0; i * dimen <= r; i++) {
+//            int rem = r - i * dimen;
+//            count += this.coinsMemo(rem, dimens, index + 1, memo);
+//        }
+//
+//        memo[r][index] = count;
+//
+//        return count;
+//    }
 }
