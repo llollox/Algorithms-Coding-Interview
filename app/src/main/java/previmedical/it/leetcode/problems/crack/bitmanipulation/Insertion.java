@@ -14,7 +14,7 @@ public class Insertion {
 
         int allOnes = ~0;  // 11111111
         int left = allOnes << j + 1; //11100000
-        int right = 1 << i; // 00000011
+        int right = (1 << i) - 1; // 00000011
         int maskN = left | right; // 11100011
 
         int nCleared = n & maskN;
