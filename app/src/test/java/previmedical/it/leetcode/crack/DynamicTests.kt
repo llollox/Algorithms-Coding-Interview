@@ -209,4 +209,23 @@ class DynamicTests {
         Assert.assertEquals(142511, coins.coinsMemo(1000))
         Assert.assertEquals(134235101, coins.coinsMemo(10000))
     }
+
+    @Test
+    fun eightQueensTest() {
+        val eightQueens = EightQueens()
+
+        val output = eightQueens.eightQueens(8)
+
+
+        Assert.assertEquals(8, output.size)
+        val list = output.toMutableList()
+
+        (0 until list.size).forEach {
+            val point = list[it]
+            list.remove(point)
+            val set = list.toSet()
+            Assert.assertEquals(true, eightQueens.canBePlaced(set, point))
+            list.add(point)
+        }
+    }
 }
