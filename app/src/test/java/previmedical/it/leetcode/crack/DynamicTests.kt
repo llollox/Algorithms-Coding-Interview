@@ -255,4 +255,12 @@ class DynamicTests {
             list.add(point)
         }
     }
+
+    @Test
+    fun hanoiTowerTest() {
+        val hanoiTower = HanoiTower()
+        hanoiTower.hanoiTower(4)
+
+        Assert.assertEquals(true, true)
+    }
 }
