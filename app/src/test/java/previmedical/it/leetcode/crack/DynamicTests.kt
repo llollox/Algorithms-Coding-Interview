@@ -173,6 +173,33 @@ class DynamicTests {
         Assert.assertEquals(16796, parens.generateParensWithoutDupsRecursive(10).size)
         Assert.assertEquals(742900, parens.generateParensWithoutDupsRecursive(13).size)
 
+
+        Assert.assertEquals(0, parens.parensNew(0).size)
+        Assert.assertEquals(1, parens.parensNew(1).size)
+        Assert.assertEquals(2, parens.parensNew(2).size)
+        Assert.assertEquals(5, parens.parensNew(3).size)
+        Assert.assertEquals(14, parens.parensNew(4).size)
+        Assert.assertEquals(42, parens.parensNew(5).size)
+        Assert.assertEquals(132, parens.parensNew(6).size)
+        Assert.assertEquals(429, parens.parensNew(7).size)
+        Assert.assertEquals(1430, parens.parensNew(8).size)
+        Assert.assertEquals(4862, parens.parensNew(9).size)
+        Assert.assertEquals(16796, parens.parensNew(10).size)
+        Assert.assertEquals(742900, parens.parensNew(13).size)
+
+
+        Assert.assertEquals(0, parens.parensWithoutDupsNew(0).size)
+        Assert.assertEquals(1, parens.parensWithoutDupsNew(1).size)
+        Assert.assertEquals(2, parens.parensWithoutDupsNew(2).size)
+        Assert.assertEquals(5, parens.parensWithoutDupsNew(3).size)
+        Assert.assertEquals(14, parens.parensWithoutDupsNew(4).size)
+        Assert.assertEquals(42, parens.parensWithoutDupsNew(5).size)
+        Assert.assertEquals(132, parens.parensWithoutDupsNew(6).size)
+        Assert.assertEquals(429, parens.parensWithoutDupsNew(7).size)
+        Assert.assertEquals(1430, parens.parensWithoutDupsNew(8).size)
+        Assert.assertEquals(4862, parens.parensWithoutDupsNew(9).size)
+        Assert.assertEquals(16796, parens.parensWithoutDupsNew(10).size)
+        Assert.assertEquals(742900, parens.parensWithoutDupsNew(13).size)
     }
 
     @Test

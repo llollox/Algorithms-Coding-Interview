@@ -102,4 +102,76 @@ public class Parens {
         }
     }
 
+
+
+    /*
+        Generate parens new try
+     */
+
+    public Set<String> parensNew(int n) {
+        if (n == 0) {
+            return new HashSet<>();
+        }
+        else if (n == 1) {
+            Set<String> set = new HashSet<>();
+            set.add("()");
+            return set;
+        }
+        else {
+
+            Set<String> prev = parensNew(n - 1);
+            Set<String> next = new HashSet<>();
+
+            for (String s : prev) {
+
+                next.add("()" + s);
+                next.add(s + "()");
+
+                StringBuilder sb = new StringBuilder(s);
+                for (int i = 0; i< sb.length(); i++) {
+                    if (sb.charAt(i) == '(') {
+
+                        sb.insert(i + 1, "()");
+                        next.add(sb.toString());
+                        sb.delete(i + 1, i + 3);
+                    }
+                }
+            }
+
+            return next;
+        }
+    }
+
+
+    public Set<String> parensWithoutDupsNew(int n) {
+        if (n <= 0) {
+            return new HashSet<>();
+        }
+        return this.parensWithoutDupsNew(n, n, new StringBuilder(), new HashSet<String>());
+    }
+
+    public Set<String> parensWithoutDupsNew(int openRem, int closeRem, StringBuilder sb, Set<String> set) {
+
+        if (openRem == 0 && closeRem == 0) {
+            set.add(sb.toString());
+        }
+        else {
+
+            if (openRem > 0) {
+                sb.append("(");
+                parensWithoutDupsNew(openRem - 1, closeRem, sb, set);
+                sb.deleteCharAt(sb.length() - 1);
+            }
+
+            if (closeRem > 0 && closeRem > openRem) {
+                sb.append(")");
+                parensWithoutDupsNew(openRem, closeRem - 1, sb, set);
+                sb.deleteCharAt(sb.length() - 1);
+            }
+
+        }
+
+        return set;
+    }
+
 }
