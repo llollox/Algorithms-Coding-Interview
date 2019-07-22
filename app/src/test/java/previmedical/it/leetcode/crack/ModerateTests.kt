@@ -5,6 +5,7 @@ import org.junit.Assert
 import org.junit.Test
 import previmedical.it.leetcode.models.Point
 import previmedical.it.leetcode.problems.crack.moderate.Intersection
+import previmedical.it.leetcode.problems.crack.moderate.NumberMax
 import previmedical.it.leetcode.problems.crack.moderate.SwapNumbers
 
 class ModerateTests {
@@ -45,5 +46,16 @@ class ModerateTests {
         val output = intersection.intersection(p1a, p1b, p2a, p2b)
 
         Log.w("ouput", "test")
+    }
+
+
+    @Test
+    fun numberMax() {
+
+        val a = Integer.MAX_VALUE -2
+        val b = -10
+
+        val output = NumberMax().max(a, b)
+        Assert.assertEquals(a, output)
     }
 }
