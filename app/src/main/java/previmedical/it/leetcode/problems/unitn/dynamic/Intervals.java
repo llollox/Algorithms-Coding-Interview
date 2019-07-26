@@ -1,7 +1,6 @@
 package previmedical.it.leetcode.problems.unitn.dynamic;
 
-import java.util.ArrayList;
-import java.util.List;
+import previmedical.it.leetcode.problems.unitn.models.Interval;
 
 public class Intervals {
     /*
@@ -14,19 +13,6 @@ public class Intervals {
         [1,5] = 7
 
      */
-
-
-    public static class Interval {
-        int start;
-        int end;
-        int profit;
-
-        public Interval(int start, int end, int profit) {
-            this.start = start;
-            this.end = end;
-            this.profit = profit;
-        }
-    }
 
 
     public int maxProfit(Interval[] intervals) {
