@@ -4,6 +4,7 @@ import android.util.Log
 import org.junit.Assert
 import org.junit.Test
 import previmedical.it.leetcode.models.Point
+import previmedical.it.leetcode.problems.crack.moderate.FactorialZero
 import previmedical.it.leetcode.problems.crack.moderate.Intersection
 import previmedical.it.leetcode.problems.crack.moderate.NumberMax
 import previmedical.it.leetcode.problems.crack.moderate.SwapNumbers
@@ -57,5 +58,14 @@ class ModerateTests {
 
         val output = NumberMax().max(a, b)
         Assert.assertEquals(a, output)
+    }
+
+    @Test
+    fun factorialZero() {
+
+        val factorial = FactorialZero()
+
+        Assert.assertEquals(2, factorial.trailingZero(10))
+        Assert.assertEquals(4, factorial.trailingZero(20))
     }
 }
