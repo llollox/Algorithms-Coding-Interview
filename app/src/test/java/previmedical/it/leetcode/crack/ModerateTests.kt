@@ -4,10 +4,7 @@ import android.util.Log
 import org.junit.Assert
 import org.junit.Test
 import previmedical.it.leetcode.models.Point
-import previmedical.it.leetcode.problems.crack.moderate.FactorialZero
-import previmedical.it.leetcode.problems.crack.moderate.Intersection
-import previmedical.it.leetcode.problems.crack.moderate.NumberMax
-import previmedical.it.leetcode.problems.crack.moderate.SwapNumbers
+import previmedical.it.leetcode.problems.crack.moderate.*
 
 class ModerateTests {
 
@@ -67,5 +64,18 @@ class ModerateTests {
 
         Assert.assertEquals(2, factorial.trailingZero(10))
         Assert.assertEquals(4, factorial.trailingZero(20))
+    }
+
+
+    @Test
+    fun smallestDifference() {
+        val a = intArrayOf(1, 3, 15, 11, 2)
+        val b = intArrayOf(23, 127, 235, 19, 8)
+
+        val smallestDifference = SmallestDifference()
+
+        Assert.assertEquals(3, smallestDifference.naive(a,b))
+        Assert.assertEquals(3, smallestDifference.binarySearch(a,b))
+        Assert.assertEquals(3, smallestDifference.twoPointers(a,b))
     }
 }
