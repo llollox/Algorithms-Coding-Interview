@@ -78,4 +78,22 @@ class ModerateTests {
         Assert.assertEquals(3, smallestDifference.binarySearch(a,b))
         Assert.assertEquals(3, smallestDifference.twoPointers(a,b))
     }
+
+    @Test
+    fun livingPeople() {
+
+        val people = arrayOf(
+            LivingPeople.Person(1923, 2000),
+            LivingPeople.Person(1930, 1984),
+            LivingPeople.Person(1991, 1999),
+            LivingPeople.Person(1954, 1989),
+            LivingPeople.Person(1960, 1984),
+            LivingPeople.Person(1943, 1965))
+
+        val livingPeople = LivingPeople()
+
+        Assert.assertEquals(1960, livingPeople.bruteForce(people))
+        Assert.assertEquals(1960, livingPeople.sorted(people))
+        Assert.assertEquals(1960, livingPeople.optimum(people))
+    }
 }
