@@ -96,4 +96,48 @@ class ModerateTests {
         Assert.assertEquals(1960, livingPeople.sorted(people))
         Assert.assertEquals(1960, livingPeople.optimum(people))
     }
+
+    @Test
+    fun masterMind() {
+
+        val masterMind = MasterMind()
+        val pattern = charArrayOf('R', 'G', 'B', 'Y')
+        val solution = charArrayOf('G', 'G', 'R', 'R')
+
+        val output = masterMind.countHits(pattern, solution)
+        Assert.assertEquals(1, output.numHits)
+        Assert.assertEquals(1, output.numPseudoHits)
+    }
+
+    @Test
+    fun subSort() {
+        val subSort = SubSort()
+        val input = intArrayOf(1, 2, 4, 7, 10, 11, 7, 12, 6, 7, 16, 18, 19)
+        val output = subSort.getSub(input)
+        Assert.assertEquals(3, output.m)
+        Assert.assertEquals(9, output.n)
+    }
+
+    @Test
+    fun contiguousSum() {
+        val contiguousSum = ContiguousSum()
+        val input = intArrayOf(2, -8, 3, -2, 4, -10)
+        val output = contiguousSum.getMaximumSum(input)
+        Assert.assertEquals(5, output)
+    }
+
+    @Test
+    fun pondSizes() {
+        val pondSize = PondSizes()
+        val input = arrayOf(
+                intArrayOf(0, 2, 1, 0),
+                intArrayOf(0, 1, 0, 1),
+                intArrayOf(1, 1, 0, 1),
+                intArrayOf(0, 1, 0, 1))
+        val output = pondSize.getPondSizes(input)
+        Assert.assertEquals(3, output.size)
+        Assert.assertEquals(2, output[0])
+        Assert.assertEquals(4, output[1])
+        Assert.assertEquals(1, output[2])
+    }
 }
