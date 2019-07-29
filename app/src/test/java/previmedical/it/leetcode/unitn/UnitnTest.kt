@@ -2,7 +2,10 @@ package previmedical.it.leetcode.unitn
 
 import junit.framework.Assert
 import org.junit.Test
+import previmedical.it.leetcode.models.Graph
+import previmedical.it.leetcode.models.GraphNode
 import previmedical.it.leetcode.problems.unitn.KnightDialer
+import previmedical.it.leetcode.problems.unitn.TopologicalSort
 import previmedical.it.leetcode.problems.unitn.dynamic.LongestCommonSubsequence
 
 
@@ -56,6 +59,31 @@ class UnitnTest  {
         val output = lcs.lcs(inputA, inputB)
 
         Assert.assertEquals("AAATA", output)
+    }
+
+    @Test
+    fun topologicalSortTest() {
+
+        val node0 = GraphNode(0, listOf())
+        val node1 = GraphNode(1, listOf())
+        val node3 = GraphNode(3, listOf(node1))
+        val node2 = GraphNode(2, listOf(node3))
+        val node4 = GraphNode(4, listOf(node0, node1))
+        val node5 = GraphNode(5, listOf(node2, node0))
+
+        val nodes = listOf(node0, node1, node2, node3, node4, node5)
+        val graph = Graph(nodes)
+
+        val topologicalSort = TopologicalSort()
+        val output = topologicalSort.topologicalSort(graph)
+
+        Assert.assertEquals(6, output.size)
+        Assert.assertEquals(5, output[0])
+        Assert.assertEquals(4, output[1])
+        Assert.assertEquals(2, output[2])
+        Assert.assertEquals(3, output[3])
+        Assert.assertEquals(1, output[4])
+        Assert.assertEquals(0, output[5])
     }
 
 }
