@@ -1,4 +1,4 @@
-package previmedical.it.leetcode.problems.unitn;
+package previmedical.it.leetcode.problems.unitn.graph;
 
 import previmedical.it.leetcode.models.Graph;
 import previmedical.it.leetcode.models.GraphNode;
