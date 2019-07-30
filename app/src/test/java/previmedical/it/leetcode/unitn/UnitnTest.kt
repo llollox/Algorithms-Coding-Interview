@@ -110,7 +110,7 @@ class UnitnTest  {
 
         Assert.assertEquals(6, output.size)
     }
-    
+
     @Test
     fun adjTest() {
         val node2 = GraphNode(2, listOf())

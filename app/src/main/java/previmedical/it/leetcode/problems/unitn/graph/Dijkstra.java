@@ -6,7 +6,7 @@ import previmedical.it.leetcode.models.GraphNode;
 import java.util.*;
 
 /*
-    Time: O(|V| + |E|)
+    Time: O(|V| * log(|V|) + |E|)
     Space: O(|V|)
  */
 public class Dijkstra {
