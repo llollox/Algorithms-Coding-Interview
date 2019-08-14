@@ -1,7 +1,5 @@
 package previmedical.it.leetcode.problems.crack.moderate;
 
-import android.util.Log;
-
 public class SwapNumbers {
 
     /*

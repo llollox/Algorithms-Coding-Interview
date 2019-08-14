@@ -140,4 +140,18 @@ class ModerateTests {
         Assert.assertEquals(4, output[1])
         Assert.assertEquals(1, output[2])
     }
+
+
+    @Test
+    fun t9() {
+
+        val dictionary = setOf<String>("apple", "banana")
+        val digits = "27753"
+
+        val t9 = T9()
+        val output = t9.t9(dictionary, digits)
+
+        Assert.assertEquals(1, output.size)
+        Assert.assertEquals("apple", output[0])
+    }
 }
