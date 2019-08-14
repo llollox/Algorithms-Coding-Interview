@@ -20,6 +20,19 @@ public class Sudoku {
         }
 
         this.sudoku(matrix, 0, 0);
+
+        if (this.isValidMatrix(matrix)) {
+            for (int i = 0; i < matrix.length; i++) {
+                for (int j = 0; j < matrix[i].length; j++) {
+                    System.out.print(matrix[i][j] + " ");
+                }
+                System.out.println();
+            }
+        }
+        else {
+            System.out.println("Unable to solve this sudoku");
+        }
+
         return matrix;
     }
 
