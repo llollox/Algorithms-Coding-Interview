@@ -154,4 +154,28 @@ class ModerateTests {
         Assert.assertEquals(1, output.size)
         Assert.assertEquals("apple", output[0])
     }
+
+    @Test
+    fun sumSwap() {
+        val a1 = intArrayOf(4, 1, 2, 1, 1, 2)
+        val a2 = intArrayOf(3, 6, 3, 3)
+
+        val sumSwap = SumSwap()
+        val output = sumSwap.sumSwap(a1, a2)
+
+        Assert.assertEquals(output.size, 2)
+        Assert.assertEquals(output[0] - output[1], -2)
+    }
+
+    @Test
+    fun sumSwapSorted() {
+        val a1 = intArrayOf(1, 1, 1, 2, 2, 4)
+        val a2 = intArrayOf(3, 3, 3, 6)
+
+        val sumSwap = SumSwap()
+        val output = sumSwap.sumSwapSorted(a1, a2)
+
+        Assert.assertEquals(output.size, 2)
+        Assert.assertEquals(output[0] - output[1], -2)
+    }
 }
