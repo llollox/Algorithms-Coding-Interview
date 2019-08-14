@@ -239,4 +239,25 @@ class ModerateTests {
         Assert.assertEquals(cache.getValue(5), "Prova5")
     }
 
+    @Test
+    fun lruCacheOptmialTest() {
+        val cache = LRUCacheOptimal(3)
+        cache.insert(1, "Prova1")
+        Thread.sleep(10)
+        cache.insert(2, "Prova2")
+        Thread.sleep(10)
+        cache.insert(3, "Prova3")
+        Thread.sleep(10)
+        cache.insert(4, "Prova4")
+
+        Assert.assertEquals(cache.getValue(1), null)
+        Assert.assertEquals(cache.getValue(2), "Prova2")
+
+        cache.insert(5, "Prova5")
+        Assert.assertEquals(cache.getValue(3), null)
+        Assert.assertEquals(cache.getValue(2), "Prova2")
+        Assert.assertEquals(cache.getValue(4), "Prova4")
+        Assert.assertEquals(cache.getValue(5), "Prova5")
+    }
+
 }
