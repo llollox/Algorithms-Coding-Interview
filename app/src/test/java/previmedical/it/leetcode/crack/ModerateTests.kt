@@ -178,4 +178,44 @@ class ModerateTests {
         Assert.assertEquals(output.size, 2)
         Assert.assertEquals(output[0] - output[1], -2)
     }
+
+    @Test
+    fun pairsWithSum() {
+        val a1 = intArrayOf(1, 2, 4, 4)
+
+        val pairsWithSum = PairsWithSum()
+        val output = pairsWithSum.pairsWithSum(a1, 8)
+
+        Assert.assertEquals(output.size, 2)
+        Assert.assertEquals(output[0], 4)
+        Assert.assertEquals(output[1], 4)
+        Assert.assertEquals(output[0] + output[1], 8)
+    }
+
+    @Test
+    fun pairsWithSumNull() {
+        val pairsWithSum = PairsWithSum()
+        val output = pairsWithSum.pairsWithSum(null, 8)
+        Assert.assertEquals(output, null)
+    }
+
+    @Test
+    fun pairsWithSumOneValue() {
+        val pairsWithSum = PairsWithSum()
+        val output = pairsWithSum.pairsWithSum(intArrayOf(1), 8)
+        Assert.assertEquals(output, null)
+    }
+
+    @Test
+    fun pairsWithSumSortedArray() {
+        val a1 = intArrayOf(1, 2, 4, 5, 7, 9, 10, 11, 15, 18)
+
+        val pairsWithSum = PairsWithSum()
+        val sum = 21
+        val output = pairsWithSum.pairsWithSumSortedArray(a1, sum)
+
+        Assert.assertEquals(output.size, 2)
+        Assert.assertEquals(output[0] + output[1], sum)
+    }
+
 }
