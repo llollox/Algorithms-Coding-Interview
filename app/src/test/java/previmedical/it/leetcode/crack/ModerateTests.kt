@@ -2,9 +2,11 @@ package previmedical.it.leetcode.crack
 
 import android.util.Log
 import org.junit.Assert
+import org.junit.Assert.assertEquals
 import org.junit.Test
 import previmedical.it.leetcode.models.Point
 import previmedical.it.leetcode.problems.crack.moderate.*
+import java.util.regex.Pattern
 
 class ModerateTests {
 
@@ -258,6 +260,21 @@ class ModerateTests {
         Assert.assertEquals(cache.getValue(2), "Prova2")
         Assert.assertEquals(cache.getValue(4), "Prova4")
         Assert.assertEquals(cache.getValue(5), "Prova5")
+    }
+
+    @Test
+    fun regexTest() {
+        val pattern = Pattern.compile("(\\d+([*/]\\d+)*)+")
+        val match = pattern.matcher("1235*113/559+1")
+        match.find()
+        Assert.assertEquals(match.group(), "1235")
+    }
+
+    @Test
+    fun calculatorTest() {
+        val calculator = Calculator()
+        val formula = "2*3+5/6*3+15"
+        assertEquals(23.5, calculator.calculate(formula), 0.0)
     }
 
 }
