@@ -3,6 +3,7 @@ package previmedical.it.leetcode.crack
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import previmedical.it.leetcode.problems.crack.hard.AddWithoutPlus
+import previmedical.it.leetcode.problems.crack.hard.RandomSet
 import previmedical.it.leetcode.problems.crack.hard.ShuffleDeck
 
 class HardTests {
@@ -24,5 +25,12 @@ class HardTests {
         val deck = ((0..51).toList()).toIntArray()
         val shuffled = shuffleDeck.shuffle(deck)
         assertEquals(52, shuffled.size)
+    }
+
+    @Test
+    fun randomSetTest() {
+        val randomSet = RandomSet()
+        val output = randomSet.randomSet(intArrayOf(1,2,3,4,5,6,7,8,9,10), 5)
+        assertEquals(5, output.size)
     }
 }
