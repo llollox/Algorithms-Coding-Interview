@@ -8,7 +8,7 @@ import previmedical.it.leetcode.problems.crack.hard.RandomSet
 import previmedical.it.leetcode.problems.crack.hard.ShuffleDeck
 
 class HardTests {
-    
+
     @Test
     fun addWithoutPlus() {
         val addWithoutPlus = AddWithoutPlus()
