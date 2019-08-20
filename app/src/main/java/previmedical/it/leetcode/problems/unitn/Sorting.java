@@ -320,7 +320,8 @@ public class Sorting {
         Arrays.fill(count, 0);
 
         for (int i = 0; i<n; i++) {
-            count[ (array[i] / exp) % 10 ]++;
+            int countIdx = (array[i] / exp) % 10;
+            count[countIdx]++;
         }
 
         for (int k = 1; k<10; k++) {

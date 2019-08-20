@@ -35,9 +35,9 @@ class SortingTest {
 
         val sorting = Sorting()
 
-        val input1 = intArrayOf(12, 4, 9, 18, 2, 0, -5, 29, 1)
+        val input1 = intArrayOf(12, 4, 4, 4, 9, 18, 2, 0, -5, 29, 1)
         val output1 = sorting.countingSort(input1)
-        val expected1 = intArrayOf(-5, 0, 1, 2, 4, 9, 12, 18, 29)
+        val expected1 = intArrayOf(-5, 0, 1, 2, 4, 4, 4, 9, 12, 18, 29)
 
         Assert.assertEquals(true, output1!!.contentEquals(expected1))
 
