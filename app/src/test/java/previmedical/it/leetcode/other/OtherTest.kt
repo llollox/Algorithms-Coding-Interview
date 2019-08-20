@@ -5,6 +5,7 @@ import org.junit.Assert.assertEquals
 import org.junit.Test
 import previmedical.it.leetcode.problems.crack.hard.Count2s
 import previmedical.it.leetcode.problems.other.NumSubsets
+import previmedical.it.leetcode.problems.other.NumWaysToDecode
 import previmedical.it.leetcode.problems.other.SortSubSequences
 import previmedical.it.leetcode.problems.other.Sudoku
 
@@ -102,5 +103,12 @@ class OtherTest {
         val input3 = listOf(intArrayOf(1, 2), intArrayOf(2, 1))
         val output3 = sortSubSequence.sortSubSequences(input3)
         assertEquals( null, output3)
+    }
+
+    @Test
+    fun numWaysToDecodeTest() {
+        val numWaysToDecode = NumWaysToDecode()
+        assertEquals(2, numWaysToDecode.numWays("12"))
+        assertEquals(5, numWaysToDecode.numWays("1212")) // abab, abl, lab, ll, aub
     }
 }
