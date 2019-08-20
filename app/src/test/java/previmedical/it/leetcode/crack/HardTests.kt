@@ -2,10 +2,7 @@ package previmedical.it.leetcode.crack
 
 import org.junit.Assert.assertEquals
 import org.junit.Test
-import previmedical.it.leetcode.problems.crack.hard.AddWithoutPlus
-import previmedical.it.leetcode.problems.crack.hard.LettersAndNumbers
-import previmedical.it.leetcode.problems.crack.hard.RandomSet
-import previmedical.it.leetcode.problems.crack.hard.ShuffleDeck
+import previmedical.it.leetcode.problems.crack.hard.*
 
 class HardTests {
 
@@ -40,5 +37,16 @@ class HardTests {
         val array = charArrayOf('r', '1', 'a', 'c', '2', '3', 'q', 'q', 'r')
         val output = lettersAndNumbers.lettersAndNumbers(array)
         assertEquals(6, output.size)
+    }
+
+    @Test
+    fun babyNamesTest() {
+        val babyNames = BabyNames()
+        val babyNamesMap = mapOf(Pair("John", 15), Pair("Jon", 12), Pair("Chris", 13), Pair("Kris", 4), Pair("Christopher", 19))
+        val synonyms = listOf(Pair("Jon", "John"), Pair("John", "Johnny"), Pair("Chris", "Kris"), Pair("Chris", "Christopher"))
+        val output = babyNames.babyNames(babyNamesMap, synonyms)
+        assertEquals(2, output.size)
+        assertEquals(27, output["Jon"])
+        assertEquals(36, output["Chris"])
     }
 }
