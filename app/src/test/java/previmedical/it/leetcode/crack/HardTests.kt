@@ -49,4 +49,15 @@ class HardTests {
         assertEquals(27, output["Jon"])
         assertEquals(36, output["Chris"])
     }
+
+    @Test
+    fun babyNamesGraphTest() {
+        val babyNames = BabyNames()
+        val babyNamesMap = mapOf(Pair("John", 15), Pair("Jon", 12), Pair("Chris", 13), Pair("Kris", 4), Pair("Christopher", 19))
+        val synonyms = listOf(Pair("Jon", "John"), Pair("John", "Johnny"), Pair("Chris", "Kris"), Pair("Chris", "Christopher"))
+        val output = babyNames.babyNamesGraph(babyNamesMap, synonyms)
+        assertEquals(2, output.size)
+        assertEquals(27, output["Johnny"])
+        assertEquals(36, output["Kris"])
+    }
 }

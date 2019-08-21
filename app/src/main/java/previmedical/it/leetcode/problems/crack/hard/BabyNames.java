@@ -1,6 +1,7 @@
 package previmedical.it.leetcode.problems.crack.hard;
 
 import kotlin.Pair;
+import previmedical.it.leetcode.models.GraphNode;
 
 import java.util.*;
 
@@ -87,4 +88,95 @@ public class BabyNames {
         return map;
     }
 
+
+
+    /*
+
+        * Build a graph. For each name I create a node into the graph O(n)
+        * For each synonym pair, I connect two edges O(m)
+        * DFS into the graph and count each frequency (n + m)
+        * Complexity   Time O(n)
+
+     */
+
+    public Map<String, Integer> babyNamesGraph(Map<String, Integer> nameFrequencies, List<Pair<String, String>> synonyms) {
+        HashMap<String, NameGraphNode> graph = this.buildGraph(nameFrequencies.keySet());
+        this.connectGraph(graph, synonyms);
+        return calculateFrequencies(graph, nameFrequencies);
+    }
+
+    private Map<String, Integer> calculateFrequencies(HashMap<String, NameGraphNode> map, Map<String, Integer> nameFrequencies) {
+        Set<NameGraphNode> visited = new HashSet<>();
+        Map<String, Integer> frequencies = new HashMap<>();
+
+        while (visited.size() < map.size()) {
+            NameGraphNode first = getFirstUnvisitedNode(map, visited);
+            int frequency = calculateFrequenciesDFS(first, visited, nameFrequencies);
+            frequencies.put(first.name, frequency);
+        }
+
+        return frequencies;
+    }
+
+    private NameGraphNode getFirstUnvisitedNode(HashMap<String, NameGraphNode> map, Set<NameGraphNode> visited) {
+        for (NameGraphNode node : map.values()) {
+            if (!visited.contains(node)) {
+                return node;
+            }
+        }
+
+        return null;
+    }
+
+    private int calculateFrequenciesDFS(NameGraphNode node, Set<NameGraphNode> visited, Map<String, Integer> nameFrequencies) {
+        visited.add(node);
+        int frequencies = nameFrequencies.get(node.name) != null ? nameFrequencies.get(node.name) : 0;
+        for (NameGraphNode child : node.children) {
+            if (!visited.contains(child)) {
+                frequencies += calculateFrequenciesDFS(child, visited, nameFrequencies);
+            }
+        }
+
+        return frequencies;
+    }
+
+    private void connectGraph(HashMap<String, NameGraphNode> map, List<Pair<String, String>> synonyms) {
+        for (Pair<String, String> synonym : synonyms) {
+
+            NameGraphNode node1 = map.get(synonym.getFirst());
+            if (node1 == null) {
+                node1 = new NameGraphNode(synonym.getFirst());
+                map.put(synonym.getFirst(), node1);
+            }
+
+            NameGraphNode node2 = map.get(synonym.getSecond());
+            if (node2 == null) {
+                node2 = new NameGraphNode(synonym.getSecond());
+                map.put(synonym.getSecond(), node2);
+            }
+
+            node1.children.add(node2);
+            node2.children.add(node1);
+        }
+    }
+
+    private HashMap<String, NameGraphNode> buildGraph(Collection<String> names) {
+        HashMap<String, NameGraphNode> map = new HashMap<>();
+
+        for (String name : names) {
+            map.put(name, new NameGraphNode(name));
+        }
+
+        return map;
+    }
+
+    private static class NameGraphNode {
+        private String name;
+        private List<NameGraphNode> children;
+
+        NameGraphNode(String name) {
+            this.name = name;
+            this.children = new ArrayList<>();
+        }
+    }
 }
