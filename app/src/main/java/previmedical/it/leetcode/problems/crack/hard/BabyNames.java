@@ -95,7 +95,7 @@ public class BabyNames {
         * Build a graph. For each name I create a node into the graph O(n)
         * For each synonym pair, I connect two edges O(m)
         * DFS into the graph and count each frequency (n + m)
-        * Complexity   Time O(n)
+        * Complexity   Time O(n + m)  Space O(n)
 
      */
 

@@ -60,4 +60,19 @@ class HardTests {
         assertEquals(27, output["Johnny"])
         assertEquals(36, output["Kris"])
     }
+
+    @Test
+    fun circusTowerTest() {
+        val people = listOf(
+            CircusTower.Person(189, 98),
+            CircusTower.Person(170, 100),
+            CircusTower.Person(198, 70),
+            CircusTower.Person(182, 78),
+            CircusTower.Person(200, 110))
+
+        val circusTower = CircusTower()
+        val output = circusTower.longestIncreasingSeq(people)
+
+        assertEquals(3, output.size)
+    }
 }
