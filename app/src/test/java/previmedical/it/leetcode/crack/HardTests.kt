@@ -75,4 +75,20 @@ class HardTests {
 
         assertEquals(3, output.size)
     }
+
+    @Test
+    fun kthMultiple() {
+        val kthMultiple = KthMultiple()
+        assertEquals(-1, kthMultiple.kthMultiple(0))
+        assertEquals(1, kthMultiple.kthMultiple(1))
+        assertEquals(3, kthMultiple.kthMultiple(2))
+        assertEquals(5, kthMultiple.kthMultiple(3))
+        assertEquals(7, kthMultiple.kthMultiple(4))
+        assertEquals(9, kthMultiple.kthMultiple(5))
+        assertEquals(15, kthMultiple.kthMultiple(6))
+        assertEquals(21, kthMultiple.kthMultiple(7))
+        assertEquals(25, kthMultiple.kthMultiple(8))
+        assertEquals(27, kthMultiple.kthMultiple(9))
+        assertEquals(24111675, kthMultiple.kthMultiple(1000))
+    }
 }
