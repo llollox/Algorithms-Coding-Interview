@@ -91,4 +91,12 @@ class HardTests {
         assertEquals(27, kthMultiple.kthMultiple(9))
         assertEquals(24111675, kthMultiple.kthMultiple(1000))
     }
+
+    @Test
+    fun majorityElementOptimal() {
+        val majorityElementOptimal = MajorityElementOptimal()
+        assertEquals(5, majorityElementOptimal.majorityElementOptimal(intArrayOf(1, 2, 5, 9, 5, 9, 5, 5, 5)))
+        assertEquals(-1, majorityElementOptimal.majorityElementOptimal(intArrayOf(1, 2, 5, 9, 5, 9)))
+        assertEquals(7, majorityElementOptimal.majorityElementOptimal(intArrayOf(3,1,7,1,3,7,3,7,7,7,7)))
+    }
 }
