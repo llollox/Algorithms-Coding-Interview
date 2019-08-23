@@ -10,6 +10,7 @@ public class PatternPermutation {
      */
 
 
+    // Time O(N) Space O(M)
     public boolean isPatternPermutationOptmial(String s, String p) {
         if (s == null || p == null || s.isEmpty() || s.length() < p.length()) {
             return false;
