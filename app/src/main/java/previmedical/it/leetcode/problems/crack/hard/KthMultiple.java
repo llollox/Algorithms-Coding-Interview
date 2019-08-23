@@ -40,6 +40,8 @@ public class KthMultiple {
 
 
 
+
+
     public int kthMultiple(int k) {
 
         int value = -1;

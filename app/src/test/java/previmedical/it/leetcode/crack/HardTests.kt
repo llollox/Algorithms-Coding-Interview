@@ -99,4 +99,14 @@ class HardTests {
         assertEquals(-1, majorityElementOptimal.majorityElementOptimal(intArrayOf(1, 2, 5, 9, 5, 9)))
         assertEquals(7, majorityElementOptimal.majorityElementOptimal(intArrayOf(3,1,7,1,3,7,3,7,7,7,7)))
     }
+
+
+    @Test
+    fun wordDistance() {
+        val wordDistance = WordDistance()
+        val input = arrayOf("Prova", "Test", "Testolino", "Perdincibacco", "Test", "Perdinci", "Test", "Pass", "Prova")
+        assertEquals(1, wordDistance.wordDistance(input, "Test", "Pass"))
+        assertEquals(1, wordDistance.wordDistance(input, "Test", "Prova"))
+        assertEquals(0, wordDistance.wordDistance(input, "Test", "Test"))
+    }
 }

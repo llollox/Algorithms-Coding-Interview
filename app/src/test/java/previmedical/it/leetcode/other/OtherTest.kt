@@ -4,10 +4,7 @@ import org.junit.Assert
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import previmedical.it.leetcode.problems.crack.hard.Count2s
-import previmedical.it.leetcode.problems.other.NumSubsets
-import previmedical.it.leetcode.problems.other.NumWaysToDecode
-import previmedical.it.leetcode.problems.other.SortSubSequences
-import previmedical.it.leetcode.problems.other.Sudoku
+import previmedical.it.leetcode.problems.other.*
 
 class OtherTest {
 
@@ -110,5 +107,19 @@ class OtherTest {
         val numWaysToDecode = NumWaysToDecode()
         assertEquals(2, numWaysToDecode.numWays("12"))
         assertEquals(5, numWaysToDecode.numWays("1212")) // abab, abl, lab, ll, aub
+    }
+
+    @Test
+    fun patternPermutationTest() {
+        val patternPermutation = PatternPermutation()
+        assertEquals(true, patternPermutation.isPatternPermutation("someInterviewQuestionsHaveStrings", "Iem"))
+        assertEquals(false, patternPermutation.isPatternPermutation("someInterviewQuestionsHaveStrings", "iem"))
+    }
+
+    @Test
+    fun patternPermutationOptimalTest() {
+        val patternPermutation = PatternPermutation()
+        assertEquals(true, patternPermutation.isPatternPermutationOptmial("someInterviewQuestionsHaveStrings", "Iem"))
+        assertEquals(false, patternPermutation.isPatternPermutationOptmial("someInterviewQuestionsHaveStrings", "iem"))
     }
 }
