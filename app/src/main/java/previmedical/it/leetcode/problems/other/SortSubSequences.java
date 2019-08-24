@@ -1,7 +1,5 @@
 package previmedical.it.leetcode.problems.other;
 
-import previmedical.it.leetcode.models.ListNode;
-
 import java.util.*;
 
 public class SortSubSequences {
@@ -21,28 +19,30 @@ public class SortSubSequences {
 
 
 
-    public static class TreeNode {
-        public int value;
-        public Set<TreeNode> children;
-
-        public TreeNode(int value) {
-            this.value = value;
-            this.children = new HashSet<>();
-        }
-
-        public TreeNode(int value, Set<TreeNode> children) {
-            this.value = value;
-            this.children = children;
-        }
-    }
+//    public static class TreeNode {
+//        public int value;
+//        public Set<TreeNode> children;
+//
+//        public TreeNode(int value) {
+//            this.value = value;
+//            this.children = new HashSet<>();
+//        }
+//
+//        public TreeNode(int value, Set<TreeNode> children) {
+//            this.value = value;
+//            this.children = children;
+//        }
+//    }
 
     public List<Integer> sortSubSequences(List<int[]> subsequences) {
-        HashMap<Integer, TreeNode> map = this.buildGraph(subsequences);
-        if (hasCycle(map)) {
+
+        Graph g = this.buildGraph(subsequences);
+
+        if (hasCycle(g)) {
             return null;
         }
         else {
-            return topSort(map);
+            return topSort(g);
         }
     }
 
@@ -57,124 +57,126 @@ public class SortSubSequences {
 
      */
 
-    private List<Integer> topSort(HashMap<Integer, TreeNode> map) {
-        List<TreeNode> toBeVisited = new ArrayList<>(map.values());
-        Stack<TreeNode> stack = new Stack<>();
+    private List<Integer> topSort(Graph g) {
 
-        while (!toBeVisited.isEmpty()) {
-            TreeNode first = toBeVisited.get(0);
-            this.topSortDfs(first, stack, toBeVisited);
+        Set<Integer> visited = new HashSet<>();
+        Stack<Integer> stack = new Stack<>();
+
+        Integer node = getFirstUnvisitedNode(g, visited);
+
+        while (node != null) {
+            topSortDfs(g, node, stack, visited);
+            node = getFirstUnvisitedNode(g, visited);
         }
 
         List<Integer> sortedList = new ArrayList<>();
         while (!stack.isEmpty()) {
-            TreeNode node = stack.pop();
-            sortedList.add(node.value);
+            sortedList.add(stack.pop());
         }
 
         return sortedList;
     }
 
-    private void topSortDfs(TreeNode node, Stack<TreeNode> stack, List<TreeNode> toBeVisited) {
-
-        if (node.children != null && !node.children.isEmpty()) {
-            for (TreeNode adj : node.children) {
-                if (toBeVisited.contains(adj)) {
-                    topSortDfs(adj, stack, toBeVisited);
-                }
-            }
-        }
-
-        toBeVisited.remove(node);
-        stack.push(node);
-    }
-
-    private boolean hasCycle(HashMap<Integer, TreeNode> map) {
-
-        // Insert all nodes into a set
-        Set<TreeNode> visited = new HashSet<>();
-
-        while (visited.size() < map.size()) {
-            TreeNode node = getFirstUnvisitedNode(map, visited);
-            HashSet<TreeNode> set = new HashSet<>();
-            if (dfs(node, visited, set)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private TreeNode getFirstUnvisitedNode(HashMap<Integer, TreeNode> map, Set<TreeNode> visited) {
-        for (TreeNode node : map.values()) {
-            if (!visited.contains(node)) {
-                return node;
-            }
-        }
-
-        throw new RuntimeException("Node not found");
-    }
-
-    private boolean dfs(TreeNode node, Set<TreeNode> visited, Set<TreeNode> recursionVisitedNodes) {
+    private void topSortDfs(Graph g, int node, Stack<Integer> stack, Set<Integer> visited) {
         visited.add(node);
 
-        recursionVisitedNodes.add(node);
-
-        for (TreeNode adj: node.children) {
-            if (recursionVisitedNodes.contains(adj)) {
-                return true;
-            }
-            else {
-                if (dfs(adj, visited, recursionVisitedNodes)) {
-                    return true;
-                }
+        for (int adj : g.adj.get(node)) {
+            if (!visited.contains(adj)) {
+                topSortDfs(g, adj, stack, visited);
             }
         }
 
-        recursionVisitedNodes.remove(node);
+        stack.add(node);
+    }
+
+    private boolean hasCycle(Graph g) {
+        if (g == null || g.adj.size() < 2) {
+            return false;
+        }
+
+        Set<Integer> visited = new HashSet<>();
+        Integer first = getFirstUnvisitedNode(g, visited);
+
+        while (first != null) {
+
+            HashSet<Integer> visitedRec = new HashSet<>();
+            if (hasCycleDfs(g, first, visited, visitedRec)) {
+                return true;
+            }
+
+            first = getFirstUnvisitedNode(g, visited);
+        }
 
         return false;
     }
 
-    private HashMap<Integer, TreeNode> buildGraph(List<int[]> subsequences) {
+    private Integer getFirstUnvisitedNode(Graph g, Set<Integer> visited) {
+        for (Integer key : g.adj.keySet()) {
+            if (!visited.contains(key)) {
+                return key;
+            }
+        }
 
-        HashMap<Integer, TreeNode> map = new HashMap<>();
+        return null;
+    }
+
+    private boolean hasCycleDfs(Graph g, int node, Set<Integer> visited, Set<Integer> visitedRec) {
+        visited.add(node);
+        visitedRec.add(node);
+
+        for (int adj : g.adj.get(node)) {
+            if (visitedRec.contains(adj)) {
+                return true;
+            }
+            else if (hasCycleDfs(g, adj, visited, visitedRec)) {
+                return true;
+            }
+        }
+
+        visitedRec.remove(node);
+        return false;
+    }
+
+    private static class Graph {
+
+        HashMap<Integer, List<Integer>> adj = new HashMap<>();
+
+        public boolean hasNode(int value) {
+            return adj.get(value) != null;
+        }
+
+        public void addNode(int value) {
+            adj.put(value, new ArrayList<Integer>());
+        }
+
+        public void addEdge(int src, int dst) {
+            List<Integer> nodeAdj = adj.get(src);
+            if (nodeAdj != null) {
+                nodeAdj.add(dst);
+            }
+        }
+    }
+
+    private Graph buildGraph(List<int[]> subsequences) {
+
+        Graph g = new Graph();
 
         for (int[] array: subsequences) {
 
-            for (int i=0; i< array.length; i++) {
+            for (int i=0; i<array.length; i++) {
+                int current = array[i];
 
-                int value = array[i];
-
-                TreeNode valueNode = map.get(value);
-                if (valueNode == null) {
-                    valueNode = new TreeNode(value);
-                    map.put(value, valueNode);
+                if (!g.hasNode(current)) {
+                    g.addNode(current);
                 }
 
                 if (i < array.length - 1) {
-
-                    int nextValue = array[i+1];
-
-                    TreeNode nextValueNode = map.get(nextValue);
-
-                    if (nextValueNode == null) { // Value not found
-                        nextValueNode = new TreeNode(nextValue);
-                        map.put(nextValue, nextValueNode);
-                    }
-
-                    if (valueNode.children == null) {
-                        valueNode.children = new HashSet<>();
-                    }
-
-                    valueNode.children.add(nextValueNode);
+                    int next = array[i + 1];
+                    g.addEdge(current, next);
                 }
             }
         }
 
-        return map;
+        return g;
     }
-
-
-
-
 }

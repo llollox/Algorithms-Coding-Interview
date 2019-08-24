@@ -91,4 +91,20 @@ class HardTests {
         assertEquals(27, kthMultiple.kthMultiple(9))
         assertEquals(24111675, kthMultiple.kthMultiple(1000))
     }
+
+    @Test
+    fun majorityElementNaiveTest() {
+        val majorityElement = MajorityElement()
+        assertEquals(5, majorityElement.majorityElementNaive(intArrayOf(1, 2, 5, 9, 5, 9, 5, 5, 5)))
+        assertEquals(3, majorityElement.majorityElementNaive(intArrayOf(1, 2, 3, 3, 3, 3, 9)))
+    }
+
+    @Test
+    fun majorityElementTest() {
+        val majorityElement = MajorityElement()
+        assertEquals(5, majorityElement.majorityElement(intArrayOf(1, 2, 5, 9, 5, 9, 5, 5, 5)))
+        assertEquals(3, majorityElement.majorityElement(intArrayOf(1, 2, 3, 3, 3, 3, 9)))
+        assertEquals(-1, majorityElement.majorityElement(intArrayOf(1, 10, 100)))
+        assertEquals(10, majorityElement.majorityElement(intArrayOf(1, 10, 10, 10, 100)))
+    }
 }
