@@ -1,5 +1,6 @@
 package previmedical.it.leetcode.crack
 
+import org.junit.Assert.assertArrayEquals
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import previmedical.it.leetcode.problems.crack.hard.*
@@ -115,5 +116,13 @@ class HardTests {
         assertEquals(1, wordDistance.wordDistance(input, "Test", "Pass"))
         assertEquals(1, wordDistance.wordDistance(input, "Test", "Prova"))
         assertEquals(0, wordDistance.wordDistance(input, "Test", "Test"))
+    }
+
+    @Test
+    fun smallestK_PQimplementation_Test() {
+        val smallestK = SmallestK()
+        assertArrayEquals(intArrayOf(4, 2, 1), smallestK.smallestK(intArrayOf(1, 7, 18, 2, 4, 6), 3))
+        assertArrayEquals(intArrayOf(2, 1), smallestK.smallestK(intArrayOf(1, 7, 18, 2, 4, 6), 2))
+        assertArrayEquals(intArrayOf(1), smallestK.smallestK(intArrayOf(1, 7, 18, 2, 4, 6), 1))
     }
 }
