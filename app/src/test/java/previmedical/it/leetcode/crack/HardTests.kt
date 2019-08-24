@@ -107,4 +107,13 @@ class HardTests {
         assertEquals(-1, majorityElement.majorityElement(intArrayOf(1, 10, 100)))
         assertEquals(10, majorityElement.majorityElement(intArrayOf(1, 10, 10, 10, 100)))
     }
+
+    @Test
+    fun wordDistance() {
+        val wordDistance = WordDistance()
+        val input = arrayOf("Prova", "Test", "Testolino", "Perdincibacco", "Test", "Perdinci", "Test", "Pass", "Prova")
+        assertEquals(1, wordDistance.wordDistance(input, "Test", "Pass"))
+        assertEquals(1, wordDistance.wordDistance(input, "Test", "Prova"))
+        assertEquals(0, wordDistance.wordDistance(input, "Test", "Test"))
+    }
 }
