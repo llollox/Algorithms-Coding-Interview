@@ -6,6 +6,7 @@ import java.util.PriorityQueue;
 
 public class SmallestK {
 
+    // Design an algorithm to find the smallest K numbers in an array.
 
     // USING A PRIORITY QUEUE
     // Time O(n * log k) Space O(log k)

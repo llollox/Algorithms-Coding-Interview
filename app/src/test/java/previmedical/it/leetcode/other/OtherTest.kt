@@ -122,4 +122,12 @@ class OtherTest {
         assertEquals(true, patternPermutation.isPatternPermutationOptmial("someInterviewQuestionsHaveStrings", "Iem"))
         assertEquals(false, patternPermutation.isPatternPermutationOptmial("someInterviewQuestionsHaveStrings", "iem"))
     }
+
+    @Test
+    fun smallestKthTest() {
+        val smallestKth = SmallestKth()
+        assertEquals(4, smallestKth.smallestKth(intArrayOf(1, 7, 18, 2, 4, 6), 3))
+        assertEquals(2, smallestKth.smallestKth(intArrayOf(1, 7, 18, 2, 4, 6), 2))
+        assertEquals(1, smallestKth.smallestKth(intArrayOf(1, 7, 18, 2, 4, 6), 1))
+    }
 }
