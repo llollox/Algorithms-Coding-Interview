@@ -119,10 +119,19 @@ class HardTests {
     }
 
     @Test
-    fun smallestK_PQimplementation_Test() {
+    fun smallestK_Heap_Test() {
         val smallestK = SmallestK()
-        assertArrayEquals(intArrayOf(4, 2, 1), smallestK.smallestK(intArrayOf(1, 7, 18, 2, 4, 6), 3))
-        assertArrayEquals(intArrayOf(2, 1), smallestK.smallestK(intArrayOf(1, 7, 18, 2, 4, 6), 2))
-        assertArrayEquals(intArrayOf(1), smallestK.smallestK(intArrayOf(1, 7, 18, 2, 4, 6), 1))
+        assertArrayEquals(intArrayOf(4, 2, 1), smallestK.smallestK_Heap(intArrayOf(1, 7, 18, 2, 4, 6), 3))
+        assertArrayEquals(intArrayOf(2, 1), smallestK.smallestK_Heap(intArrayOf(1, 7, 18, 2, 4, 6), 2))
+        assertArrayEquals(intArrayOf(1), smallestK.smallestK_Heap(intArrayOf(1, 7, 18, 2, 4, 6), 1))
+    }
+
+    @Test
+    fun smallestK_Partitioning_Test() {
+        val smallestK = SmallestK()
+        assertArrayEquals(intArrayOf(4, 2, 1), smallestK.smallestK_Partitioning(intArrayOf(1, 7, 18, 2, 4, 6), 3))
+        assertArrayEquals(intArrayOf(2, 1), smallestK.smallestK_Partitioning(intArrayOf(1, 7, 18, 2, 4, 6), 2))
+        assertArrayEquals(intArrayOf(1), smallestK.smallestK_Partitioning(intArrayOf(1, 7, 18, 2, 4, 6), 1))
+        assertArrayEquals(intArrayOf(2, 1, 1, 1), smallestK.smallestK_Partitioning(intArrayOf(1, 1, 1, 7, 18, 2, 4, 6), 4))
     }
 }
