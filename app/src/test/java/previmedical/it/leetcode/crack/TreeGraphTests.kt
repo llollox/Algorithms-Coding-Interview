@@ -125,23 +125,45 @@ class TreeGraphTests {
 
     @Test
     fun randomNodeTest() {
-        val balanced = TreeNode(1)
-        balanced.left = TreeNode(2)
-        balanced.right = TreeNode(3)
-        balanced.left.left = TreeNode(4)
-        balanced.left.right = TreeNode(5)
-        balanced.right.left = TreeNode(6)
-        balanced.right.right = TreeNode(7)
+        val tree = TreeNode(1)
+        tree.left = TreeNode(2)
+        tree.right = TreeNode(3)
+        tree.left.left = TreeNode(4)
+        tree.left.right = TreeNode(5)
+        tree.right.left = TreeNode(6)
+        tree.right.right = TreeNode(7)
 
         val randomNode = RandomNode()
         val frequencies = HashMap<Int, Int>()
 
         (0..7000).forEach {
-            val rnd = randomNode.randomNode(balanced)
+            val rnd = randomNode.randomNode(tree)
             frequencies[rnd.`val`] = frequencies[rnd.`val`]?.let { it + 1 } ?: 1
         }
 
         // All node must have been chosen roughly 1000 times
         Assert.assertNotNull(frequencies)
+    }
+
+
+    /*
+            SUM = 3
+
+              1
+         2         4
+      8    4    -1   9
+     */
+    @Test
+    fun pathsWithSumTest() {
+        val tree = TreeNode(1)
+        tree.left = TreeNode(2)
+        tree.right = TreeNode(4)
+        tree.left.left = TreeNode(8)
+        tree.left.right = TreeNode(4)
+        tree.right.left = TreeNode(-1)
+        tree.right.right = TreeNode(9)
+
+        val pathsWithSum = PathsWithSum()
+        Assert.assertEquals(2, pathsWithSum.pathsWithSum(tree, 3))
     }
 }
