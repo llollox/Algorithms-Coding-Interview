@@ -4,10 +4,7 @@ import junit.framework.Assert
 import org.junit.Test
 import previmedical.it.leetcode.models.GraphNode
 import previmedical.it.leetcode.models.TreeNode
-import previmedical.it.leetcode.problems.crack.treegraph.CheckBalanced
-import previmedical.it.leetcode.problems.crack.treegraph.ListOfDepths
-import previmedical.it.leetcode.problems.crack.treegraph.MinimalTree
-import previmedical.it.leetcode.problems.crack.treegraph.RouteBetweenNodes
+import previmedical.it.leetcode.problems.crack.treegraph.*
 
 class TreeGraphTests {
 
@@ -124,5 +121,49 @@ class TreeGraphTests {
 
         Assert.assertEquals(false, checkBalanced.checkBalanced(unbalanced))
         Assert.assertEquals(false, checkBalanced.checkBalancedImproved(unbalanced))
+    }
+
+    @Test
+    fun randomNodeTest() {
+        val tree = TreeNode(1)
+        tree.left = TreeNode(2)
+        tree.right = TreeNode(3)
+        tree.left.left = TreeNode(4)
+        tree.left.right = TreeNode(5)
+        tree.right.left = TreeNode(6)
+        tree.right.right = TreeNode(7)
+
+        val randomNode = RandomNode()
+        val frequencies = HashMap<Int, Int>()
+
+        (0..7000).forEach {
+            val rnd = randomNode.randomNode(tree)
+            frequencies[rnd.`val`] = frequencies[rnd.`val`]?.let { it + 1 } ?: 1
+        }
+
+        // All node must have been chosen roughly 1000 times
+        Assert.assertNotNull(frequencies)
+    }
+
+
+    /*
+            SUM = 3
+
+              1
+         2         4
+      8    4    -1   9
+     */
+    @Test
+    fun pathsWithSumTest() {
+        val tree = TreeNode(1)
+        tree.left = TreeNode(2)
+        tree.right = TreeNode(4)
+        tree.left.left = TreeNode(8)
+        tree.left.right = TreeNode(4)
+        tree.right.left = TreeNode(-1)
+        tree.right.right = TreeNode(9)
+
+        val pathsWithSum = PathsWithSum()
+        Assert.assertEquals(2, pathsWithSum.pathsWithSum(tree, 3))
     }
 }

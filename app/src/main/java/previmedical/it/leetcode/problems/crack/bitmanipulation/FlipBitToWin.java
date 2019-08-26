@@ -93,7 +93,7 @@ public class FlipBitToWin {
         To reduce the space usage, note that we don't need to hang on to the length of each sequence the entire time.
         We only need it long enough to compare each 1 s sequence to the immediately preceding 1 s sequence.
         Therefore, we can just walk through the integer doing this:
-            - tracking the current 1s sequence length and the previous ls sequence length.
+            - tracking the current 1s sequence length and the previous 1s sequence length.
             - when we see a zero, update previous Length:
                 - If the next bit is a 1, previous Length should be set to current Length.
                 - If the next bit is a 0, then we can't merge these sequences together. So, set previous Length to 0.
@@ -104,7 +104,7 @@ public class FlipBitToWin {
 
         // If all 1s returns immediately.
         if (~n == 0) {
-            return Integer.BYTES * 8;
+            return Integer.BYTES * 8;  // Bytes = 4, * Bits per byte. Totale 32 bits maximum
         }
 
         int currentLength = 0;

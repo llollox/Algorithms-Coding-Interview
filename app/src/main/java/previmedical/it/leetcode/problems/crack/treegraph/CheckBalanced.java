@@ -24,34 +24,6 @@ public class CheckBalanced {
         return diff <= 1 && (checkBalanced(root.left) && checkBalanced(root.right));
     }
 
-    public boolean checkBalancedImproved(TreeNode node) {
-        return this.checkHeight(node) != Integer.MIN_VALUE;
-    }
-
-    private int checkHeight(TreeNode node) {
-        if (node == null) {
-            return 0;
-        }
-
-        int leftHeight = this.checkHeight(node.left);
-        if (leftHeight == Integer.MIN_VALUE) {
-            return Integer.MIN_VALUE;
-        }
-
-        int rightHeight = this.checkHeight(node.right);
-        if (rightHeight == Integer.MIN_VALUE) {
-            return Integer.MIN_VALUE;
-        }
-
-
-        if (Math.abs(rightHeight - leftHeight) > 1) {
-            return Integer.MIN_VALUE;
-        }
-        else {
-            return Math.max(rightHeight, leftHeight) + 1;
-        }
-    }
-
     private int getHeight(TreeNode node) {
         if (node == null) {
             return 0;
@@ -59,5 +31,32 @@ public class CheckBalanced {
         else {
             return Math.max(getHeight(node.left), getHeight(node.right)) + 1;
         }
+    }
+
+
+    public boolean checkBalancedImproved(TreeNode node) {
+        if (node == null) {
+            return true;
+        }
+
+        return checkBalancedDFS(node) != -1;
+
+    }
+
+    private int checkBalancedDFS(TreeNode node) {
+        if (node == null) {
+            return 0;
+        }
+
+        int leftHeight = checkBalancedDFS(node.left);
+        int rightHeight = checkBalancedDFS(node.right);
+
+        if (leftHeight == -1                                    // Unbalanced left
+                || rightHeight == -1                            // Unbalanced right
+                || Math.abs(leftHeight - rightHeight) >= 2) {   // Unbalanced current node
+            return -1;
+        }
+
+        return Math.max(leftHeight, rightHeight) + 1;
     }
 }
