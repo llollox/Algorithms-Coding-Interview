@@ -134,4 +134,14 @@ class HardTests {
         assertArrayEquals(intArrayOf(1), smallestK.smallestK_Partitioning(intArrayOf(1, 7, 18, 2, 4, 6), 1))
         assertArrayEquals(intArrayOf(2, 1, 1, 1), smallestK.smallestK_Partitioning(intArrayOf(1, 1, 1, 7, 18, 2, 4, 6), 4))
     }
+
+    @Test
+    fun canBeBuilt_Test() {
+        val longestWord = LongestWord()
+        val words = setOf("test", "ing", "prova", "computer", "telephone", "testing")
+        assertEquals(true, longestWord.canBeBuilt("computertesting", words))
+        assertEquals(true, longestWord.canBeBuilt("testingcomputer", words))
+
+        assertEquals("testing", longestWord.longestWord(words))
+    }
 }
