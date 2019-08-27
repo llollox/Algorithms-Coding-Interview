@@ -17,10 +17,10 @@ public class TripleSteps {
             return 1;
         }
         else if (n == 2) {
-            return 2;
+            return 1 + tripleStepRecursive(n - 1);
         }
-        else if (n <= 3) {
-            return 4;
+        else if (n == 3) {
+            return 1 + tripleStepRecursive(n - 2) + tripleStepRecursive(n - 1);
         }
         else {
             return tripleStepRecursive(n - 1) + tripleStepRecursive(n - 2) + tripleStepRecursive(n - 3);
