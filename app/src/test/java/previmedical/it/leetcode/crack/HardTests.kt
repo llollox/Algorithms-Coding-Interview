@@ -144,4 +144,21 @@ class HardTests {
 
         assertEquals("testing", longestWord.longestWord(words))
     }
+
+    @Test
+    fun masseuseTest() {
+        val masseuse = Masseuse()
+        val input = intArrayOf(30, 15, 60, 75, 45, 15, 15, 45)
+        assertEquals(180, masseuse.maxMinutes(input))
+
+        val input1 = intArrayOf(30, 15, 60, 75, 45, 15, 15, 45, 30, 15, 60, 75, 45, 15, 15, 45, 30, 15, 60, 75, 45, 15, 15, 45, 75, 45, 15, 15, 45, 30, 15, 60, 75, 45, 15, 15, 45, 75, 45, 15, 15, 45, 30)
+        assertEquals(840, masseuse.maxMinutes(input1))
+
+
+        assertEquals(180, masseuse.maxMinutesIterative(input))
+        assertEquals(840, masseuse.maxMinutesIterative(input1))
+
+        assertEquals(180, masseuse.maxMinutesIterativeOptimal(input))
+        assertEquals(840, masseuse.maxMinutesIterativeOptimal(input1))
+    }
 }
