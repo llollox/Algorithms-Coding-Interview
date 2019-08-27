@@ -161,4 +161,15 @@ class HardTests {
         assertEquals(180, masseuse.maxMinutesIterativeOptimal(input))
         assertEquals(840, masseuse.maxMinutesIterativeOptimal(input1))
     }
+
+    @Test
+    fun shortestSubsequenceTest() {
+        val shortestSubsequence = ShortestSubsequence()
+        val inputLonger = intArrayOf(7, 5, 9, 0, 2, 1, 3, 5, 7, 9, 1, 1, 5, 8, 8, 9, 7)
+        val inputShorter = intArrayOf(1, 5, 9)
+        val output = shortestSubsequence.shortestSubsequence(inputLonger, inputShorter)
+        assertEquals(2, output.size)
+        assertEquals(7, output[0])
+        assertEquals(10, output[1])
+    }
 }
