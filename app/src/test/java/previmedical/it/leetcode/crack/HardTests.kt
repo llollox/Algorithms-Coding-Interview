@@ -206,4 +206,11 @@ class HardTests {
         continuousMedian.addValue(3)
         assertEquals(3, continuousMedian.median)
     }
+
+    @Test
+    fun volumeHistogramTest() {
+        val volumeOfHistogram = VolumeOfHistogram()
+        val input = intArrayOf(0,0,4,0,0,6,0,0, 3,0, 5,0,1,0,0,0)
+        assertEquals(26, volumeOfHistogram.volumeHistogram(input))
+    }
 }
