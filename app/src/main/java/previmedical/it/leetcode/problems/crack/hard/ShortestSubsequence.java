@@ -79,7 +79,7 @@ public class ShortestSubsequence {
 
         while (end < longer.length) {
 
-            if (start < end && !isValid(shorterSet, longer[start]) && numItems(end, start) > shorter.length) {
+            if (!isValid(shorterSet, longer[start])) {
                 start += 1;
             }
             else {
@@ -99,10 +99,8 @@ public class ShortestSubsequence {
                             endMinSubsequence = end;
                         }
 
-                        while (valuesFound.size() == shorterSet.size()) {
-                            valuesFound.remove(longer[start]);
-                            start += 1;
-                        }
+                        valuesFound.remove(longer[start]);
+                        start += 1;
                     }
                 }
 
