@@ -174,6 +174,47 @@ class HardTests {
     }
 
     @Test
+    fun missingTwoTest() {
+        val missingTwo = MissingTwo()
+        val input = intArrayOf(2, 8, 4, 1, 9, 6, 5)
+        val output = missingTwo.missingTwo(input)
+        assertEquals(7, output[0])
+        assertEquals(3, output[1])
+    }
+
+    @Test
+    fun missingTwoEdgeTest() {
+        val missingTwo = MissingTwo()
+        val input = intArrayOf()
+        val output = missingTwo.missingTwo(input)
+        assertEquals(2, output[0])
+        assertEquals(1, output[1])
+    }
+
+    @Test
+    fun continuousMedianTest() {
+        val continuousMedian = ContinuousMedian()
+        assertEquals(0, continuousMedian.median)
+        continuousMedian.addValue(1)
+        assertEquals(1, continuousMedian.median)
+        continuousMedian.addValue(2)
+        assertEquals(1, continuousMedian.median)
+        continuousMedian.addValue(3)
+        assertEquals(2, continuousMedian.median)
+        continuousMedian.addValue(3)
+        assertEquals(2, continuousMedian.median)
+        continuousMedian.addValue(3)
+        assertEquals(3, continuousMedian.median)
+    }
+
+    @Test
+    fun volumeHistogramTest() {
+        val volumeOfHistogram = VolumeOfHistogram()
+        val input = intArrayOf(0,0,4,0,0,6,0,0, 3,0, 5,0,1,0,0,0)
+        assertEquals(26, volumeOfHistogram.volumeHistogram(input))
+    }
+
+    @Test
     fun trieTest() {
         val trie = MultiSearch.Trie()
         trie.addWord("is")
