@@ -212,6 +212,9 @@ class HardTests {
         val volumeOfHistogram = VolumeOfHistogram()
         val input = intArrayOf(0,0,4,0,0,6,0,0, 3,0, 5,0,1,0,0,0)
         assertEquals(26, volumeOfHistogram.volumeHistogram(input))
+
+        val input2 = intArrayOf(0,0,4,0,0,6,0,0,3,0,8,0,2,0,5,2,0,3,0,0)
+        assertEquals(46, volumeOfHistogram.volumeHistogram(input2))
     }
 
     @Test
@@ -233,6 +236,14 @@ class HardTests {
         val multiSearch = MultiSearch()
         val words = listOf("is", "ppi", "hi", "sis", "i", "ssippi")
         val output = multiSearch.multiSearch("mississippi", words)
+        assertEquals(5, output.size)
+    }
+
+    @Test
+    fun wordTransformer() {
+        val wordTransformer = WordTransformer()
+        val dictionary = arrayOf("DAMP","DAKP", "DAKE", "LAKE","LAMP","LIMP","LIME","LIKE")
+        val output = wordTransformer.wordTransformer("DAMP", "LIKE", dictionary)
         assertEquals(5, output.size)
     }
 }
