@@ -172,4 +172,22 @@ class HardTests {
         assertEquals(7, output[0])
         assertEquals(10, output[1])
     }
+
+    @Test
+    fun missingTwoTest() {
+        val missingTwo = MissingTwo()
+        val input = intArrayOf(2, 8, 4, 1, 9, 6, 5)
+        val output = missingTwo.missingTwo(input)
+        assertEquals(7, output[0])
+        assertEquals(3, output[1])
+    }
+
+    @Test
+    fun missingTwoEdgeTest() {
+        val missingTwo = MissingTwo()
+        val input = intArrayOf()
+        val output = missingTwo.missingTwo(input)
+        assertEquals(2, output[0])
+        assertEquals(1, output[1])
+    }
 }
