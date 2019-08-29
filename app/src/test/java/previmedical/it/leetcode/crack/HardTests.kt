@@ -172,4 +172,26 @@ class HardTests {
         assertEquals(7, output[0])
         assertEquals(10, output[1])
     }
+
+    @Test
+    fun trieTest() {
+        val trie = MultiSearch.Trie()
+        trie.addWord("is")
+        trie.addWord("ppi")
+        trie.addWord("hi")
+        trie.addWord("sis")
+        trie.addWord("i")
+        trie.addWord("ssippi")
+
+        assertEquals(true, trie.contains("sis"))
+        assertEquals(false, trie.contains("sisd"))
+    }
+
+    @Test
+    fun multiSearchTest() {
+        val multiSearch = MultiSearch()
+        val words = listOf("is", "ppi", "hi", "sis", "i", "ssippi")
+        val output = multiSearch.multiSearch("mississippi", words)
+        assertEquals(5, output.size)
+    }
 }
