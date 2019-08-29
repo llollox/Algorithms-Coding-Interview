@@ -190,4 +190,20 @@ class HardTests {
         assertEquals(2, output[0])
         assertEquals(1, output[1])
     }
+
+    @Test
+    fun continuousMedianTest() {
+        val continuousMedian = ContinuousMedian()
+        assertEquals(0, continuousMedian.median)
+        continuousMedian.addValue(1)
+        assertEquals(1, continuousMedian.median)
+        continuousMedian.addValue(2)
+        assertEquals(1, continuousMedian.median)
+        continuousMedian.addValue(3)
+        assertEquals(2, continuousMedian.median)
+        continuousMedian.addValue(3)
+        assertEquals(2, continuousMedian.median)
+        continuousMedian.addValue(3)
+        assertEquals(3, continuousMedian.median)
+    }
 }
