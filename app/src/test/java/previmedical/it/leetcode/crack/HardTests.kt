@@ -240,10 +240,26 @@ class HardTests {
     }
 
     @Test
-    fun wordTransformer() {
+    fun wordTransformerDFSTest() {
+        val wordTransformer = WordTransformer()
+        val dictionary = arrayOf("DAMP","DAKP", "DAKE", "CAKE", "CIKE", "PIKE", "SIKE", "CINE", "LAKE", "LAMP","LIMP","LIME","LIKE")
+        val output = wordTransformer.wordTransformerDFS("DAMP", "LIKE", dictionary)
+        assertEquals(8, output.size)
+    }
+
+    @Test
+    fun wordTransformerBFSTest() {
+        val wordTransformer = WordTransformer()
+        val dictionary = arrayOf("DAMP","DAKP", "DAKE", "CAKE", "CIKE", "PIKE", "SIKE", "CINE", "LAKE", "LAMP","LIMP","LIME","LIKE")
+        val output = wordTransformer.wordTransformerBFS("DAMP", "LIKE", dictionary)
+        assertEquals(5, output.size)
+    }
+
+    @Test
+    fun wordTransformerOptmialTest() {
         val wordTransformer = WordTransformer()
         val dictionary = arrayOf("DAMP","DAKP", "DAKE", "LAKE","LAMP","LIMP","LIME","LIKE")
-        val output = wordTransformer.wordTransformer("DAMP", "LIKE", dictionary)
+        val output = wordTransformer.transform("DAMP", "LIKE", dictionary)
         assertEquals(5, output.size)
     }
 }
