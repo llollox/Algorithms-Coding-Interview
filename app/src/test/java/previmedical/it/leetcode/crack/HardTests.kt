@@ -279,4 +279,10 @@ class HardTests {
         assertEquals(1, output.j)
         assertEquals(3, output.length)
     }
+
+    @Test
+    fun maxSubMatrixTest() {
+        val maxSubMatrix = MaxSubmatrix()
+        maxSubMatrix.test()
+    }
 }
