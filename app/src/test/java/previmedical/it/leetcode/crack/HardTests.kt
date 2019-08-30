@@ -303,4 +303,32 @@ class HardTests {
         assertEquals(3, maxMatrixOptimal.bottomRightJ)
         assertEquals(23, maxMatrixOptimal.sum)
     }
+
+    @Test
+    fun sparseSimilarityTest() {
+        val sparseSimilarity = SparseSimilarity()
+        val input = hashMapOf(
+            Pair(13, listOf(14, 15, 100, 9, 3)),
+            Pair(16, listOf(32, 1, 9, 3, 5)),
+            Pair(19, listOf(15, 29, 2, 6, 8, 7)),
+            Pair(24, listOf(7, 10))
+        )
+
+        val output = sparseSimilarity.sparseSimilarity(input)
+        assertEquals(3, output.size)
+
+        assertEquals(16, output[0].id1)
+        assertEquals(13, output[0].id2)
+        assertEquals(0.25, output[0].similarity, 0.0)
+
+        assertEquals(24, output[1].id1)
+        assertEquals(19, output[1].id2)
+        assertEquals(0.14285714285714285, output[1].similarity, 0.0)
+
+        assertEquals(19, output[2].id1)
+        assertEquals(13, output[2].id2)
+        assertEquals(0.1, output[2].similarity, 0.0)
+
+
+    }
 }
