@@ -54,14 +54,13 @@ public class MaxSubmatrix {
         }
     }
 
-    public Matrix maxSubMatrix(int[][] matrix) {
+    public Matrix maxSubMatrixNaive(int[][] matrix) {
         if (matrix == null || matrix.length == 0 || matrix[0].length == 0) {
             return null;
         }
 
         int rowCount = matrix.length;
         int colCount = matrix[0].length;
-        int[][] sumMatrix = this.buildSumMatrix(matrix);
 
         Matrix max = null;
 
@@ -71,7 +70,7 @@ public class MaxSubmatrix {
                 for (int row2=row1; row2 < rowCount; row2++) {
                     for (int col2=col1; col2 < colCount; col2++) {
 
-                        int sum = getSum(row1, col1, row2, col2, sumMatrix);
+                        int sum = getSum(row1, col1, row2, col2, matrix);
                         if (max == null || max.sum < sum) {
                             max = new Matrix(row1, col1, row2, col2, sum);
                         }
@@ -82,43 +81,74 @@ public class MaxSubmatrix {
 
         return max;
     }
-//
-//    private int calculateSum(int i, int j, int rowLength, int colLength, int[][] sumMatrix) {
-//
-//
-//    }
-//
-//    private int getColSum(int j, int start, int end, int[][] subMatrix) {
-//        int total = subMatrix[0][j];
-//        int sumFromStart = subMatrix[start][j];
-//        int sumBeforeStart = total - sumFromStart;
-//        int sumAfterEnd = end >= subMatrix.length ? 0 : subMatrix[end][j];
-//        return total - (sumBeforeStart + sumAfterEnd);
-//    }
-//
-//    private int getNextSum(int i, int j, int rowLength, int colLength, int[][] sumMatrix, int prevSum) {
-//        int remove = this.getColSum(j - 1, i, (i + rowLength) - 1, sumMatrix);
-//        int add = this.getColSum(j, i, (i + rowLength) - 1, sumMatrix);
-//        return prevSum - remove + add;
-//    }
 
-    private int getSum(int row1, int col1, int row2, int col2, int[][] sumMatrix) {
 
+    private int getSum(int row1, int col1, int row2, int col2, int[][]matrix) {
+        int sum = 0;
+        for (int i=row1; i<= row2; i++) {
+            for (int j=col1; j<=col2; j++) {
+                sum += matrix[i][j];
+            }
+        }
+        return sum;
+    }
+
+    // ***************************************************************************************************
+    /*
+        Time O(#COLS^2 * #ROWS)
+        - Mi creo una matrice delle somme sumMatrix in cui:
+            - sumMatrix[i][j] = la somma della riga i esima fino al valore j
+
+        - Per ogni larghezza a partire da 1 fino ad #COLS:
+            - Per ogni valore di j:
+                - Scorro tutta la matrice da i = 0 fino ad #ROWS tenendo conto del massimo
+                - Se arrivo a 0 allora resetto e riparto da capo con la nuova riga
+     */
+
+    public Matrix maxSubMatrixOptimal(int[][] matrix) {
+        int[][] sumMatrix = this.buildSumMatrix(matrix);
+        int rows = matrix.length;
+        int cols = matrix[0].length;
+        Matrix max = null;
+        for (int l=0;l<cols; l++) {
+
+            for (int j=0; j<cols - l; j++) {
+                int sum = 0;
+                int startI = 0;
+                for (int i=0; i<rows; i++) {
+                    sum += getRowSum(i, j, l, sumMatrix);
+
+                    if (sum <= 0) {
+                        sum = 0;
+                        startI = i + 1;
+                    }
+                    else if (max == null || max.sum < sum) {
+                        max = new Matrix(startI, j, i, j + l, sum);
+                    }
+                }
+            }
+        }
+
+        return max;
+    }
+
+    private int getRowSum(int i, int j, int l, int[][] sumMatrix) {
+        int cols = sumMatrix[0].length;
+        int total = sumMatrix[i][cols - 1];
+        int sumBefore = j > 0 ? sumMatrix[i][j - 1] : 0;
+        int sumAfter = j + l >= sumMatrix[0].length ? 0 : total - sumMatrix[i][j + l];
+        return total - (sumBefore + sumAfter);
     }
 
     private int[][] buildSumMatrix(int[][] matrix) {
         int[][] sumMatrix = new int[matrix.length][matrix[0].length];
-
-        for (int j=0; j<matrix[0].length; j++) {
-            for (int i=matrix.length - 1; i >= 0; i--) {
-
-                int left = j > 0 ? sumMatrix[i][j - 1] : 0;
-                int top= i > 0 ? sumMatrix[i- 1][j] : 0;
-                int overlap = i > 0 && j> 0 ? sumMatrix[i-1][j-1] : 0;
-                sumMatrix[i][j]=left + top - overlap + matrix[i][j];
+        for (int i=0; i<matrix.length; i++) {
+            int sum = 0;
+            for (int j=0; j<matrix[0].length; j++) {
+                sum += matrix[i][j];
+                sumMatrix[i][j] = sum;
             }
         }
-
         return sumMatrix;
     }
 }

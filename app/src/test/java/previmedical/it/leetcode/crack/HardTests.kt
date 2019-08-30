@@ -283,6 +283,24 @@ class HardTests {
     @Test
     fun maxSubMatrixTest() {
         val maxSubMatrix = MaxSubmatrix()
-        maxSubMatrix.test()
+        val input = arrayOf(
+            intArrayOf(-2, 0, 1, 4),
+            intArrayOf(3, 2, 0, 1),
+            intArrayOf(5, 6, 1, 2),
+            intArrayOf(4, -10, 5, 1)
+        )
+        val maxMatrix = maxSubMatrix.maxSubMatrixNaive(input)
+        assertEquals(0, maxMatrix.topLeftI)
+        assertEquals(0, maxMatrix.topLeftJ)
+        assertEquals(2, maxMatrix.bottomRightI)
+        assertEquals(3, maxMatrix.bottomRightJ)
+        assertEquals(23, maxMatrix.sum)
+
+        val maxMatrixOptimal = maxSubMatrix.maxSubMatrixOptimal(input)
+        assertEquals(0, maxMatrixOptimal.topLeftI)
+        assertEquals(0, maxMatrixOptimal.topLeftJ)
+        assertEquals(2, maxMatrixOptimal.bottomRightI)
+        assertEquals(3, maxMatrixOptimal.bottomRightJ)
+        assertEquals(23, maxMatrixOptimal.sum)
     }
 }
