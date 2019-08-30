@@ -262,4 +262,21 @@ class HardTests {
         val output = wordTransformer.transform("DAMP", "LIKE", dictionary)
         assertEquals(5, output.size)
     }
+
+    @Test
+    fun maxSquareMatrixTest() {
+        val input = arrayOf(
+            intArrayOf(1, 0, 0, 0, 1, 0),
+            intArrayOf(1, 0, 1, 0, 1, 1),
+            intArrayOf(0, 0, 0, 0, 1, 1),
+            intArrayOf(1, 1, 1, 1, 1, 1),
+            intArrayOf(0, 1, 0, 0, 1, 0),
+            intArrayOf(1, 1, 0, 0, 1, 1)
+        )
+        val maxSquareMatrix = MaxSquareMatrix()
+        val output = maxSquareMatrix.maxSquare(input)
+        assertEquals(0, output.i)
+        assertEquals(1, output.j)
+        assertEquals(3, output.length)
+    }
 }
