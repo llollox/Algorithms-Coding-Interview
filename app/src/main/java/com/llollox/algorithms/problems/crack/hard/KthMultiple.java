@@ -1,5 +1,7 @@
 package com.llollox.algorithms.problems.crack.hard;
 
+import java.util.PriorityQueue;
+
 public class KthMultiple {
 
     /*
@@ -36,10 +38,34 @@ public class KthMultiple {
      */
 
 
+    // Priority Queue ******************************************************************************
+    public int kthMultiplePriorityQueue(int k) {
+        if (k <= 0) {
+            return -1;
+        }
+
+        PriorityQueue<Integer> queue = new PriorityQueue<>();
+        queue.add(1);
+
+        int[] factors = new int[] {3, 5, 7};
+
+        for (int i=0; i<k - 1; i++) {
+            int peek = queue.poll();
+
+            for (int factor : factors) {
+                int value = peek * factor;
+                if (value > 0 && !queue.contains(value)) {
+                    queue.add(value);
+                }
+            }
+        }
+
+        return queue.peek();
+    }
 
 
-
-    public int kthMultiple(int k) {
+    // Naive ***************************************************************************************
+    public int kthMultipleNaive(int k) {
 
         int value = -1;
         int count = 0;

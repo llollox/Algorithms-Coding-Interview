@@ -93,19 +93,39 @@ class HardTests {
     }
 
     @Test
-    fun kthMultiple() {
+    fun kthMultipleNaiveTest() {
         val kthMultiple = KthMultiple()
-        assertEquals(-1, kthMultiple.kthMultiple(0))
-        assertEquals(1, kthMultiple.kthMultiple(1))
-        assertEquals(3, kthMultiple.kthMultiple(2))
-        assertEquals(5, kthMultiple.kthMultiple(3))
-        assertEquals(7, kthMultiple.kthMultiple(4))
-        assertEquals(9, kthMultiple.kthMultiple(5))
-        assertEquals(15, kthMultiple.kthMultiple(6))
-        assertEquals(21, kthMultiple.kthMultiple(7))
-        assertEquals(25, kthMultiple.kthMultiple(8))
-        assertEquals(27, kthMultiple.kthMultiple(9))
-        assertEquals(24111675, kthMultiple.kthMultiple(1000))
+        assertEquals(-1, kthMultiple.kthMultipleNaive(0))
+        assertEquals(1, kthMultiple.kthMultipleNaive(1))
+        assertEquals(3, kthMultiple.kthMultipleNaive(2))
+        assertEquals(5, kthMultiple.kthMultipleNaive(3))
+        assertEquals(7, kthMultiple.kthMultipleNaive(4))
+        assertEquals(9, kthMultiple.kthMultipleNaive(5))
+        assertEquals(15, kthMultiple.kthMultipleNaive(6))
+        assertEquals(21, kthMultiple.kthMultipleNaive(7))
+        assertEquals(25, kthMultiple.kthMultipleNaive(8))
+        assertEquals(27, kthMultiple.kthMultipleNaive(9))
+        assertEquals(33075, kthMultiple.kthMultipleNaive(100))
+        assertEquals(900375, kthMultiple.kthMultipleNaive(200))
+        assertEquals(283618125, kthMultiple.kthMultipleNaive(500))
+    }
+
+    @Test
+    fun kthMultiplePriorityQueueTest() {
+        val kthMultiple = KthMultiple()
+        assertEquals(-1, kthMultiple.kthMultiplePriorityQueue(0))
+        assertEquals(1, kthMultiple.kthMultiplePriorityQueue(1))
+        assertEquals(3, kthMultiple.kthMultiplePriorityQueue(2))
+        assertEquals(5, kthMultiple.kthMultiplePriorityQueue(3))
+        assertEquals(7, kthMultiple.kthMultiplePriorityQueue(4))
+        assertEquals(9, kthMultiple.kthMultiplePriorityQueue(5))
+        assertEquals(15, kthMultiple.kthMultiplePriorityQueue(6))
+        assertEquals(21, kthMultiple.kthMultiplePriorityQueue(7))
+        assertEquals(25, kthMultiple.kthMultiplePriorityQueue(8))
+        assertEquals(27, kthMultiple.kthMultiplePriorityQueue(9))
+        assertEquals(33075, kthMultiple.kthMultiplePriorityQueue(100))
+        assertEquals(900375, kthMultiple.kthMultiplePriorityQueue(200))
+        assertEquals(283618125, kthMultiple.kthMultiplePriorityQueue(500))
     }
 
     @Test
