@@ -107,16 +107,16 @@ public class MaxSubmatrix {
 
     public Matrix maxSubMatrixOptimal(int[][] matrix) {
         int[][] sumMatrix = this.buildSumMatrix(matrix);
-        int rows = matrix.length;
-        int cols = matrix[0].length;
+        int rows = matrix.length; // R
+        int cols = matrix[0].length; // C
         Matrix max = null;
-        for (int l=0;l<cols; l++) {
+        for (int l=0;l<cols; l++) {                   // C
 
-            for (int j=0; j<cols - l; j++) {
+            for (int j=0; j<cols - l; j++) {          // C
                 int sum = 0;
                 int startI = 0;
-                for (int i=0; i<rows; i++) {
-                    sum += getRowSum(i, j, l, sumMatrix);
+                for (int i=0; i<rows; i++) {          // R
+                    sum += getRowSum(i, j, l, sumMatrix); // 1
 
                     if (sum <= 0) {
                         sum = 0;
@@ -142,9 +142,9 @@ public class MaxSubmatrix {
 
     private int[][] buildSumMatrix(int[][] matrix) {
         int[][] sumMatrix = new int[matrix.length][matrix[0].length];
-        for (int i=0; i<matrix.length; i++) {
+        for (int i=0; i<matrix.length; i++) {                  // R
             int sum = 0;
-            for (int j=0; j<matrix[0].length; j++) {
+            for (int j=0; j<matrix[0].length; j++) {           // C
                 sum += matrix[i][j];
                 sumMatrix[i][j] = sum;
             }
