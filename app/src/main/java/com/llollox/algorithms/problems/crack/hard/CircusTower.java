@@ -52,7 +52,7 @@ public class CircusTower {
 
      */
 
-    public List<Person> longestIncreasingSeq(List<Person> people) {
+    public List<Person> circusTowerExponential(List<Person> people) {
         if (people == null || people.isEmpty()) {
             return new ArrayList<>();
         }
@@ -96,6 +96,90 @@ public class CircusTower {
     }
 
 
+    // Approach 2 *****************************************************************************
+
+    /*
+        Sorted by weight:
+        P3 [198, 70]
+        P4 [182, 78]
+        P1 [189, 98]
+        P2 [170, 100]
+        P5 [200, 110]
+
+        L'idea è quella di considerare le persone fino a k.
+        Viene creata una lista di liste in cui alla posizione i:
+            lista[i] = la lista di lunghezza massima considerando fino alla i-esima persona.
+
+        - Inizializzo un'arary di liste.
+        - Scorro tutte le persone Time O(N), j = i + 1
+            - Scorro tutte le liste precedenti per trovare quella di lunghezza massima in cui posso aggiungerlo Time O(N)
+            - Aggiungo me a tale lista
+            - lista[j] = Max tra:
+                - la lista più lunga trovata con me
+                - lista[j - 1]
+        - ritorno lista[n - 1]
+     */
+    public List<Person> circusTowerNSquare(List<Person> people) {
+        if (people == null || people.isEmpty()) {
+            return new ArrayList<>();
+        }
+        Collections.sort(people);
+        return circusTower(people);
+    }
+
+    private List<Person> circusTower(List<Person> people) {
+        int n = people.size();
+        ArrayList<ArrayList<Person>> subSequences = new ArrayList<>(n);
+
+        for (int i=0; i<n; i++) {
+            Person person = people.get(i);
+
+            List<Person> longestWithMe = getLongestSubList(person.weight, i, subSequences);
+
+            if (longestWithMe == null) {
+                longestWithMe = new ArrayList<>();
+            }
+
+            List<Person> longest = i > 0 ? subSequences.get(i - 1) : new ArrayList<Person>();
+
+            ArrayList<Person> newLongest;
+
+            if (longestWithMe.size() + 1 >= longest.size()) {
+                newLongest = new ArrayList<>(longestWithMe);
+                newLongest.add(person);
+            }
+            else {
+                newLongest = new ArrayList<>(longest);
+            }
+
+            subSequences.add(i, newLongest);
+        }
+
+        return subSequences.get(n - 1);
+    }
+
+    private List<Person> getLongestSubList(int minWeight, int maxIndex, ArrayList<ArrayList<Person>> subsequences) {
+        List<Person> longest = null;
+        for (int i=0; i<maxIndex; i++) {
+
+            List<Person> subSequence = subsequences.get(i);
+
+            if (canChoose(minWeight, subSequence) && (longest == null || longest.size() < subSequence.size())) {
+                longest = subSequence;
+            }
+        }
+
+        return longest;
+    }
+
+    private boolean canChoose(int minWeight, List<Person> subsequence) {
+        Person last = subsequence.isEmpty() ? null : subsequence.get(subsequence.size() - 1);
+        return last == null || last.weight <= minWeight;
+    }
+
+
+
+    // Data Model *************************************************************************
     public static class Person implements Comparable<Person> {
         int height;
         int weight;

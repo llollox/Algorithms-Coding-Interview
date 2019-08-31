@@ -1,9 +1,9 @@
 package com.llollox.algorithms.crack
 
+import com.llollox.algorithms.problems.crack.hard.*
 import org.junit.Assert.assertArrayEquals
 import org.junit.Assert.assertEquals
 import org.junit.Test
-import com.llollox.algorithms.problems.crack.hard.*
 
 class HardTests {
 
@@ -72,7 +72,22 @@ class HardTests {
             CircusTower.Person(200, 110))
 
         val circusTower = CircusTower()
-        val output = circusTower.longestIncreasingSeq(people)
+        val output = circusTower.circusTowerExponential(people)
+
+        assertEquals(3, output.size)
+    }
+
+    @Test
+    fun circusTowerDPTest() {
+        val people = listOf(
+            CircusTower.Person(189, 98),
+            CircusTower.Person(170, 100),
+            CircusTower.Person(198, 70),
+            CircusTower.Person(182, 78),
+            CircusTower.Person(200, 110))
+
+        val circusTower = CircusTower()
+        val output = circusTower.circusTowerNSquare(people)
 
         assertEquals(3, output.size)
     }
