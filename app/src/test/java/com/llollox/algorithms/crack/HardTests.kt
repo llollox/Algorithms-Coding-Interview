@@ -129,6 +129,24 @@ class HardTests {
     }
 
     @Test
+    fun kthMultipleOptimalTest() {
+        val kthMultiple = KthMultiple()
+        assertEquals(-1, kthMultiple.kthMultipleOptimal(0))
+        assertEquals(1, kthMultiple.kthMultipleOptimal(1))
+        assertEquals(3, kthMultiple.kthMultipleOptimal(2))
+        assertEquals(5, kthMultiple.kthMultipleOptimal(3))
+        assertEquals(7, kthMultiple.kthMultipleOptimal(4))
+        assertEquals(9, kthMultiple.kthMultipleOptimal(5))
+        assertEquals(15, kthMultiple.kthMultipleOptimal(6))
+        assertEquals(21, kthMultiple.kthMultipleOptimal(7))
+        assertEquals(25, kthMultiple.kthMultipleOptimal(8))
+        assertEquals(27, kthMultiple.kthMultipleOptimal(9))
+        assertEquals(33075, kthMultiple.kthMultipleOptimal(100))
+        assertEquals(900375, kthMultiple.kthMultipleOptimal(200))
+        assertEquals(283618125, kthMultiple.kthMultipleOptimal(500))
+    }
+
+    @Test
     fun majorityElementNaiveTest() {
         val majorityElement = MajorityElement()
         assertEquals(5, majorityElement.majorityElementNaive(intArrayOf(1, 2, 5, 9, 5, 9, 5, 5, 5)))
