@@ -51,35 +51,6 @@ public class WordDistance {
           In questo modo il lookup costa O(1)
      */
 
-
-    private HashMap<String, List<Integer>> createIndexesMap(String[] words) {
-        HashMap<String, List<Integer>> map = new HashMap<>();
-
-        for (int i=0; i<words.length; i++) {
-            String word = words[i];
-            List<Integer> indexes = map.get(word);
-            if (indexes == null) {
-                indexes = new ArrayList<>();
-                map.put(word, indexes);
-            }
-            indexes.add(i);
-        }
-
-        return map;
-    }
-
-
-//    public int wordDistanceOptmial(String[] words) {
-//        HashMap<String, List<Integer>> map = this.createIndexesMap(words);
-//
-//
-//    }
-//
-//    private int findMinDifference(List<Integer> a, List<Integer> b) {
-//
-//    }
-
-
     public int wordDistance(String[] words, String a, String b) {
         if (words == null || a == null || b == null) {
             return -1;
@@ -119,4 +90,51 @@ public class WordDistance {
         }
     }
 
+
+    // Optimal ****************************************************************************************
+    public int wordDistanceOptimal(String[] strings, String a, String b) {
+        HashMap<String, List<Integer>> locations = this.createIndexesMap(strings);
+        List<Integer> locationsA = locations.get(a);
+        List<Integer> locationsB = locations.get(b);
+
+        int iA = 0;
+        int iB = 0;
+        int minDistance = Integer.MAX_VALUE;
+
+        while (iA < locationsA.size() && iB < locationsB.size()) {
+            int valA = locationsA.get(iA);
+            int valB = locationsB.get(iB);
+            int diff = Math.abs(valA - valB);
+
+            if (minDistance > diff) {
+                minDistance = diff;
+            }
+
+            if (valA < valB) {
+                iA += 1;
+            }
+            else {
+                iB += 1;
+            }
+        }
+
+        return minDistance;
+    }
+
+
+    private HashMap<String, List<Integer>> createIndexesMap(String[] words) {
+        HashMap<String, List<Integer>> map = new HashMap<>();
+
+        for (int i=0; i<words.length; i++) {
+            String word = words[i];
+            List<Integer> indexes = map.get(word);
+            if (indexes == null) {
+                indexes = new ArrayList<>();
+                map.put(word, indexes);
+            }
+            indexes.add(i);
+        }
+
+        return map;
+    }
 }

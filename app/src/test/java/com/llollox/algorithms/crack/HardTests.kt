@@ -172,6 +172,15 @@ class HardTests {
     }
 
     @Test
+    fun wordDistanceOptimalTest() {
+        val wordDistance = WordDistance()
+        val input = arrayOf("Prova", "Test", "Testolino", "Perdincibacco", "Test", "Perdinci", "Test", "Pass", "Prova")
+        assertEquals(1, wordDistance.wordDistanceOptimal(input, "Test", "Pass"))
+        assertEquals(1, wordDistance.wordDistanceOptimal(input, "Test", "Prova"))
+        assertEquals(0, wordDistance.wordDistanceOptimal(input, "Test", "Test"))
+    }
+
+    @Test
     fun smallestK_Heap_Test() {
         val smallestK = SmallestK()
         assertArrayEquals(intArrayOf(4, 2, 1), smallestK.smallestK_Heap(intArrayOf(1, 7, 18, 2, 4, 6), 3))
