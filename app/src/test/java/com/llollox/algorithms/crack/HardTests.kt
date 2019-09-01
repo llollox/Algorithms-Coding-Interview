@@ -203,6 +203,15 @@ class HardTests {
     }
 
     @Test
+    fun reSpaceTest() {
+        val reSpace = ReSpace()
+        val string = "jesslookedjustliketimherbrother"
+        val dictionary = hashSetOf("looked", "just", "like", "her", "brother")
+        val output = reSpace.reSpace(string, dictionary)
+        assertEquals(7, output.numUnrecognizedCharacters)
+    }
+
+    @Test
     fun smallestK_Heap_Test() {
         val smallestK = SmallestK()
         assertArrayEquals(intArrayOf(4, 2, 1), smallestK.smallestK_Heap(intArrayOf(1, 7, 18, 2, 4, 6), 3))
