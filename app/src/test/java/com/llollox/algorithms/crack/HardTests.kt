@@ -181,6 +181,28 @@ class HardTests {
     }
 
     @Test
+    fun biNodeTest() {
+        val root = BiNodeProblem.BiNode(5)
+        root.left = BiNodeProblem.BiNode(3)
+        root.right = BiNodeProblem.BiNode(7)
+        root.left.left = BiNodeProblem.BiNode(1)
+        root.left.right = BiNodeProblem.BiNode(4)
+        root.right.left = BiNodeProblem.BiNode(6)
+        root.right.right = BiNodeProblem.BiNode(8)
+
+        val biNodeProblem = BiNodeProblem()
+        val output = biNodeProblem.BSTtoLL(root)
+
+        assertEquals(1, output.value)
+        assertEquals(3, output.right.value)
+        assertEquals(4, output.right.right.value)
+        assertEquals(5, output.right.right.right.value)
+        assertEquals(6, output.right.right.right.right.value)
+        assertEquals(7, output.right.right.right.right.right.value)
+        assertEquals(8, output.right.right.right.right.right.right.value)
+    }
+
+    @Test
     fun smallestK_Heap_Test() {
         val smallestK = SmallestK()
         assertArrayEquals(intArrayOf(4, 2, 1), smallestK.smallestK_Heap(intArrayOf(1, 7, 18, 2, 4, 6), 3))
