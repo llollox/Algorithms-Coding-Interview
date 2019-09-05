@@ -2,6 +2,7 @@ package com.llollox.algorithms.problems.crack.hard;
 
 import java.util.LinkedList;
 import java.util.PriorityQueue;
+import java.util.Queue;
 
 public class KthMultiple {
 
@@ -45,9 +46,9 @@ public class KthMultiple {
             return -1;
         }
 
-        LinkedList<Integer> q3 = new LinkedList<>();
-        LinkedList<Integer> q5 = new LinkedList<>();
-        LinkedList<Integer> q7 = new LinkedList<>();
+        Queue<Integer> q3 = new LinkedList<>();
+        Queue<Integer> q5 = new LinkedList<>();
+        Queue<Integer> q7 = new LinkedList<>();
         q3.add(1);
         int val = 0;
 
