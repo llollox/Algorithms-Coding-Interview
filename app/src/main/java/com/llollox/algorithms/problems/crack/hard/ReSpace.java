@@ -72,7 +72,9 @@ public class ReSpace {
             return new Result(strings, s.length());
         }
 
-        return reSpace(s, dictionary, new HashMap<String, Result>());
+        HashMap<String, Result> memo = new HashMap<>();
+        Result r = reSpace(s, dictionary, memo);
+        return r;
     }
 
     private Result reSpace(String s, HashSet<String> dictionary, HashMap<String, Result> memo) {
