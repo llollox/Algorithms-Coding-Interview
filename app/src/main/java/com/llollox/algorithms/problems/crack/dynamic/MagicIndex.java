@@ -91,6 +91,7 @@ public class MagicIndex {
         return magicIndexDuplicates(a, 0, a.length - 1);
     }
 
+    // [1, 1, 1, 4, 6, 8]
     public int magicIndexDuplicates(int[] a, int start, int end) {
 
         if (start > end) {

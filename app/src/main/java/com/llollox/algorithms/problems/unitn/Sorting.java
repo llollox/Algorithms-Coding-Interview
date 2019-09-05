@@ -245,7 +245,7 @@ public class Sorting {
 
 
     // QUICK SORT ******************************************************************************************************
-    // Choose a pivot randomly. Than put all the lower elements to the right, and all the greater elements to the left.
+    // Choose a pivot randomly. Then put all the lower elements to the right, and all the greater elements to the left.
     // Repeat recursively within the two halves.
     // Best case O(n * log2n): Prendo sempre il medio
     // Worst case O(n2): Prendo sempre il minimo o il massimo
@@ -268,7 +268,7 @@ public class Sorting {
         // Partitioning
         int pivot = a[end];
 
-        int i = start - 1;
+        int i = start - 1; // i = L'ultimo elemento della prima partizione
         for (int j=start; j <= end - 1; j++) {
 
             // If current element is smaller than or equal to pivot
@@ -319,11 +319,13 @@ public class Sorting {
         int[] count = new int[10];
         Arrays.fill(count, 0);
 
+        // Conto le occorrenze di ogni valore
         for (int i = 0; i<n; i++) {
             int countIdx = (array[i] / exp) % 10;
             count[countIdx]++;
         }
 
+        // Sommo i valori delle occorrenze per trovare la posizione nell'array
         for (int k = 1; k<10; k++) {
             count[k] += count[k - 1];
         }
