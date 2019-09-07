@@ -7,9 +7,12 @@ public class AddWithoutPlus {
      */
 
     public int addWithoutPlus(int a, int b) {
-        int and = a & b;
-        int andShifted = and << 1;
-        int xor = a ^ b;
-        return xor | andShifted;
+        if (b == 0) {
+            return a;
+        }
+        int sum = a ^ b; // Sum without carring
+        int carry = (a & b) << 1;
+
+        return addWithoutPlus(sum, carry);
     }
 }
