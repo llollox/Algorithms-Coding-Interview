@@ -5,6 +5,7 @@ import org.junit.Test
 import com.llollox.algorithms.models.GraphNode
 import com.llollox.algorithms.models.TreeNode
 import com.llollox.algorithms.problems.crack.treegraph.*
+import android.util.Pair
 
 class TreeGraphTests {
 
@@ -165,5 +166,19 @@ class TreeGraphTests {
 
         val pathsWithSum = PathsWithSum()
         Assert.assertEquals(2, pathsWithSum.pathsWithSum(tree, 3))
+    }
+
+    @Test
+    fun buildOrderTest() {
+        val projects = listOf('a', 'b', 'c', 'd', 'e', 'f')
+        val dependencies = listOf(BuildOrder.Dep('a', 'd'), BuildOrder.Dep('f', 'b'), BuildOrder.Dep('b', 'd'), BuildOrder.Dep('f', 'a'), BuildOrder.Dep('d', 'c'))
+        val output = BuildOrder().buildOrder(projects, dependencies)
+
+        Assert.assertEquals('f', output[0])
+        Assert.assertEquals('e', output[1])
+        Assert.assertEquals('b', output[2])
+        Assert.assertEquals('a', output[3])
+        Assert.assertEquals('d', output[4])
+        Assert.assertEquals('c', output[5])
     }
 }
