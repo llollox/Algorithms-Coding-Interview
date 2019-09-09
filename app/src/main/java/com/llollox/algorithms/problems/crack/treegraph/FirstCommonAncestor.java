@@ -16,6 +16,7 @@ public class FirstCommonAncestor {
         - What if one or both nodes doesn't exists into the tree? Return null
         - Can a node be the ancestor of the other node? Yes
             - Ex. If one of the two nodes is the root of the tree
+        - What if n1 and n2 are the same?
 
         - Approach 1 Time O(n log n) Space O(log n)
             - Scorro l'albero con una DFS
