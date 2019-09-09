@@ -181,4 +181,31 @@ class TreeGraphTests {
         Assert.assertEquals('d', output[4])
         Assert.assertEquals('c', output[5])
     }
+
+    @Test
+    fun firstCommonAncestorTest() {
+
+        val n7 = TreeNode(7)
+        val n6 = TreeNode(6)
+        val n5 = TreeNode(5)
+        val n4 = TreeNode(4)
+        val n3 = TreeNode(3)
+        val n2 = TreeNode(2)
+        val n1 = TreeNode(1)
+
+        n3.left = n6
+        n3.right = n7
+
+        n2.left = n4
+        n2.right = n5
+
+        n1.left = n2
+        n1.right = n3
+
+        val firstCommonAncestor = FirstCommonAncestor()
+
+        Assert.assertEquals(n2, firstCommonAncestor.firstCommonAncestor(n1, n4, n5))
+        Assert.assertEquals(n1, firstCommonAncestor.firstCommonAncestor(n1, n5, n6))
+        Assert.assertEquals(n6, firstCommonAncestor.firstCommonAncestor(n1, n6, n6))
+    }
 }
