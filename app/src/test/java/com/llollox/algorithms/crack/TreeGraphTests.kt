@@ -210,7 +210,7 @@ class TreeGraphTests {
 
     @Test
     fun bstSequenceTest1() {
-        
+
         val n3 = TreeNode(3)
         val n2 = TreeNode(2)
         val n1 = TreeNode(1)
@@ -234,5 +234,59 @@ class TreeGraphTests {
         val bstSequence = BSTSequence()
         val output = bstSequence.getPermutations(listOf(1, 2, 3))
         Assert.assertEquals(6, output.size)
+    }
+
+    @Test
+    fun validateBSTTestFalse() {
+        val validateBST = ValidateBST()
+        val n7 = TreeNode(7)
+        val n6 = TreeNode(6)
+        val n5 = TreeNode(5)
+        val n4 = TreeNode(4)
+        val n3 = TreeNode(3)
+        val n2 = TreeNode(2)
+        val n1 = TreeNode(1)
+
+        n3.left = n6
+        n3.right = n7
+
+        n2.left = n4
+        n2.right = n5
+
+        n1.left = n2
+        n1.right = n3
+
+        Assert.assertEquals(false, validateBST.checkBST(n1))
+    }
+
+
+    @Test
+    fun validateBSTTestTrue() {
+        val validateBST = ValidateBST()
+
+        /*
+                4
+              2    6
+             1 3  5  7
+         */
+
+        val n7 = TreeNode(7)
+        val n6 = TreeNode(6)
+        val n5 = TreeNode(5)
+        val n4 = TreeNode(4)
+        val n3 = TreeNode(3)
+        val n2 = TreeNode(2)
+        val n1 = TreeNode(1)
+
+        n4.left = n2
+        n4.right = n6
+
+        n2.left = n1
+        n2.right = n3
+
+        n6.left = n5
+        n6.right = n7
+
+        Assert.assertEquals(true, validateBST.checkBST(n4))
     }
 }
