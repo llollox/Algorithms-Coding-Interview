@@ -1,10 +1,10 @@
 package com.llollox.algorithms.crack
 
-import junit.framework.Assert
-import org.junit.Test
 import com.llollox.algorithms.problems.crack.strings.IsPermutation
 import com.llollox.algorithms.problems.crack.strings.IsUnique
 import com.llollox.algorithms.problems.crack.strings.URLify
+import junit.framework.Assert
+import org.junit.Test
 
 class StringTests {
 
@@ -36,6 +36,10 @@ class StringTests {
         Assert.assertEquals(true, isPermutation.isPermutation("ciaoaaa", "iaaocaa"))
         Assert.assertEquals(false, isPermutation.isPermutation("provaaa", "prov"))
         Assert.assertEquals(false, isPermutation.isPermutation("", "iaoc"))
+        Assert.assertEquals(true, isPermutation.isPermutationHashMap("ciao", "iaoc"))
+        Assert.assertEquals(true, isPermutation.isPermutationHashMap("ciaoaaa", "iaaocaa"))
+        Assert.assertEquals(false, isPermutation.isPermutationHashMap("provaaa", "prov"))
+        Assert.assertEquals(false, isPermutation.isPermutationHashMap("", "iaoc"))
     }
 
     @Test

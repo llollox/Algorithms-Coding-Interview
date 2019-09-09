@@ -10,6 +10,7 @@ class HardTests {
     @Test
     fun addWithoutPlus() {
         val addWithoutPlus = AddWithoutPlus()
+        assertEquals(8, addWithoutPlus.addWithoutPlus(5, 3))
         assertEquals(14, addWithoutPlus.addWithoutPlus(5, 9))
         assertEquals(81, addWithoutPlus.addWithoutPlus(72, 9))
         assertEquals(14, addWithoutPlus.addWithoutPlus(3, 11))

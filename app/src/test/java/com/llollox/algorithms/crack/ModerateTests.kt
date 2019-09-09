@@ -1,11 +1,11 @@
 package com.llollox.algorithms.crack
 
 import android.util.Log
+import com.llollox.algorithms.models.Point
+import com.llollox.algorithms.problems.crack.moderate.*
 import org.junit.Assert
 import org.junit.Assert.assertEquals
 import org.junit.Test
-import com.llollox.algorithms.models.Point
-import com.llollox.algorithms.problems.crack.moderate.*
 import java.util.regex.Pattern
 
 class ModerateTests {
@@ -66,6 +66,8 @@ class ModerateTests {
 
         Assert.assertEquals(2, factorial.trailingZero(10))
         Assert.assertEquals(4, factorial.trailingZero(20))
+        Assert.assertEquals(6, factorial.trailingZero(25))
+        Assert.assertEquals(28, factorial.trailingZero(124))
     }
 
 
