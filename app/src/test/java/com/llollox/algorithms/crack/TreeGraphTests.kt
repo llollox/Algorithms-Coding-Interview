@@ -1,11 +1,10 @@
 package com.llollox.algorithms.crack
 
-import junit.framework.Assert
-import org.junit.Test
 import com.llollox.algorithms.models.GraphNode
 import com.llollox.algorithms.models.TreeNode
 import com.llollox.algorithms.problems.crack.treegraph.*
-import android.util.Pair
+import junit.framework.Assert
+import org.junit.Test
 
 class TreeGraphTests {
 
@@ -207,5 +206,33 @@ class TreeGraphTests {
         Assert.assertEquals(n2, firstCommonAncestor.firstCommonAncestor(n1, n4, n5))
         Assert.assertEquals(n1, firstCommonAncestor.firstCommonAncestor(n1, n5, n6))
         Assert.assertEquals(n6, firstCommonAncestor.firstCommonAncestor(n1, n6, n6))
+    }
+
+    @Test
+    fun bstSequenceTest1() {
+        
+        val n3 = TreeNode(3)
+        val n2 = TreeNode(2)
+        val n1 = TreeNode(1)
+
+        n2.left = n1
+        n2.right = n3
+
+        val bstSequence = BSTSequence()
+        val output = bstSequence.bstSequence(n2)
+        Assert.assertEquals(2, output.size)
+        Assert.assertEquals(2, output[0][0])
+        Assert.assertEquals(1, output[0][1])
+        Assert.assertEquals(3, output[0][2])
+        Assert.assertEquals(2, output[1][0])
+        Assert.assertEquals(3, output[1][1])
+        Assert.assertEquals(1, output[1][2])
+    }
+
+    @Test
+    fun permutationTest() {
+        val bstSequence = BSTSequence()
+        val output = bstSequence.getPermutations(listOf(1, 2, 3))
+        Assert.assertEquals(6, output.size)
     }
 }

@@ -42,8 +42,9 @@ public class BSTSequence {
              - Insert each permutation for each list, duplicating the values
      */
 
-    private ArrayList<ArrayList<Integer>> bstSequence(TreeNode root) {
+    public ArrayList<ArrayList<Integer>> bstSequence(TreeNode root) {
         ArrayList<ArrayList<Integer>> results = new ArrayList<>();
+        results.add(new ArrayList<Integer>());
 
         if (root == null) {
             return results;
@@ -54,24 +55,52 @@ public class BSTSequence {
 
         while (!queue.isEmpty()) {
 
+            ArrayList<TreeNode> nodes = new ArrayList<>();
+
+            while (!queue.isEmpty()) {
+                nodes.add(queue.poll());
+            }
+
             ArrayList<Integer> elements = new ArrayList<>();
-            for (TreeNode node : queue) {
+            for (TreeNode node : nodes) {
                 elements.add(node.val);
             }
 
-            ArrayList<ArrayList<Integer>> permutations = getPermutations(elements);
-            for (ArrayList<Integer> result : results) {
+            results = merge(results, getPermutations(elements));
 
-                for (ArrayList<Integer> permutation : permutations) {
+            for (TreeNode node : nodes) {
+                if (node.left != null) {
+                    queue.add(node.left);
+                }
 
-//                    result.addAll(permutation);
+                if (node.right != null) {
+                    queue.add(node.right);
                 }
             }
         }
+
+        return results;
+    }
+
+    private ArrayList<ArrayList<Integer>> merge(
+            ArrayList<ArrayList<Integer>> results,
+            ArrayList<ArrayList<Integer>> permutations) {
+
+        ArrayList<ArrayList<Integer>> newResults = new ArrayList<>();
+
+        for (ArrayList<Integer> result : results) {
+            for (ArrayList<Integer> permutation : permutations) {
+                ArrayList<Integer> r = new ArrayList<>(result);
+                r.addAll(permutation);
+                newResults.add(r);
+            }
+        }
+
+        return newResults;
     }
 
 
-    private ArrayList<ArrayList<Integer>> getPermutations(List<Integer> list) {
+    public ArrayList<ArrayList<Integer>> getPermutations(List<Integer> list) {
         ArrayList<ArrayList<Integer>> results = new ArrayList<>();
         getPermutations(results, new ArrayList<Integer>(), new HashSet<>(list));
         return results;
@@ -79,7 +108,7 @@ public class BSTSequence {
 
     private void getPermutations(ArrayList<ArrayList<Integer>> results, ArrayList<Integer> current, HashSet<Integer> remaining) {
         if (remaining.isEmpty()) {
-            results.add(current);
+            results.add(new ArrayList<>(current));
         }
 
         for (Integer value : remaining) {
