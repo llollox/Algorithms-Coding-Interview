@@ -28,8 +28,7 @@ public class FirstCommonAncestor {
                     - Se vedo che uno viene dal mio figlio sinitro e l'altro da quello destro
                         - Ho trovato il nodo che è il primo antenato comune
 
-        - Approach 2 Time O(log n) Space O(log n)
-            - Assumo di avere il puntatore al padre di un nodo
+        - Approach 2 Time O(log n) Space O(log n)  Assumo di avere il puntatore al padre di un nodo
             - Istanzio un HashSet<Node>
             - Parto dal nodo 1 ed inserisco tutti gli antenati fino alla radice
             - Parto dal nodo 2 e per ogni antenato fino alla radice, lo cerco nel set, il primo che trovo lo ritorno.
