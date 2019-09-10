@@ -209,6 +209,27 @@ class TreeGraphTests {
     }
 
     @Test
+    fun waveTest() {
+        val bstSequence = BSTSequence()
+        val output = bstSequence.wave(arrayListOf(1,2), listOf(3, 4))
+        Assert.assertEquals(6, output.size)
+    }
+
+    @Test
+    fun waveEmptyTest() {
+        val bstSequence = BSTSequence()
+        val output = bstSequence.wave(arrayListOf(), listOf(3, 4))
+        Assert.assertEquals(1, output.size)
+    }
+
+    @Test
+    fun waveSingleListsTest() {
+        val bstSequence = BSTSequence()
+        val output = bstSequence.wave(arrayListOf(1), listOf(2))
+        Assert.assertEquals(2, output.size)
+    }
+
+    @Test
     fun bstSequenceTest1() {
 
         val n3 = TreeNode(3)
@@ -222,19 +243,19 @@ class TreeGraphTests {
         val output = bstSequence.bstSequence(n2)
         Assert.assertEquals(2, output.size)
         Assert.assertEquals(2, output[0][0])
-        Assert.assertEquals(1, output[0][1])
-        Assert.assertEquals(3, output[0][2])
+        Assert.assertEquals(3, output[0][1])
+        Assert.assertEquals(1, output[0][2])
         Assert.assertEquals(2, output[1][0])
-        Assert.assertEquals(3, output[1][1])
-        Assert.assertEquals(1, output[1][2])
+        Assert.assertEquals(1, output[1][1])
+        Assert.assertEquals(3, output[1][2])
     }
-
-    @Test
-    fun permutationTest() {
-        val bstSequence = BSTSequence()
-        val output = bstSequence.getPermutations(listOf(1, 2, 3))
-        Assert.assertEquals(6, output.size)
-    }
+//
+//    @Test
+//    fun permutationTest() {
+//        val bstSequence = BSTSequence()
+//        val output = bstSequence.getPermutations(listOf(1, 2, 3))
+//        Assert.assertEquals(6, output.size)
+//    }
 
     @Test
     fun validateBSTTestFalse() {
