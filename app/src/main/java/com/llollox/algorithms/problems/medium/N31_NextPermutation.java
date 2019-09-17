@@ -38,12 +38,12 @@ public class N31_NextPermutation {
         - Generate all permutations of the array
         - Keep the minimum permutation that is greater than current one.
 
-        Approach 2 O(n log n) Space O(1)
+        Approach 2 O(n) Space O(1)
         - let define index = the index of the first element in which the previous number is less than the current one O(n)
-            - if there is no the case, sort the array and return it
+            - if there is no the case, reverse the array and return it
         - Find the minimum value that is greater than the element of index - 1 (the smaller element)
         - Swap the item at index - 1 with the smallest greater
-        - Sort the sub array starting from position index
+        - Reverse the sub array starting from position index
      */
 
     public void nextPermutation(int[] nums) {
@@ -57,22 +57,27 @@ public class N31_NextPermutation {
             index -= 1;
         }
 
-        if (index == 0) {
-            Arrays.sort(nums);
-            return;
-        }
+        if (index > 0) {
+            int minGreaterIndex = index;
 
-        int minGreaterIndex = index;
-        for (int i=index; i<nums.length; i++) {
-            int value = nums[i];
-            if (nums[minGreaterIndex] > value && value > nums[index - 1]) {
-                minGreaterIndex = i;
+            while (minGreaterIndex < nums.length - 1 && nums[minGreaterIndex + 1] > nums[index - 1]) {
+                minGreaterIndex += 1;
             }
+
+            this.swap(nums, minGreaterIndex, index - 1);
         }
 
-        this.swap(nums, minGreaterIndex, index - 1);
+        reverse(nums, index);
+    }
 
-        Arrays.sort(nums, index, nums.length);
+    private void reverse(int[] array, int start) {
+        int left = start;
+        int right = array.length - 1;
+        while (left < right) {
+            this.swap(array, left, right);
+            left += 1;
+            right -= 1;
+        }
     }
 
     private void swap(int[] array, int i, int j) {
