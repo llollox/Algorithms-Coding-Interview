@@ -1,6 +1,8 @@
 package com.llollox.algorithms.problems.crack.dynamic;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class Parens {
@@ -109,7 +111,7 @@ public class Parens {
      */
 
     public Set<String> parensNew(int n) {
-        if (n == 0) {
+        if (n <= 0) {
             return new HashSet<>();
         }
         else if (n == 1) {
@@ -174,4 +176,53 @@ public class Parens {
         return set;
     }
 
+
+
+    // Optmial Version *************************************************************************************************
+    /*
+     Note
+     - What if n <= 0, return empty array
+
+     Approach 1  Time O(2n) Space O(n)
+     - Given n means have at most n opening parens and n closing parens
+     - Try to construct all the combinations of parens recursively
+     - If opening and closing are 0
+        - This means we have no more parens left and therefore we can add that solution to the array
+     - Otherwise if opening > 0
+        - (this means we have the possibility to add a new opening parenthesis)
+        - Continue add that parenthesis and reduce the number of opening parens by 1.
+     - Otherswise if opening < closing,
+        - (this means we can safely add a closing parenthesis)
+        - continue adding a closing parenthesis and reduce the number of closing parens by 1.
+      */
+
+    public List<String> generateParenthesis(int n) {
+
+        List<String> ans = new ArrayList<>();
+        if(n < 1) {
+            return ans;
+        }
+
+        dfsHelper(n, n, new StringBuilder(), ans);
+        return ans;
+    }
+
+    private void dfsHelper(int open, int close,  StringBuilder sb, List<String> ans){
+
+        if(open == 0 && close == 0) {
+            ans.add(sb.toString());
+        }
+
+        if(open > 0){
+            sb.append('(');
+            dfsHelper(open - 1, close, sb, ans);
+            sb.deleteCharAt(sb.length() - 1);
+        }
+
+        if(open < close){
+            sb.append(')');
+            dfsHelper(open, close - 1, sb, ans);
+            sb.deleteCharAt(sb.length() - 1);
+        }
+    }
 }
