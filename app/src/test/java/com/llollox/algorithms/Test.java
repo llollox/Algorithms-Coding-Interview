@@ -3,6 +3,8 @@ package com.llollox.algorithms;
 import org.junit.Assert;
 
 import java.util.Arrays;
+import java.util.Comparator;
+import java.util.PriorityQueue;
 
 public class Test {
 
@@ -21,6 +23,15 @@ public class Test {
         char[] array = s.toCharArray();
         Arrays.sort(array);
         return String.valueOf(array);
+    }
+
+    public void prova() {
+        PriorityQueue<Integer> pq = new PriorityQueue<>(new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                return 0;
+            }
+        });
     }
 
 }
