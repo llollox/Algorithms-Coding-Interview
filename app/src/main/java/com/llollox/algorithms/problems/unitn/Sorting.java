@@ -160,7 +160,8 @@ public class Sorting {
 
     // INSERTION SORT **************************************************************************************************
     // Considero il primo come già ordinato.
-    // Parto dal secondo e verifico se è minore del primo, se si li swappo. A questo punto ho i primi 2 ordinati.
+    // Parto dal secondo e verifico se è minore del primo, se si li swappo.
+    // A questo punto ho i primi 2 ordinati.
     // Prendo il terzo e swappo all'indietro fintanto che trovo la posizione corretta dell'elemento.
     // Avanti cosí per tutti gli elementi dell'array.
     // Best case O(n): Already sorted array
