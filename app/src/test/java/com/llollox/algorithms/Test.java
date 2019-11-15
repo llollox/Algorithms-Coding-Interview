@@ -2,6 +2,7 @@ package com.llollox.algorithms;
 
 import org.junit.Assert;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.PriorityQueue;
@@ -11,6 +12,7 @@ public class Test {
     @org.junit.Test
     public void myTest() {
 
+        ArrayList<String> ab = new ArrayList<>();
         String a = "eIm";
         String sorted = sort(a);
         Assert.assertEquals("Iem", sorted);
