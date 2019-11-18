@@ -66,12 +66,74 @@ public class SumLists {
     }
 
 
-    public ListNode sumListsCorrectOrder(ListNode n1, ListNode n2) {
-        Reverse reverse = new Reverse();
+    class PartialSum {
+        ListNode node;
+        int carry;
 
-        ListNode summed = this.sumListsReversed(reverse.reverse(n1), reverse.reverse(n2));
-
-        return reverse.reverse(summed);
+        public PartialSum(ListNode node, int carry) {
+            this.node = node;
+            this.carry = carry;
+        }
     }
+
+    public ListNode calculateSumCorrectOrder(ListNode l1, ListNode l2) {
+        if (l1 == null || l2 == null) {
+            return null;
+        }
+
+        int l1Length = getLength(l1);
+        int l2Length = getLength(l2);
+        int diff = Math.abs(l1Length - l2Length);
+        ListNode shorter = l1Length > l2Length ? l2 : l1;
+        ListNode longer = l1Length > l2Length ? l1 : l2;
+
+        // Padding to shorter linked list
+        for (int i=0; i<diff; i++) {
+            shorter = prepend(shorter, 0);
+        }
+
+        PartialSum partialSum = sum(longer, shorter);
+        if (partialSum.carry > 0) {
+            return prepend(partialSum.node, partialSum.carry);
+        }
+        else {
+            return partialSum.node;
+        }
+    }
+
+    private PartialSum sum(ListNode l1, ListNode l2) {
+        if (l1.next == null) {
+            int sum = l1.val + l2.val;
+            int val = sum % 10;
+            int carry = sum >= 10 ? 1 : 0;
+            return new PartialSum(new ListNode(val), carry);
+        }
+        else {
+            PartialSum prevSum = sum(l1.next, l2.next);
+            int sum = l1.val + l2.val + prevSum.carry;
+            int val = sum % 10;
+            ListNode pre = prepend(prevSum.node, val);
+            int carry = sum >= 10 ? 1 : 0;
+            return new PartialSum(pre, carry);
+        }
+    }
+
+    private int getLength(ListNode l) {
+        int count = 0;
+        ListNode runner = l;
+        while (runner != null) {
+            runner = runner.next;
+            count += 1;
+        }
+
+        return count;
+    }
+
+    private ListNode prepend(ListNode n, int value) {
+        ListNode pre = new ListNode(value);
+        pre.next = n;
+        return pre;
+    }
+
 
 }
