@@ -1,9 +1,9 @@
 package com.llollox.algorithms.crack
 
-import org.junit.Assert
-import org.junit.Test
 import com.llollox.algorithms.problems.crack.bitmanipulation.Conversion
 import com.llollox.algorithms.problems.crack.bitmanipulation.FlipBitToWin
+import org.junit.Assert
+import org.junit.Test
 
 class BitManipulationTests {
 
