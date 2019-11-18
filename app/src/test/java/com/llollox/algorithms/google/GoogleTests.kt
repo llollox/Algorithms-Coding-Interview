@@ -1,6 +1,7 @@
 package com.llollox.algorithms.google
 
 import com.llollox.algorithms.problems.google.DeleteSubTree
+import com.llollox.algorithms.problems.google.FindMaximumSubString
 import junit.framework.Assert.assertEquals
 import org.junit.Test
 
@@ -37,5 +38,25 @@ class GoogleTests {
         assertEquals(2, tree.nodes[1].value)
         assertEquals(1, tree.nodes[2].value)
         assertEquals(3, tree.nodes[3].value)
+    }
+
+    @Test
+    fun findMaximumSubStringTest() {
+        val findMaximumSubString = FindMaximumSubString()
+
+        val s = "aabbcccd"
+        assertEquals(5, findMaximumSubString.getMaxSubstringLength(s, 2))
+        assertEquals(7, findMaximumSubString.getMaxSubstringLength(s, 3))
+        assertEquals(8, findMaximumSubString.getMaxSubstringLength(s, 4))
+    }
+
+    @Test
+    fun findMaximumSubStringTest2() {
+        val findMaximumSubString = FindMaximumSubString()
+
+        val s = "aabbcccddddg"
+        assertEquals(7, findMaximumSubString.getMaxSubstringLength(s, 2))
+        assertEquals(9, findMaximumSubString.getMaxSubstringLength(s, 3))
+        assertEquals(11, findMaximumSubString.getMaxSubstringLength(s, 4))
     }
 }
