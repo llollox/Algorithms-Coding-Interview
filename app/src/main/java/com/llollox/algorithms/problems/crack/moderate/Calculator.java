@@ -7,7 +7,7 @@ public class Calculator {
 
 
     public double calculate(String formula) {
-        Pattern pattern = Pattern.compile("(\\d+([*/]\\d+)*)+");
+        Pattern pattern = Pattern.compile("(\\d+[*/]\\d+)*");
         Matcher matcher = pattern.matcher(formula);
         double total = 0;
         while(matcher.find()) {
