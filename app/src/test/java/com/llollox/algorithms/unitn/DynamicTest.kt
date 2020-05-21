@@ -2,8 +2,8 @@ package com.llollox.algorithms.unitn
 
 import org.junit.Assert
 import org.junit.Test
-import com.llollox.algorithms.problems.unitn.dynamic.Intervals
-import com.llollox.algorithms.problems.unitn.models.Interval
+import com.llollox.algorithms.problems.topics.dynamic.Intervals
+import com.llollox.algorithms.problems.topics.models.Interval
 
 class DynamicTest {
 

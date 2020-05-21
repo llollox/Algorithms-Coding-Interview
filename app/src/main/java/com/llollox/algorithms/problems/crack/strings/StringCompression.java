@@ -57,21 +57,50 @@ public class StringCompression {
         return sb.toString();
     }
 
+    public String compress(String s) {
+        if (s == null || s.isEmpty()) {
+            return "";
+        }
+
+        int compressedLength = countCompressedLength(s);
+        if (s.length() <= compressedLength) {
+            return s;
+        }
+
+        StringBuilder sb = new StringBuilder(compressedLength);
+        int numOccurrences = 1;
+
+        for (int i=0; i<s.length(); i++) {
+            if (i + 1 == s.length() || s.charAt(i) != s.charAt(i + 1)) {
+                sb.append(s.charAt(i));
+                sb.append(numOccurrences);
+                numOccurrences = 1;
+            }
+            else {
+                numOccurrences += 1;
+            }
+        }
+
+        return sb.toString();
+    }
+
 
     public int countCompressedLength(String s) {
+        if (s == null || s.isEmpty()) {
+            return 0;
+        }
+
         int compressedLength = 0;
-        int i=0;
-
-        while (i<s.length()) {
-            char c = s.charAt(i);
-
-            int j =i + 1;
-            while (j < s.length() && s.charAt(j) == c) {
-                j++;
+        int numOccurrences = 1;
+        for (int i=0; i<s.length(); i++) {
+            if (i + 1 == s.length() || s.charAt(i) != s.charAt(i + 1)) {
+                compressedLength += 1; // for the char
+                compressedLength += String.valueOf(numOccurrences).length(); // for the occurrences
+                numOccurrences = 1;
             }
-
-            compressedLength += 2;
-            i = j;
+            else {
+                numOccurrences += 1;
+            }
         }
 
         return compressedLength;

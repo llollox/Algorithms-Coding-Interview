@@ -2,7 +2,7 @@ package com.llollox.algorithms.unitn
 
 import junit.framework.Assert
 import org.junit.Test
-import com.llollox.algorithms.problems.unitn.Sorting
+import com.llollox.algorithms.problems.topics.Sorting
 
 
 class SortingTest {

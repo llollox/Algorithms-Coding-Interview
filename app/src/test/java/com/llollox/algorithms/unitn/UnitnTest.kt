@@ -4,10 +4,10 @@ import junit.framework.Assert
 import org.junit.Test
 import com.llollox.algorithms.models.Graph
 import com.llollox.algorithms.models.GraphNode
-import com.llollox.algorithms.problems.unitn.KnightDialer
-import com.llollox.algorithms.problems.unitn.graph.TopologicalSort
-import com.llollox.algorithms.problems.unitn.dynamic.LongestCommonSubsequence
-import com.llollox.algorithms.problems.unitn.graph.Dijkstra
+import com.llollox.algorithms.problems.topics.KnightDialer
+import com.llollox.algorithms.problems.topics.graph.TopologicalSort
+import com.llollox.algorithms.problems.topics.dynamic.LongestCommonSubsequence
+import com.llollox.algorithms.problems.topics.graph.Dijkstra
 
 
 class UnitnTest  {

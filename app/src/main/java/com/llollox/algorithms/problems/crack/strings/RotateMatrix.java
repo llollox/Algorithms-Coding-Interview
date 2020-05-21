@@ -51,27 +51,67 @@ public class RotateMatrix {
 
      */
 
+    /*
+        L'approccio si basa sul far saltare il puntatore di n posizioni alla volta.
+        int start = 0
+        int end = n - 1
+        se start >= end - 1 -> ho finito perche' sono arrivato ad una matrice vuota o con un elemento solo
+        altrimenti:
+            [start,start] -> [start, end]
+            [start,end] -> [end, end]
+            [end, end] -> [end, start]
+            [end,start] -> [start, start]
+
+            // next = [start,end]
+            // [start,end] = [start, start]
+
+            // copy = [end, end]
+            // [end, end] = next
+            // next = copy
+
+            // copy = [end, start]
+            // [end, start] = next
+            // next = copy
+
+            // [start, start] = next
+
+
+
+        Ad ogni iterazione start += 1 & end -= 1
+        1   2   3   4   5       1   1   1   1   1
+        1   2   3   4   5       2   2   2   2   2
+        1   2   3   4   5       3   3   3   3   3
+        1   2   3   4   5       4   4   4   4   4
+        1   2   3   4   5       5   5   5   5   5
+     */
+
     public int[][] rotateMatrix(int[][] matrix) {
+        if (matrix == null || matrix.length <= 1) {
+            return matrix;
+        }
 
         int n = matrix.length;
+        for (int start=0; start<n/2; start++) {
+            int end = n - (start + 1);
+            if (start >= end) {
+                break;
+            }
 
-        for (int j=0; j<n; j++) {
+            for (int j=start; j<end; j++) {
+                int top = matrix[start][start + j];
 
-            int first = matrix[j][0];
+                // left -> top
+                matrix[start][start + j] = matrix[end - j][start];
 
-            int k = (n - 1) - j;
+                // bottom -> left
+                matrix[end - j][start] = matrix[end][end - j];
 
-            int second = matrix[0][k];
+                // right -> bottom
+                matrix[end][end - j] = matrix[start + j][end];
 
-            int third = matrix[k][n - 1];
-
-            int fourth = matrix[n - 1][(n - 1) - k];
-
-
-            matrix[j][0] = fourth;
-            matrix[0][k] = first;
-            matrix[k][n - 1] = second;
-            matrix[n - 1][(n - 1) - k] = third;
+                // right -> top
+                matrix[start + j][end] = top;
+            }
         }
 
         return matrix;

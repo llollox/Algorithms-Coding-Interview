@@ -2,8 +2,8 @@ package com.llollox.algorithms.unitn;
 
 import org.junit.Assert;
 import org.junit.Test;
-import com.llollox.algorithms.problems.unitn.graph.DetectCycle;
-import com.llollox.algorithms.problems.unitn.graph.KruskalMinimumSpanningTree;
+import com.llollox.algorithms.problems.topics.graph.DetectCycle;
+import com.llollox.algorithms.problems.topics.graph.KruskalMinimumSpanningTree;
 
 public class GraphTest {
 

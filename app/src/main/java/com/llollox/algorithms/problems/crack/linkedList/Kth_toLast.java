@@ -2,6 +2,8 @@ package com.llollox.algorithms.problems.crack.linkedList;
 
 import com.llollox.algorithms.models.ListNode;
 
+import java.util.List;
+
 public class Kth_toLast {
 
 
@@ -15,6 +17,9 @@ public class Kth_toLast {
         ListNode fastRunner = head;
 
         for (int i=0; i<kToLast; i++) {
+            if (fastRunner == null) {
+                return null;
+            }
             fastRunner = fastRunner.next;
         }
 
@@ -24,5 +29,33 @@ public class Kth_toLast {
         }
 
         return slowRunner;
+    }
+
+    public ListNode kthToLastRecursive(ListNode head, int kthToLast) {
+        Index index = new Index();
+        return kthToLastRecursiveImpl(head, kthToLast, index);
+    }
+
+    private static class Index {
+        int val = 0;
+    }
+
+    private ListNode kthToLastRecursiveImpl(ListNode node, int kthToLast, Index idx) {
+        if (node != null) {
+            ListNode returnNode = kthToLastRecursiveImpl(node.next, kthToLast, idx);
+            if (returnNode != null) {
+                return returnNode;
+            }
+
+            idx.val = idx.val + 1;
+            if (idx.val == kthToLast) {
+                return node;
+            }
+            return null;
+        }
+        else {
+            idx.val = -1;
+            return null;
+        }
     }
 }
