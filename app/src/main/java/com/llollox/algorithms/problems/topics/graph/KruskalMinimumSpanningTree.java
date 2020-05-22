@@ -69,6 +69,7 @@ public class KruskalMinimumSpanningTree {
         }
     }
 
+    // m + n log n
     // Kruskal Algorithm *********************************************************************************
     public int minimumSpanningTree(Graph g) {
         PriorityQueue<Edge> queue = new PriorityQueue<>(new Comparator<Edge>() {
@@ -78,10 +79,12 @@ public class KruskalMinimumSpanningTree {
             }
         });
 
+        // m log m
         for (List<Edge> edges : g.edges.values()) {
             queue.addAll(edges);
         }
 
+        // n
         HashMap<Integer, Subset> subsets = new HashMap<>();
         for (int node : g.edges.keySet()) {
             Subset s = new Subset();
@@ -93,6 +96,7 @@ public class KruskalMinimumSpanningTree {
         int edgesTaken = 0;
         int sum = 0;
 
+        // m
         while (edgesTaken < g.edges.size() - 1 && !queue.isEmpty()) {
             Edge edge = queue.poll();
 

@@ -118,4 +118,90 @@ public class BSTSequence {
     }
 
     ///////////////////////////////////////////////////////////////////
+
+    public List<List<Integer>> bstSequenceDfs(TreeNode node) {
+        ArrayList<List<Integer>> solutions = new ArrayList<>();
+
+        if (node == null) {
+            solutions.add(new ArrayList<Integer>());
+        }
+        else if (node.left == null && node.right == null) {
+            ArrayList<Integer> s = new ArrayList<>();
+            s.add(node.val);
+            solutions.add(s);
+        }
+        else {
+            List<List<Integer>> leftSequence = bstSequenceDfs(node.left);
+            List<List<Integer>> rightSequence = bstSequenceDfs(node.right);
+
+            if (!leftSequence.isEmpty() && !rightSequence.isEmpty()) {
+                for (List<Integer> l : leftSequence) {
+                    for (List<Integer> r : rightSequence) {
+                        solutions.addAll(prefix(wave(l, r), node.val));
+                    }
+                }
+            }
+            else if (!leftSequence.isEmpty()) {
+                return prefix(leftSequence, node.val);
+            }
+            else {
+                return prefix(rightSequence, node.val);
+            }
+        }
+
+        return solutions;
+    }
+
+    private List<List<Integer>> prefix(List<List<Integer>> lists, int prefix) {
+        ArrayList<List<Integer>> solutions = new ArrayList<>();
+        for (List<Integer> l : lists) {
+            ArrayList<Integer> solution = new ArrayList<>();
+            solution.add(prefix);
+            solution.addAll(l);
+            solutions.add(solution);
+        }
+        return solutions;
+    }
+
+    /*
+        Parto con l'idea che devo scegliere l1.length + l2.length elementi
+        Ad ogni step posso scegliere se prendere un elemento da l1 o da l2.
+        Ho due puntatori (che all'inizio puntano al primo elemento di ogni lista).
+        Quando un puntatore raggiunge la fine della lista significa che ho scelto tutti i suoi elementi.
+
+        Ad ogni step provo scegliendo prima un elemento dalla prima lista.
+        Riporto indietro il puntatore
+        Scelgo un elemento dalla seconda lista ecc.
+     */
+    private List<List<Integer>> wave(List<Integer> l1, List<Integer> l2) {
+        ArrayList<List<Integer>> solutions = new ArrayList<>();
+        wave(l1, l2, 0, 0, solutions, new ArrayList<Integer>());
+        return solutions;
+    }
+
+    private void wave(
+            List<Integer> l1, List<Integer> l2,
+            int l1index, int l2index,
+            ArrayList<List<Integer>> solutions, ArrayList<Integer> solution) {
+
+        if (l1index == l1.size() && l2index == l2.size()) {
+            // Ho finito tutti gli elementi a disposizione
+            solutions.add(solution);
+            return;
+        }
+
+        if (l1index < l1.size()) {
+            // Provo a prendere l1index
+            ArrayList<Integer> copy = new ArrayList<>(solution);
+            copy.add(l1.get(l1index));
+            wave(l1, l2, l1index + 1, l2index, solutions, copy);
+        }
+
+        if (l2index < l2.size()) {
+            // Provo a prendere l2index
+            ArrayList<Integer> copy = new ArrayList<>(solution);
+            copy.add(l2.get(l2index));
+            wave(l1, l2, l1index, l2index + 1, solutions, copy);
+        }
+    }
 }
