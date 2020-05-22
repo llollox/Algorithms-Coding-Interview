@@ -52,4 +52,60 @@ public class RandomNode {
 
         return left + right + 1;
     }
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////
+
+   /*
+        Secondo approccio.
+        Ritornare un numero random da 0 alla grandezza dell'albero.
+        Ritornare l'i-esimo nodo dato da una visita in-order.
+    */
+
+   public static class Counter {
+       int value;
+
+       public Counter(int value) {
+           this.value = value;
+       }
+
+       public void increment() { value += 1; }
+   }
+
+   public TreeNode getRandomNodeInOrderTraversal(TreeNode node) {
+       if (node == null) {
+           return null;
+       }
+
+       int size = getSize(node);
+
+       Random random = new Random();
+       int index = random.nextInt(size);
+       return getIthNode(node, new Counter(-1), index);
+   }
+
+   public TreeNode getIthNode(TreeNode node, Counter counter, int indexToBeFound) {
+       if (node == null) {
+           return null;
+       }
+
+       TreeNode left = getIthNode(node.left, counter, indexToBeFound);
+       if (left != null) {
+            return left;
+       }
+
+       counter.increment();
+       if (counter.value == indexToBeFound) {
+           return node;
+       }
+
+       return getIthNode(node.right, counter, indexToBeFound);
+   }
+
+   private int getSize(TreeNode node) {
+       if (node == null) {
+           return 0;
+       }
+
+       return getSize(node.left) + getSize(node.right) + 1;
+   }
 }

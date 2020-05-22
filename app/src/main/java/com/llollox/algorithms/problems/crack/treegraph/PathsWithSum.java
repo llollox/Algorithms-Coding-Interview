@@ -45,4 +45,26 @@ public class PathsWithSum {
         return paths + (currentSum + node.val == sum ? 1 : 0);
     }
 
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    public int pathWithSumReImplemented(TreeNode node, int goal) {
+        if (node == null) return 0;
+        return countPaths(node, 0, goal);
+    }
+
+    // count path starting from a certain node.
+    private int countPaths(TreeNode node, int sum, int goal) {
+        if (node == null) { return 0; }
+
+        if (sum + node.val == goal) {
+            return 1;
+        }
+
+        return countPaths(node.left, sum + node.val, goal)
+                + countPaths(node.right, sum + node.val, goal)
+                + countPaths(node.left, 0, goal)
+                + countPaths(node.right, 0, goal);
+    }
+
+
 }
