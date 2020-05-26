@@ -72,4 +72,59 @@ public class RecursiveMultiply {
             return 2 * recursiveMultiplyHelper2(bigger, smaller >> 1);
         }
     }
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    public int recursiveMultiplyReImplemented(int a, int b) {
+        if (isPower2(a)) {
+            return b << log(a);
+        }
+
+        if (isPower2(b)) {
+            return a << log(b);
+        }
+
+        int min = a > b ? b : a;
+        int max = a > b ? a : b;
+
+        int result = 0;
+        while (min > 0) {
+            if (isPower2(min)) {
+                return result + (max << log(min));
+            }
+
+            result += max;
+            min--;
+        }
+
+        return result;
+    }
+
+    private int log(int value) {
+        int count = 0;
+        while (value > 1) {
+            value >>= 1;
+            count++;
+        }
+        return count;
+    }
+
+    private boolean isPower2(int value) {
+        return (value & (value - 1)) == 0;
+    }
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    // Time O(log n) Space O(log n)
+    public int recursiveMultiplyReImplementedOptimal(int a, int b) {
+        int smaller = a > b ? b : a;
+        int bigger = a > b ? a : b;
+        return multiplyHelper(smaller, bigger);
+    }
+
+    private int multiplyHelper(int smaller, int bigger) {
+        switch (smaller) {
+            case 0: return 0;
+            case 1: return bigger;
+            default:
+                int result = multiplyHelper(smaller >> 1, bigger) << 1;
+                return smaller % 2 == 0 ? result : result + bigger;
+        }
+    }
 }
