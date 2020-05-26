@@ -34,4 +34,27 @@ public class SortedMerge {
 
         return A;
     }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    // Time O(|A| + |B|) Space O(1)
+    public void sortedMergeReImplemented(int[] a, int[] b, int lastAindex) {
+        if (a == null || b == null || a.length == 0 || b.length == 0) {
+            return;
+        }
+
+        int aIndex = lastAindex;
+        int bIndex = b.length - 1;
+        int currIndex = lastAindex + b.length;
+
+        while (bIndex >= 0) {
+            if (aIndex >= 0 && a[aIndex] > b[bIndex]) {
+                a[currIndex] = a[aIndex];
+                aIndex--;
+            } else {
+                a[currIndex] = b[bIndex];
+                bIndex--;
+            }
+            currIndex--;
+        }
+    }
 }

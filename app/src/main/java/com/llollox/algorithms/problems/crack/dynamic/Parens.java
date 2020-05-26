@@ -225,4 +225,31 @@ public class Parens {
             sb.deleteCharAt(sb.length() - 1);
         }
     }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    public ArrayList<String> parensReImplemented(int n) {
+        ArrayList<String> solutions = new ArrayList<>();
+        parensReImplemented(n, n, new StringBuilder(), solutions);
+        return solutions;
+    }
+
+    private void parensReImplemented(
+            int opensLeft, int closedLeft, StringBuilder sb, ArrayList<String> solutions) {
+        if (opensLeft == 0 && closedLeft == 0) {
+            solutions.add(sb.toString());
+            return;
+        }
+
+        if (opensLeft > 0) {
+            sb.append("(");
+            parensReImplemented(opensLeft -1, closedLeft, sb, solutions);
+            sb.deleteCharAt(sb.length() - 1);
+        }
+
+        if (opensLeft < closedLeft && closedLeft > 0) {
+            sb.append(")");
+            parensReImplemented(opensLeft, closedLeft - 1, sb, solutions);
+            sb.deleteCharAt(sb.length() - 1);
+        }
+    }
 }

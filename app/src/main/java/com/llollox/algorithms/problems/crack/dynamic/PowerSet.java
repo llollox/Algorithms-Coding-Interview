@@ -59,4 +59,35 @@ public class PowerSet {
 
         return r;
     }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    public ArrayList<List<Integer>> powerSetReImplemented(List<Integer> set) {
+        ArrayList<List<Integer>> solutions = new ArrayList<>();
+
+        if (set == null || set.size() == 0) {
+            solutions.add(new ArrayList<Integer>());
+            return solutions;
+        }
+
+        powerSetReImplemented(set, 0, solutions, new ArrayList<Integer>());
+        return solutions;
+    }
+
+    private void powerSetReImplemented(
+            List<Integer> set, int i,
+            ArrayList<List<Integer>> solutions,
+            ArrayList<Integer> solution) {
+
+        if (i == set.size()) {
+            solutions.add(solution);
+            return;
+        }
+
+        // Non prendo l'elemento
+        powerSetReImplemented(set, i + 1, solutions, new ArrayList<>(solution));
+
+        // Prendo l'elemento
+        solution.add(set.get(i));
+        powerSetReImplemented(set, i + 1, solutions, new ArrayList<>(solution));
+    }
 }

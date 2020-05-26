@@ -112,4 +112,85 @@ public class MagicIndex {
 
         return magicIndexDuplicates(a, Math.max(midValue, midIndex + 1), end);
     }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    public int findMagicIndexRecursive(int[] array) {
+        if (array == null || array.length == 0) return -1;
+        return findMagicIndexRecursive(array, 0, array.length);
+    }
+
+    private int findMagicIndexRecursive(int[] array, int start, int end) {
+        int mid = (start + end) / 2;
+        if (start >= end) {
+            return -1;
+        }
+
+        if (array[mid] == mid) {
+            return mid;
+        }
+        else if (array[mid] < mid) {
+            return findMagicIndexRecursive(array, mid + 1, end);
+        }
+        else {
+            return findMagicIndexRecursive(array, start, mid);
+        }
+    }
+
+    public int findMagicIndexIterative(int[] array) {
+        if (array == null || array.length == 0) return -1;
+        int start = 0;
+        int end = array.length;
+
+        while (start < end) {
+
+            int mid = (start + end) / 2;
+            if (array[mid] == mid) {
+                return mid;
+            }
+            else if (array[mid] < mid) {
+                start = mid + 1;
+            }
+            else {
+                end = mid;
+            }
+        }
+
+        return -1;
+    }
+
+    public int findMagicIndexWithDuplicates(int[] array) {
+        if (array == null || array.length == 0) return -1;
+        return findMagicIndexWithDuplicatesRecursion(array, 0, array.length);
+    }
+
+    private int findMagicIndexWithDuplicatesRecursion(int[] array, int start, int end) {
+        if (start >= end) {
+            return -1;
+        }
+
+        int mid = (start + end) / 2;
+        if (mid == array[mid]) {
+            return mid;
+        }
+        else if (array[mid] > mid) {
+            // test left part
+            int result = findMagicIndexWithDuplicatesRecursion(array, start, mid);
+            if (result > -1) {
+                return result;
+            }
+
+            // test right part
+            return findMagicIndexWithDuplicatesRecursion(array, array[mid] - 1, end);
+        }
+        else {
+            // test right part
+            int result = findMagicIndexWithDuplicatesRecursion(array, mid + 1, end);
+            if (result > -1) {
+                return result;
+            }
+
+            // test left part
+            return findMagicIndexWithDuplicatesRecursion(array, start, array[mid]);
+        }
+    }
 }
