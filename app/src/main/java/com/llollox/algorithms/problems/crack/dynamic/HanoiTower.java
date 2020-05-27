@@ -44,7 +44,7 @@ public class HanoiTower {
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
-    // Time O(2^n) Space 
+    // Time O(2^n) Space
     public ArrayList<String> hanoiReImplemented(int n) {
         StackWithName<Integer> left = new StackWithName<>("left");
         for (int i = n; i > 0; i --) {
