@@ -1,8 +1,8 @@
 package com.llollox.algorithms.problems.crack.dynamic;
 
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.Map;
 
 public class PermutationsWithDups {
     /*
@@ -10,28 +10,35 @@ public class PermutationsWithDups {
         The list of permutations should not have duplicates.
      */
 
-    public Set<String> recursive(String s) {
+    public ArrayList<String> recursive(String s) {
         if (s == null || s.length() == 0) {
-            return new HashSet<>();
+            return new ArrayList<>();
         }
 
         HashMap<Character, Integer> frequency = buildFrequencyMap(s);
-        HashSet<String> solutions = new HashSet<>();
-        helper(frequency, solutions, new StringBuilder(), s);
+        ArrayList<String> solutions = new ArrayList<>();
+        helper(frequency, solutions, new StringBuilder(), s.length());
         return solutions;
     }
 
-    private void helper(HashMap<Character, Integer> freqMap, Set<String> solutions, StringBuilder sb, String s) {
-        if (sb.length() == s.length()) {
+    private void helper(
+            HashMap<Character, Integer> freqMap,
+            ArrayList<String> solutions,
+            StringBuilder sb,
+            int remaining) {
+
+        if (remaining == 0) {
             solutions.add(sb.toString());
+            return;
         }
 
-        for (int i=0; i<s.length(); i++) {
-            char c = s.charAt(i);
-            if (canBeChosen(freqMap, c)) {
+        for (Map.Entry<Character, Integer> entry : freqMap.entrySet()) {
+            Character c = entry.getKey();
+            int count = entry.getValue();
+            if (count > 0) {
                 sb.append(c);
                 decrement(freqMap, c);
-                helper(freqMap, solutions, sb, s);
+                helper(freqMap, solutions, sb, remaining - 1);
                 increment(freqMap, c);
                 sb.deleteCharAt(sb.length() - 1);
             }
@@ -48,14 +55,10 @@ public class PermutationsWithDups {
     }
 
     private void decrement(HashMap<Character, Integer> map, Character key) {
-        map.put(key, map.getOrDefault(key, 0) - 1);
+        map.put(key, map.getOrDefault(key, 1) - 1);
     }
 
     private void increment(HashMap<Character, Integer> map, Character key) {
         map.put(key, map.getOrDefault(key, 0) + 1);
-    }
-
-    private boolean canBeChosen(HashMap<Character, Integer> map, Character key) {
-        return map.getOrDefault(key, 0) > 0;
     }
 }
