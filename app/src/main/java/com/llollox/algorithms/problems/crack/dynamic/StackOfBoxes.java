@@ -103,7 +103,7 @@ public class StackOfBoxes {
 
     public int stackOfBoxesHelper(ArrayList<Box> boxes, int[] heightFromBox) {
         int max = 0;
-        for (int i=0; i<boxes.size(); i++) {
+        for (int i = 0; i < boxes.size(); i++) {
             int maxWithI = tallestStackHeight(boxes, i, heightFromBox);
             heightFromBox[i] = maxWithI;
             max = Math.max(max, maxWithI);
@@ -116,7 +116,7 @@ public class StackOfBoxes {
         Box box = boxes.get(boxIndex);
         int max = box.h;
 
-        for (int j=0; j<boxIndex; j++) {
+        for (int j = 0; j < boxIndex; j++) {
             Box top = boxes.get(j);
 
             if (box.canBeOnTop(top)) {
@@ -159,7 +159,7 @@ public class StackOfBoxes {
 
         int max = 0;
         // N
-        for (int i=0; i<boxes.size(); i++) {
+        for (int i = 0; i < boxes.size(); i++) {
             int maxWithI = tallestStackHeight(boxes, i, boxHeight); // N
             boxHeight.add(new BoxHeight(boxes.get(i), maxWithI)); // log N
             max = Math.max(max, maxWithI);
@@ -183,5 +183,35 @@ public class StackOfBoxes {
         return box.h;
     }
 
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    public int stackOfBoxesRecursive(ArrayList<Box> boxes) {
+        if (boxes == null || boxes.isEmpty()) return 0;
+        // Sorted asc order
+        Collections.sort(boxes, new Comparator<Box>() {
+            @Override
+            public int compare(Box box1, Box box2) {
+                return Integer.compare(box2.h, box1.h);
+            }
+        });
+
+        int[] memo = new int[boxes.size()];
+        int max = 0;
+        for (int i = 0; i < boxes.size(); i++) {
+            max = Math.max(max, stackOfBoxesHelperRecursive(boxes, i, memo));
+        }
+        return max;
+    }
+
+    public int stackOfBoxesHelperRecursive(ArrayList<Box> boxes, int bottom, int[] memo) {
+        Box bottomBox = boxes.get(bottom);
+        int max = 0;
+        for (int i = bottom + 1; i < boxes.size(); i++) {
+            Box top = boxes.get(i);
+            if (bottomBox.canBeOnTop(top)) {
+                max = Math.max(max, stackOfBoxesHelperRecursive(boxes, i, memo));
+            }
+        }
+        return max + bottomBox.h;
+    }
 
 }
