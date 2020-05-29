@@ -127,4 +127,33 @@ public class FlipBitToWin {
 
         return maxLength;
     }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    public int flipToWinReImplemented(int n) {
+        if (~n == 0) {
+            return 0;
+        }
+
+        int max = 0;
+        int curr = 0;
+        int prev = 0;
+
+        while (n > 0) {
+            int digit = n & 1;
+
+            if (digit == 1) {
+                curr++;
+            }
+            else {
+                prev = (n & 2) == 0 ? 0 : curr;
+                curr = 0;
+            }
+
+            max = Math.max(curr + prev + 1, max);
+
+            n >>>= 1;
+        }
+
+        return max;
+    }
 }

@@ -2,6 +2,8 @@ package com.llollox.algorithms.problems.crack.treegraph;
 
 import com.llollox.algorithms.models.TreeNode;
 
+import java.util.HashMap;
+
 public class PathsWithSum {
 
     /*
@@ -67,4 +69,43 @@ public class PathsWithSum {
     }
 
 
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    public int pathWithSumOptimal(TreeNode node, int goal) {
+        if (node == null) return 0;
+        return pathWithSumDfs(node, goal, new HashMap<Integer, Integer>(), 0);
+    }
+
+    private int pathWithSumDfs(TreeNode node, int goal, HashMap<Integer, Integer> sumCount, int sum) {
+        if (node == null) return 0;
+
+        sum += node.val;
+
+        int res = sumCount.getOrDefault(sum - goal, 0);
+
+        if (sum == goal) {
+            res++;
+        }
+
+        increment(sumCount, sum);
+        res += pathWithSumDfs(node.left, goal, sumCount, sum);
+        res += pathWithSumDfs(node.right, goal, sumCount, sum);
+        decrement(sumCount, sum);
+
+        return res;
+    }
+
+    private void increment(HashMap<Integer, Integer> map, int key) {
+        int value = map.getOrDefault(key, 0) + 1;
+        map.put(key, value);
+    }
+
+    private void decrement(HashMap<Integer, Integer> map, int key) {
+        int value = map.getOrDefault(key, 0);
+        if (value == 0) {
+            map.remove(key);
+        }
+        else {
+            map.put(key, value - 1);
+        }
+    }
 }
