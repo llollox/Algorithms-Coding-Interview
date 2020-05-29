@@ -24,4 +24,10 @@ public class Insertion {
 
         return nCleared | m;
     }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    public int insertionReImplemented(int n, int m, int i, int j) {
+        int mask = (~0 << j + 1) | ((1 << i) - 1);
+        return (n & mask) | (m << i);
+    }
 }

@@ -28,4 +28,16 @@ public class Conversion {
 
         return count;
     }
+
+    public int conversionImproved(int a, int b) {
+        int count = 0;
+        for (int c= a ^ b; c != 0; c = c & (c - 1)) {
+            count++;
+        }
+        return count;
+    }
+
+    public int conversionOptimal(int a, int b) {
+        return Integer.bitCount(a ^ b);
+    }
 }
