@@ -68,9 +68,67 @@ public class PathsWithSum {
                 + countPaths(node.right, 0, goal);
     }
 
+    ///////////////////////////////////////////////////////////////////////////////////
+
+    /*
+      SUM = 3
+
+              1
+         2         4
+      8    4    -1   9
+
+     */
+    public int pathWithSumOptimal(TreeNode node, int targetSum) {
+        return countPathsWithSum(node, targetSum, 0, new HashMap<Integer, Integer>());
+    }
+
+    /*
+        Map:
+            - key: La somma fino a quel momento
+            - value: il numero di volte che è occorsa quella somma all'interno della sequenza.
+     */
+    private int countPathsWithSum(
+            TreeNode node, int targetSum, int runningSum,
+            HashMap<Integer, Integer> pathCount) {
+
+        if (node == null) return 0; // Base case
+
+        // Count paths with sum ending at the current node
+        runningSum += node.val;
+        int sum = runningSum - targetSum;
+        int totalPaths = pathCount.getOrDefault(sum, 0);
+
+        // If running sum equals target sum, then add one additional path starts at root.
+        // Add in this path.
+        if (runningSum == targetSum) {
+            totalPaths++;
+        }
+
+        // Increment pathCount, recurse, then decrement pathcount
+        incrementHashTable(pathCount, runningSum, 1);
+        totalPaths += countPathsWithSum(node.left, targetSum, runningSum, pathCount);
+        totalPaths += countPathsWithSum(node.right, targetSum, runningSum, pathCount);
+        incrementHashTable(pathCount, runningSum, -1);
+
+        return totalPaths;
+    }
+
+    private void incrementHashTable(
+            HashMap<Integer, Integer> map, int key, int delta
+    ) {
+        int newCount = map.getOrDefault(key, 0) + delta;
+        if (newCount == 0) {
+            // Remove when zero to reduce space usage
+            map.remove(key);
+        }
+        else {
+            map.put(key, newCount);
+        }
+    }
+
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
-    public int pathWithSumOptimal(TreeNode node, int goal) {
+    public int pathWithSumOptimalReImplemented(TreeNode node, int goal) {
         if (node == null) return 0;
         return pathWithSumDfs(node, goal, new HashMap<Integer, Integer>(), 0);
     }

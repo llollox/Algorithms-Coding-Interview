@@ -1,5 +1,6 @@
 package com.llollox.algorithms.problems.crack.dynamic;
 
+import java.util.ArrayList;
 import java.util.Stack;
 
 public class HanoiTower {
@@ -40,6 +41,48 @@ public class HanoiTower {
         Integer peek = from.pop();
         System.out.println("Move "  + peek + ": " + from.name + " --> " + to.name);
         to.push(peek);
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    // Time O(2^n) Space
+    public ArrayList<String> hanoiReImplemented(int n) {
+        StackWithName<Integer> left = new StackWithName<>("left");
+        for (int i = n; i > 0; i --) {
+            left.push(i);
+        }
+
+        ArrayList<String> moves = new ArrayList();
+        hanoiHelperReImplemented(
+                left,
+                new StackWithName<Integer>("middle"),
+                new StackWithName<Integer>("right"),
+                n, moves);
+
+        return moves;
+    }
+
+    private void hanoiHelperReImplemented(
+            StackWithName<Integer> left,
+            StackWithName<Integer> middle,
+            StackWithName<Integer> right,
+            int n,
+            ArrayList<String> moves) {
+        switch(n) {
+            case 0: return;
+            case 1:
+                move(left, right, moves);
+                break;
+            default:
+                hanoiHelperReImplemented(left, right, middle, n - 1, moves);
+                move(left, right, moves);
+                hanoiHelperReImplemented(middle, left, right, n - 1, moves);
+        }
+    }
+
+    private void move(StackWithName<Integer> from, StackWithName<Integer> to, ArrayList<String> moves) {
+        String move = String.format("%s [%d] -> %s", from.name, from.peek(), to.name);
+        moves.add(move);
+        to.push(from.pop());
     }
 
 }

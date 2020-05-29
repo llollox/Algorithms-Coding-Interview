@@ -66,12 +66,12 @@ public class Coins {
 
         int count = 0;
 
-        for (int i=n25; i> 0; i--) {
+        for (int i = n25; i > 0; i--) {
             int diff = r - 25 * i;
             count += this.coinsHelper(diff, 0, diff / 10, diff / 5);
         }
 
-        for (int i=n10; i> 0; i--) {
+        for (int i = n10; i > 0; i--) {
             int diff = r - 10 * i;
             count += this.coinsHelper(diff, 0, 0, diff / 5);
         }
@@ -97,7 +97,6 @@ public class Coins {
      */
 
 
-
     public int coinsVector(int r) {
         if (r <= 0) {
             return 0;
@@ -115,7 +114,7 @@ public class Coins {
     public int coinsHelperVector(int r, int[] dimens, int index, Counter k) {
 
         k.k += 1;
-        System.out.println(k.k + ": c("+ r + ", " + index + ")");
+        System.out.println(k.k + ": c(" + r + ", " + index + ")");
 
         if (r == 0 || index == dimens.length - 1) {
             return 1;
@@ -125,7 +124,7 @@ public class Coins {
 
         int count = 0;
 
-        for (int i=0; i * dimen <= r; i++) {
+        for (int i = 0; i * dimen <= r; i++) {
             int rem = r - i * dimen;
             count += this.coinsHelperVector(rem, dimens, index + 1, k);
         }
@@ -143,8 +142,7 @@ public class Coins {
     public int coinsMemo(int r) {
         if (r <= 0) {
             return 0;
-        }
-        else if (r < 5) {
+        } else if (r < 5) {
             return 1;
         }
 
@@ -155,9 +153,6 @@ public class Coins {
 
     // Better because fill memo for each iteration
     private int coinsMemo(int r, int[] dimens, int index, int[][] memo) {
-
-//        System.out.println("c("+ r + ", " + index + ")");
-
         if (r == 0 || index == dimens.length - 1) {
             return 1;
         }
@@ -166,7 +161,7 @@ public class Coins {
 
         int count = 0;
 
-        for (int i=0; i * dimen <= r; i++) {
+        for (int i = 0; i * dimen <= r; i++) {
             int rem = r - i * dimen;
 
             int v = memo[rem][index];
@@ -181,29 +176,83 @@ public class Coins {
         return count;
     }
 
-//    private int coinsMemo(int r, int[] dimens, int index, int[][] memo) {
-//
-//        System.out.println("c("+ r + ", " + index + ")");
-//
-//        if (r == 0 || index == dimens.length - 1) {
-//            return 1;
-//        }
-//
-//        if (memo[r][index] > 0) {
-//            return memo[r][index];
-//        }
-//
-//        int dimen = dimens[index];
-//
-//        int count = 0;
-//
-//        for (int i=0; i * dimen <= r; i++) {
-//            int rem = r - i * dimen;
-//            count += this.coinsMemo(rem, dimens, index + 1, memo);
-//        }
-//
-//        memo[r][index] = count;
-//
-//        return count;
-//    }
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    int coinsReImplemented(int r) {
+        int[] dimens = {25, 10, 5, 1};
+        return coinsHelper(r, 0, dimens);
+    }
+
+    private int coinsHelper(int r, int index, int[] dimens) {
+        if (index == dimens.length - 1) {
+            return 1;
+        }
+
+        int count = 0;
+        for (int i=0; i * dimens[index] <= r; i++) {
+            count += coinsHelper(r - dimens[index] * i, index + 1, dimens);
+        }
+        return count;
+    }
+
+    int coinsReImplementedMemo(int r) {
+        int[] dimens = {25, 10, 5, 1};
+        int[][] memo = new int[r + 1][dimens.length - 1];
+        return coinsHelper(r, 0, dimens);
+    }
+
+    private int coinsHelperMemo(int r, int index, int[] dimens, int[][] memo) {
+        if (index == dimens.length - 1) {
+            return 1;
+        }
+
+        if (memo[r][index] > 0) {
+            return memo[r][index];
+        }
+
+        int count = 0;
+        for (int i=0; i * dimens[index] <= r; i++) {
+            count += coinsHelper(r - dimens[index] * i, index + 1, dimens);
+        }
+
+        memo[r][index] = count;
+        return count;
+    }
+
+    /*
+        DP[index][r] =
+
+           sum DP[r - i * dimens[index]][index - 1]
+     */
+    int coinsDP(int r) {
+        if (r <= 0) {
+            return 0;
+        }
+
+        int[] dimens = {1, 5, 10, 25};
+        int[]DP = new int[r + 1];
+
+        // Setto 1 per la prima riga.
+        // Se ho solo la moneta da 1, ho un solo modo per fare qualunque numero
+        for (int i=0; i<=r; i++) {
+            DP[i] = 1;
+        }
+
+        for (int dimIndex=1; dimIndex<dimens.length; dimIndex++) {
+            int[] newDP = new int[r + 1];
+
+            int coin = dimens[dimIndex];
+            for (int value=0; value<=r; value++) {
+                int sum = 0;
+                for (int c = 0; c * coin <= value; c++) {
+                    sum += DP[value - c * coin];
+                }
+
+                newDP[value] = sum;
+            }
+
+            DP = newDP;
+        }
+
+        return DP[r];
+    }
 }

@@ -1,5 +1,6 @@
 package com.llollox.algorithms.problems.crack.dynamic;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -106,4 +107,70 @@ public class EightQueens {
             return Objects.hash(i, j);
         }
     }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    public ArrayList<Point> queensReImplemented() {
+        ArrayList<Point> solutions = new ArrayList<>();
+        queensHelperReImplemented(solutions, 0);
+        return solutions;
+    }
+
+    private boolean queensHelperReImplemented(
+            ArrayList<Point> solutions, int i) {
+        if (solutions.size() == 8) {
+            return true;
+        }
+
+        for (int j=0; j<8; j++) {
+            if (canSetQueen(solutions, i, j)) {
+                solutions.add(new Point(i, j));
+                boolean result = queensHelperReImplemented(solutions, i + 1);
+                if (result) {
+                    return true;
+                }
+                solutions.remove(solutions.size() - 1);
+            }
+        }
+
+        return false;
+    }
+
+    private boolean canSetQueen(ArrayList<Point> queens, int i, int j) {
+        return !isThereAQueen(queens, i, j)
+                && !checkSameRow(queens, i)
+                && !checkSameColumn(queens, j)
+                && !checkSameDiagonal(queens, i, j);
+    }
+
+    private boolean isThereAQueen(ArrayList<Point> queens, int i, int j) {
+        return queens.contains(new Point(i, j));
+    }
+
+    private boolean checkSameRow(ArrayList<Point> points, int i) {
+        for (Point p : points) {
+            if (p.i == i) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean checkSameColumn(ArrayList<Point> points, int j) {
+        for (Point p : points) {
+            if (p.j == j) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean checkSameDiagonal(ArrayList<Point> points, int i, int j) {
+        for (Point p : points) {
+            if (Math.abs(p.j - j) == Math.abs(p.i - i)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }

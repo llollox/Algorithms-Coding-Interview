@@ -88,9 +88,57 @@ public class RobotIntoGrid {
         return false;
     }
 
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    ArrayList<Point> getPath(boolean[][] matrix) {
+        if (matrix == null) {
+            return null;
+        }
 
+        ArrayList<Point> path = new ArrayList<>();
+        HashSet<Point> deadPoints = new HashSet<>();
+        path.add(new Point(0, 0));
+        if (calculatePath(0, 0, matrix, path, deadPoints)) {
+            return path;
+        }
 
+        return null;
+    }
 
+    boolean calculatePath(int i, int j, boolean[][] matrix, ArrayList<Point> path,
+                          HashSet<Point> deadPoints) {
+        if (i == matrix.length - 1 && j == matrix[0].length - 1) {
+            return true;
+        }
 
+        Point p = new Point(i, j);
+
+        if (deadPoints.contains(p)) {
+            return false;
+        }
+
+        if (canMoveRight(i, j, matrix)) {
+            path.add(new Point(i, j + 1));
+            if (calculatePath(i, j + 1, matrix, path, deadPoints)) {
+                return true;
+            }
+        }
+        else if (canMoveDown(i, j, matrix)) {
+            path.add(new Point(i + 1, j));
+            if (calculatePath(i + 1, j, matrix, path, deadPoints)) {
+                return true;
+            }
+        }
+
+        deadPoints.add(p);
+        return false;
+    }
+
+    private boolean canMoveRight(int i, int j, boolean[][] matrix) {
+        return j < matrix[0].length - 1 && matrix[i][j + 1];
+    }
+
+    private boolean canMoveDown(int i, int j, boolean[][] matrix) {
+        return i < matrix.length - 1 && matrix[i + 1][j];
+    }
 
 }
