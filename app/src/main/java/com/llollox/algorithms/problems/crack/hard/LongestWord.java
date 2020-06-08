@@ -1,6 +1,10 @@
 package com.llollox.algorithms.problems.crack.hard;
 
+import com.llollox.algorithms.datastructure.trie.Trie;
+import com.llollox.algorithms.datastructure.trie.TrieNode;
+
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Set;
@@ -64,4 +68,45 @@ public class LongestWord {
         return false;
     }
 
+
+    // Trie approach *******************************************************************************
+    String longestWord(String[] strings) {
+        if (strings == null || strings.length == 0) {
+            return null;
+        }
+
+        // sort by length asc
+//        Arrays.sort(string, new Comparator<String>() {
+//            @Override
+//            public int compareTo(String s1, String s2) {
+//                return Integer.compare(s2.length, s1.length);
+//            }
+//        });
+
+        Trie trie = new Trie(strings);
+        TrieNode root = trie;
+
+        for (String s : strings) {
+            if (isWithinTrie(root, s)) {
+                return s;
+            }
+        }
+
+        return null;
+    }
+
+    private boolean isWithinTrie(TrieNode root, String s) {
+        TrieNode node = root;
+        for (char c : s.toCharArray()) {
+            node = node.getChild(c);
+            if (node == null) {
+                return false;
+            }
+
+            if (node.isTerminates()) {
+                node = root;
+            }
+        }
+        return true;
+    }
 }
