@@ -35,8 +35,12 @@ public class TrieNode {
         }
 
         char firstCharacter = word.charAt(0);
-        TrieNode child = new TrieNode(firstCharacter);
-        this.children.put(firstCharacter, child);
+        TrieNode child = this.getChild(firstCharacter);
+
+        if (child == null) {
+            child = new TrieNode(firstCharacter);
+            this.children.put(firstCharacter, child);
+        }
 
         if (word.length() > 1) {
             child.addWord(word.substring(1));

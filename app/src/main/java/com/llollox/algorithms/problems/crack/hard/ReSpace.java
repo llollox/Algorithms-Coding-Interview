@@ -1,5 +1,8 @@
 package com.llollox.algorithms.problems.crack.hard;
 
+import com.llollox.algorithms.datastructure.trie.Trie;
+import com.llollox.algorithms.datastructure.trie.TrieNode;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -96,7 +99,7 @@ public class ReSpace {
 
         Result minUnrecResult = null;
 
-        for (int i = 1; i< s.length(); i++) {
+        for (int i = 1; i < s.length(); i++) {
             String part1 = s.substring(0, i);
             Result part1Result = memo.get(part1);
             if (part1Result == null) {
@@ -121,5 +124,53 @@ public class ReSpace {
         }
 
         return minUnrecResult;
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    public static class MyResult {
+        String res;
+        int unknownChars;
+
+        public MyResult(String res, int unknownChars) {
+            this.res = res;
+            this.unknownChars = unknownChars;
+        }
+    }
+
+    public MyResult reSpaceTrie(String s, List<String> dictionary) {
+        Trie trie = new Trie(dictionary);
+        MyResult[] memo = new MyResult[s.length()];
+        return reSpace(s, 0, trie.getRoot(), memo);
+    }
+
+    private MyResult reSpace(String s, int start, TrieNode trie, MyResult[] memo) {
+        if (start >= s.length()) {
+            return new MyResult("", 0);
+        }
+
+        MyResult without = reSpace(s, start + 1, trie, memo);
+        MyResult min = new MyResult( s.charAt(start) + without.res, without.unknownChars + 1);
+
+        int i = start;
+        TrieNode node = trie;
+        while (i < s.length() && node.getChild(s.charAt(i)) != null) {
+            node = node.getChild(s.charAt(i));
+            if (node.isTerminates()) {
+
+                MyResult result = i < s.length() - 1 ? memo[i + 1] : null;
+                if (result == null) {
+                    result = reSpace(s, i + 1, trie, memo);
+                }
+
+                String word = s.substring(start, i + 1);
+                if (min.unknownChars > result.unknownChars) {
+                    min = new MyResult(word + " " + result.res, result.unknownChars);
+                }
+            }
+            i++;
+        }
+
+        memo[start] = min;
+        return min;
     }
 }

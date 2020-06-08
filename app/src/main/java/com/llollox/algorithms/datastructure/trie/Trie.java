@@ -23,6 +23,10 @@ public class Trie {
         }
     }
 
+    public TrieNode getRoot() {
+        return root;
+    }
+
     // Checks whether this trie contains a string with the prefix passed in as argument.
     public boolean contains(String prefix, boolean exact) {
 
