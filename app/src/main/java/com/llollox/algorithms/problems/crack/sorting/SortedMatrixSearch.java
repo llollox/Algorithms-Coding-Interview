@@ -21,14 +21,13 @@ public class SortedMatrixSearch {
         int cols = matrix[0].length;
         if (rows > cols) {
             return bsOnRows(matrix, n, rows, cols);
-        }
-        else {
+        } else {
             return bsOnCols(matrix, n, rows, cols);
         }
     }
 
     private Coordinate bsOnRows(int[][] matrix, int n, int rows, int cols) {
-        for (int i = 0; i<rows; i++) {
+        for (int i = 0; i < rows; i++) {
             if (matrix[i][0] <= n && matrix[i][cols - 1] >= n) {
                 int result = bs(matrix[i], n, 0, cols);
                 if (result >= 0) {
@@ -40,7 +39,7 @@ public class SortedMatrixSearch {
     }
 
     private Coordinate bsOnCols(int[][] matrix, int n, int rows, int cols) {
-        for (int j = 0; j<cols; j++) {
+        for (int j = 0; j < cols; j++) {
             if (matrix[0][j] <= n && matrix[rows - 1][j] >= n) {
                 int result = bsCol(matrix, n, j, 0, rows);
                 if (result >= 0) {
@@ -62,11 +61,9 @@ public class SortedMatrixSearch {
 
         if (midValue == n) {
             return midIndex;
-        }
-        else if (n < midValue) {
+        } else if (n < midValue) {
             return bsCol(matrix, n, col, start, midIndex);
-        }
-        else {
+        } else {
             return bsCol(matrix, n, col, midIndex + 1, end);
         }
     }
@@ -81,17 +78,15 @@ public class SortedMatrixSearch {
 
         if (midValue == n) {
             return midIndex;
-        }
-        else if (n < midValue) {
+        } else if (n < midValue) {
             return bs(array, n, start, midIndex);
-        }
-        else {
+        } else {
             return bs(array, n, midIndex + 1, end);
         }
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
-    public Coordinate findElementImproved(int[][] matrix, int n) {
+    Coordinate findElementImproved(int[][] matrix, int n) {
         if (matrix == null || matrix.length == 0 || matrix[0].length == 0) {
             return null;
         }
@@ -107,15 +102,44 @@ public class SortedMatrixSearch {
 
             if (value == n) {
                 return new Coordinate(row, col);
-            }
-            else if (value > n) {
+            } else if (value > n) {
                 col--;
-            }
-            else {
+            } else {
                 row++;
             }
         }
 
         return null;
     }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    // TO BE COMPLETED
+//    Coordinate int findCoordinates(int[][] matrix, int n) {
+//        if (matrix == null || matrix.length == 0 || matrix[0].length == 0) {
+//            return null;
+//        }
+//
+//        int rows = matrix.length;
+//        int cols = matrix[0].length;
+//
+//    }
+//
+//    private Coordinate bsDiagonal(int[][] matrix, int n, int rowStart, int rowEnd, int colStart, int colEnd) {
+//
+//    }
+//
+//    private int findDiagonalIntersection(int[][] matrix, int n) {
+//        int diagonal = 0;
+//        while (diagonal < rows - 1
+//                && diagonal < cols - 1
+//                && matrix[diagonal][diagonal] <= n
+//                && matrix[diagonal + 1][diagonal + 1] >= n) {
+//            diagonal++;
+//        }
+//
+//        if (diagonal == rows -1 || diagonal == cols - 1) {
+//            return -1;
+//        }
+//    }
+
 }

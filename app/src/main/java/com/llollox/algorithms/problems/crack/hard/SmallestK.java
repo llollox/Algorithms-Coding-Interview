@@ -148,4 +148,56 @@ public class SmallestK {
         array[i] = array[j];
         array[j] = tmp;
     }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    int[] smallestKReImplemented(int[] array, int k) {
+
+        if (array == null || array.length == 0) {
+            return null;
+        }
+
+        smallestKReImplemented(array, k, 0, array.length - 1);
+        return copyFirst(array, k);
+    }
+
+    void smallestKReImplemented(int[] array, int remaining, int start, int end) {
+        if (remaining <= 0 || start > end) {
+            return;
+        }
+
+        int pivotIndex = partitionReImplemented(array, start, end);
+        int numElementsLeft = (pivotIndex + 1) - start; // +1 perche iniziano a contare da 0
+
+        if (numElementsLeft > remaining) {
+            smallestKReImplemented(array, remaining, start, pivotIndex - 1);
+        }
+        else if (numElementsLeft < remaining) {
+            smallestKReImplemented(array, remaining - numElementsLeft, pivotIndex + 1, end);
+        }
+    }
+
+    // Given a sub array from start to end inclusive,
+    // it takes the last element as pivot and then
+    // it partition all the elements <= pivot to left
+    // others to right.
+    // returns pivot index
+    int partitionReImplemented(int[] array, int start, int end) {
+        int pivotValue = array[end];
+        int partitionIndex = start - 1;
+        for (int i=start; i<end; i++) {
+            if (array[i] < pivotValue) {
+                partitionIndex++;
+                swap(array, i, partitionIndex);
+            }
+        }
+
+        swap(array, end, ++partitionIndex);
+        return partitionIndex;
+    }
+
+    int[] copyFirst(int[] array, int k) {
+        int[] copy = new int[k];
+        System.arraycopy(array, 0, copy, 0, k);
+        return copy;
+    }
 }
