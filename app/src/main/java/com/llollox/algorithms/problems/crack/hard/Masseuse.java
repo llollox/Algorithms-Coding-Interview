@@ -84,4 +84,25 @@ public class Masseuse {
 
         return value;
     }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    int masseuse(int[] array) {
+        if (array == null || array.length == 0) {
+            return 0;
+        }
+
+        int max = 0;
+        int prevprev = 0;
+        int prev = 0;
+
+        for (int v : array) {
+            int curr = Math.max(prevprev + v, prev);
+            max = Math.max(max, curr);
+            prevprev = prev;
+            prev = curr;
+        }
+
+        return max;
+    }
+
 }
